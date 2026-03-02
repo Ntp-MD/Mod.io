@@ -1,0 +1,123 @@
+/* Button Components */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-md);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-gray-800);
+  border-color: var(--color-gray-800);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.btn-lg {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-lg);
+}
+
+/* Card Component */
+.card {
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: all var(--transition-md);
+}
+
+.card:hover {
+  border-color: var(--color-gray-300);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-dark {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border-color: var(--color-gray-800);
+}
+
+.card-dark:hover {
+  border-color: var(--color-gray-600);
+}
+
+/* Section Component */
+.section {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.section-dark {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+/* Badge Component */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-primary {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.badge-secondary {
+  background-color: var(--color-gray-200);
+  color: var(--color-primary);
+}
+
+/* Icon Component */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(24px, 1.5vw, 32px);
+  height: clamp(24px, 1.5vw, 32px);
+}
+
+.icon-lg {
+  width: clamp(48px, 3vw, 64px);
+  height: clamp(48px, 3vw, 64px);
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-gray-200);
+  margin: var(--space-xl) 0;
+}
+
+.section-dark .divider {
+  background-color: var(--color-gray-700);
+}
