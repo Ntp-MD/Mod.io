@@ -1,28 +1,26 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const isMenuOpen = ref(false)
+const isMenuOpen = ref(false);
 
 const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Documentation', href: '#docs' },
-  { label: 'GitHub', href: '#github' }
-]
+  { label: "Features", href: "#features" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Documentation", href: "#docs" },
+  { label: "GitHub", href: "#github" },
+];
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 </script>
 
 <template>
   <header class="header">
-    <div class="container header-content">
+    <div class="header-content">
       <a href="/" class="logo">
-        <span class="logo-icon">M</span>
         <span class="logo-text">MOD.io</span>
       </a>
-
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
         <ul class="nav-list">
           <li v-for="link in navLinks" :key="link.label">
@@ -30,15 +28,9 @@ const toggleMenu = () => {
           </li>
         </ul>
       </nav>
-
       <div class="header-actions">
         <a href="#get-started" class="btn btn-primary">Get Started</a>
-        <button 
-          class="menu-toggle" 
-          @click="toggleMenu"
-          :aria-expanded="isMenuOpen"
-          aria-label="Toggle navigation menu"
-        >
+        <button class="menu-toggle" @click="toggleMenu" :aria-expanded="isMenuOpen" aria-label="Toggle navigation menu">
           <span class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }"></span>
         </button>
       </div>
@@ -48,12 +40,14 @@ const toggleMenu = () => {
 
 <style scoped>
 .header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: var(--z-sticky);
   background-color: var(--color-secondary);
   border-bottom: 1px solid var(--color-gray-200);
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) var(--space-md);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .header-content {
@@ -67,21 +61,15 @@ const toggleMenu = () => {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: 800;
   letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: all var(--transition-md);
 }
 
-.logo-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(32px + 1vw);
-  height: calc(32px + 1vw);
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
-  border-radius: var(--radius-md);
-  font-weight: 800;
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .logo-text {
@@ -98,11 +86,32 @@ const toggleMenu = () => {
   font-size: var(--font-size-sm);
   font-weight: 500;
   color: var(--color-gray-600);
-  transition: color var(--transition-fast);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-1);
+  transition: all var(--transition-md);
+  position: relative;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: all var(--transition-md);
+  transform: translateX(-50%);
 }
 
 .nav-link:hover {
   color: var(--color-primary);
+  background-color: var(--color-gray-100);
+}
+
+.nav-link:hover::before {
+  width: 80%;
 }
 
 .header-actions {
@@ -111,11 +120,31 @@ const toggleMenu = () => {
   gap: var(--space-md);
 }
 
+.header-actions .btn {
+  padding: var(--space-sm) var(--space-lg);
+  font-weight: 600;
+  transition: all var(--transition-md);
+}
+
+.header-actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 .menu-toggle {
   display: none;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-1);
+  transition: all var(--transition-md);
+}
+
+.menu-toggle:hover {
+  background-color: var(--color-gray-100);
 }
 
 .menu-icon,
@@ -126,8 +155,8 @@ const toggleMenu = () => {
   height: 2px;
   background-color: var(--color-primary);
   position: absolute;
-  left: 4px;
-  transition: all var(--transition-fast);
+  left: 8px;
+  transition: all var(--transition-sm);
 }
 
 .menu-icon {
@@ -136,12 +165,12 @@ const toggleMenu = () => {
 }
 
 .menu-icon::before {
-  content: '';
+  content: "";
   top: -8px;
 }
 
 .menu-icon::after {
-  content: '';
+  content: "";
   top: 8px;
 }
 

@@ -55,17 +55,21 @@ const testimonials = [
         <h2 class="section-title">Trusted by Developers Worldwide</h2>
         <p class="section-description">See what leading developers and companies say about MOD.io</p>
       </div>
-      <div class="testimonials-grid">
+      <div class="testimonials-grid" large="3" medium="2" semi="2" small="1" gap="var(--space-md)">
         <article v-for="testimonial in testimonials" :key="testimonial.name" class="testimonial-card">
           <div class="testimonial-header">
-            <span class="testimonial-avatar" aria-hidden="true">{{ testimonial.avatar }}</span>
+            <div class="testimonial-avatar">
+              <span class="avatar-emoji">{{ testimonial.avatar }}</span>
+            </div>
             <div class="testimonial-info">
               <h3 class="testimonial-name">{{ testimonial.name }}</h3>
               <p class="testimonial-role">{{ testimonial.role }}</p>
               <p class="testimonial-company">{{ testimonial.company }}</p>
             </div>
           </div>
-          <blockquote class="testimonial-content">"{{ testimonial.content }}"</blockquote>
+          <div class="testimonial-content">
+            <blockquote>{{ testimonial.content }}</blockquote>
+          </div>
           <div class="testimonial-rating">
             <span class="star">⭐</span>
             <span class="star">⭐</span>
@@ -82,40 +86,32 @@ const testimonials = [
 <style scoped>
 .section-header {
   text-align: center;
-  margin-bottom: var(--space-2xl);
-}
-
-.section-title {
-  font-size: var(--font-size-3xl);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
 }
 
 .section-description {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   color: var(--color-gray-400);
   max-width: 600px;
   margin-inline: auto;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-lg);
+  line-height: var(--line-height-base);
 }
 
 .testimonial-card {
+  padding: var(--space-lg);
   background-color: var(--color-gray-900);
   border: 1px solid var(--color-gray-800);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  border-radius: var(--radius-3);
   transition: all var(--transition-md);
-  position: relative;
+  text-align: center;
 }
 
 .testimonial-card:hover {
-  border-color: var(--color-gray-600);
+  border-color: var(--color-primary);
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
@@ -124,36 +120,46 @@ const testimonials = [
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-md);
 }
 
 .testimonial-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-circle);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(48px, 3vw, 64px);
-  height: clamp(48px, 3vw, 64px);
-  font-size: clamp(24px, 1.5vw, 32px);
-  background-color: var(--color-gray-800);
-  border-radius: var(--radius-lg);
   flex-shrink: 0;
+  transition: all var(--transition-md);
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: scale(1.1);
+}
+
+.avatar-emoji {
+  font-size: var(--font-size-lg);
+  filter: grayscale(1) brightness(2);
 }
 
 .testimonial-info {
   flex: 1;
 }
 
+.testimonial-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
 .testimonial-name {
-  font-size: var(--font-size-md);
-  font-weight: 700;
   color: var(--color-secondary);
-  margin-bottom: var(--space-xs);
 }
 
 .testimonial-role {
   font-size: var(--font-size-sm);
   color: var(--color-gray-400);
-  margin-bottom: var(--space-xs);
 }
 
 .testimonial-company {
@@ -161,33 +167,34 @@ const testimonials = [
   color: var(--color-gray-500);
 }
 
-.testimonial-content {
-  font-size: var(--font-size-md);
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonial-content blockquote {
+  font-size: var(--font-size-sm);
   color: var(--color-gray-300);
-  line-height: 1.6;
-  margin-bottom: var(--space-md);
+  line-height: var(--line-height-base);
   font-style: italic;
+  margin: 0;
 }
 
 .testimonial-rating {
   display: flex;
+  justify-content: center;
   gap: var(--space-xs);
+  margin-top: var(--space-md);
 }
 
 .star {
   font-size: var(--font-size-sm);
-  color: #fbbf24;
+  color: var(--color-primary);
+  transition: all var(--transition-md);
 }
 
-@media (max-width: 1024px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
+.testimonial-card:hover .star {
+  transform: scale(1.2);
 }
 </style>

@@ -1,16 +1,189 @@
-/* Button Components */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--font-size-md);
-  font-weight: 600;
-  border-radius: var(--radius-sm);
+/* Transition utilities */
+.transition-all {
   transition: all var(--transition-md);
-  cursor: pointer;
 }
+
+.transition-transform {
+  transition: transform var(--transition-md);
+}
+
+.transition-colors {
+  transition:
+    color var(--transition-md),
+    background-color var(--transition-md);
+}
+
+.transition-opacity {
+  transition: opacity var(--transition-md);
+}
+
+/* Color utilities */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-gray-800 {
+  background-color: var(--color-gray-800);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.border-gray-200 {
+  border-color: var(--color-gray-200);
+}
+
+/* Border utilities */
+.rounded-circle {
+  border-radius: var(--radius-circle);
+}
+
+.rounded-3 {
+  border-radius: var(--radius-3);
+}
+
+.border {
+  border: 1px solid var(--color-gray-200);
+}
+
+/* Combined utility classes (max 3 per element) */
+.card-feature {
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-3);
+}
+
+.icon-feature {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border-radius: var(--radius-circle);
+}
+
+.card-hover {
+  transition: all var(--transition-md);
+}
+
+.icon-hover {
+  transition: transform var(--transition-md);
+}
+
+/* Cool Grid Animations */
+.grid-entrance {
+  animation: gridEntrance 0.6s ease-out;
+}
+
+.grid-resize {
+  animation: gridResize 0.3s ease-out;
+}
+
+@keyframes gridEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gridResize {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Grid Debug Mode (development only) */
+.grid-debug::before {
+  content: attr(data-grid-indicator);
+  position: absolute;
+  top: -25px;
+  left: 0;
+  font-size: 10px;
+  color: #666;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Cool Grid Patterns */
+.mega-grid {
+  --grid-color: #ff6b6b;
+}
+
+.flex-grid {
+  --grid-color: #4ecdc4;
+}
+
+.compact-grid {
+  --grid-color: #45b7d1;
+}
+
+.balanced-grid {
+  --grid-color: #96ceb4;
+}
+
+.mobile-grid {
+  --grid-color: #feca57;
+}
+
+.uniform-grid {
+  --grid-color: #ff9ff3;
+}
+
+.dynamic-grid {
+  --grid-color: #54a0ff;
+}
+
+.wide-grid {
+  --grid-color: #48dbfb;
+}
+
+/* Grid Visual Effects */
+.grid-visual {
+  position: relative;
+}
+
+.grid-visual::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, var(--grid-color) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.grid-visual:hover::after {
+  opacity: 0.1;
+}
+
+/* Button Components */
 
 .btn-primary {
   background-color: var(--color-primary);
@@ -34,16 +207,11 @@
   color: var(--color-secondary);
 }
 
-.btn-lg {
-  padding: var(--space-md) var(--space-xl);
-  font-size: var(--font-size-lg);
-}
-
 /* Card Component */
 .card {
   background-color: var(--color-secondary);
   border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-3);
   padding: var(--space-lg);
   transition: all var(--transition-md);
 }
@@ -65,8 +233,8 @@
 
 /* Section Component */
 .section {
-  padding-top: var(--space-3xl);
-  padding-bottom: var(--space-3xl);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
 }
 
 .section-dark {
@@ -81,7 +249,7 @@
   padding: var(--space-xs) var(--space-sm);
   font-size: var(--font-size-xs);
   font-weight: 600;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-1);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }

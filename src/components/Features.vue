@@ -37,14 +37,14 @@ const features = [
   <section id="features" class="section">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-secondary">Features</span>
+        <span class="badge badge-primary">Features</span>
         <h2 class="section-title">Everything You Need</h2>
         <p class="section-description">Powerful tools for library creators and maintainers</p>
       </div>
-      <div class="features-grid">
-        <article v-for="feature in features" :key="feature.title" class="feature-card">
-          <span class="feature-icon" aria-hidden="true">{{ feature.icon }}</span>
-          <h3 class="feature-title">{{ feature.title }}</h3>
+      <div class="features-grid mega-grid" screen="6,3,2,1,var(--space-sm)">
+        <article v-for="feature in features" :key="feature.title" class="feature-card card-feature card-hover">
+          <span class="feature-icon icon-feature icon-hover">{{ feature.icon }}</span>
+          <h3 class="feature-title text-primary">{{ feature.title }}</h3>
           <p class="feature-description">{{ feature.description }}</p>
         </article>
       </div>
@@ -55,75 +55,57 @@ const features = [
 <style scoped>
 .section-header {
   text-align: center;
-  margin-bottom: var(--space-2xl);
-}
-
-.section-title {
-  font-size: var(--font-size-3xl);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
 }
 
 .section-description {
-  font-size: var(--font-size-lg);
-  color: var(--color-gray-500);
+  font-size: var(--font-size-md);
+  color: var(--color-gray-600);
   max-width: 600px;
   margin-inline: auto;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  line-height: var(--line-height-base);
 }
 
 .feature-card {
-  padding: var(--space-lg);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  text-align: center;
+  container-type: inline-size;
 }
 
 .feature-card:hover {
   border-color: var(--color-primary);
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
 
 .feature-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(48px, 3vw, 64px);
-  height: clamp(48px, 3vw, 64px);
-  font-size: clamp(24px, 1.5vw, 32px);
-  background-color: var(--color-gray-100);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--space-md);
+  font-size: var(--font-size-lg);
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
 }
 
 .feature-title {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  margin-bottom: var(--space-sm);
+  font-size: 15cqw;
 }
 
 .feature-description {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xs);
   color: var(--color-gray-600);
-  line-height: 1.6;
-}
-
-@media (max-width: 1024px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
+  line-height: var(--line-height-base);
 }
 </style>

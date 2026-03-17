@@ -55,13 +55,16 @@ const toggleBilling = () => {
   <section id="pricing" class="section">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-secondary">Pricing</span>
+        <span class="badge badge-primary">Pricing</span>
         <h2 class="section-title">Simple, Transparent Pricing</h2>
         <p class="section-description">Choose the perfect plan for your needs. Start free and scale as you grow.</p>
       </div>
 
-      <div class="pricing-grid">
+      <div class="pricing-grid" large="3" medium="2" semi="1" small="1" gap="var(--space-md)">
         <article v-for="plan in plans" :key="plan.name" :class="['pricing-card', { 'pricing-card-highlighted': plan.highlighted }]">
+          <div class="pricing-badge" v-if="plan.highlighted">
+            <span class="badge badge-accent">MOST POPULAR</span>
+          </div>
           <div class="pricing-header">
             <h3 class="pricing-name">{{ plan.name }}</h3>
             <div class="pricing-price">
@@ -71,15 +74,15 @@ const toggleBilling = () => {
             <p class="pricing-description">{{ plan.description }}</p>
           </div>
 
-          <ul class="pricing-features">
-            <li v-for="feature in plan.features" :key="feature" class="feature-item">
+          <div class="pricing-features">
+            <div v-for="feature in plan.features" :key="feature" class="feature-item">
               <span class="feature-icon">✓</span>
               <span class="feature-text">{{ feature }}</span>
-            </li>
-          </ul>
+            </div>
+          </div>
 
           <div class="pricing-cta">
-            <a href="#get-started" :class="['btn', plan.highlighted ? 'btn-primary' : 'btn-secondary', 'btn-lg']">
+            <a href="#get-started" :class="['btn', plan.highlighted ? 'btn-primary' : 'btn-secondary']">
               {{ plan.cta }}
             </a>
           </div>
@@ -100,79 +103,70 @@ const toggleBilling = () => {
 <style scoped>
 .section-header {
   text-align: center;
-  margin-bottom: var(--space-2xl);
-}
-
-.section-title {
-  font-size: var(--font-size-3xl);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
 }
 
 .section-description {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   color: var(--color-gray-600);
   max-width: 600px;
   margin-inline: auto;
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-lg);
-  margin-bottom: var(--space-2xl);
+  line-height: var(--line-height-base);
 }
 
 .pricing-card {
   background-color: var(--color-secondary);
   border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  border-radius: var(--radius-3);
   transition: all var(--transition-md);
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .pricing-card:hover {
-  border-color: var(--color-gray-300);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
 }
 
 .pricing-card-highlighted {
   border-color: var(--color-primary);
-  box-shadow: var(--shadow-md);
   transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
 }
 
-.pricing-card-highlighted::before {
-  content: "MOST POPULAR";
+.pricing-badge {
   position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gray-700) 100%);
+  padding: var(--space-xs);
+  text-align: center;
 }
 
 .pricing-header {
+  padding: var(--space-lg);
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%);
   text-align: center;
-  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.pricing-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 .pricing-name {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: var(--space-md);
 }
 
 .pricing-price {
@@ -180,66 +174,72 @@ const toggleBilling = () => {
   align-items: baseline;
   justify-content: center;
   gap: var(--space-xs);
-  margin-bottom: var(--space-md);
 }
 
 .price-amount {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-xl);
   font-weight: 800;
   color: var(--color-primary);
   line-height: 1;
 }
 
 .price-period {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   color: var(--color-gray-600);
 }
 
 .pricing-description {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   color: var(--color-gray-600);
-  line-height: 1.5;
+  line-height: var(--line-height-base);
 }
 
 .pricing-features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 var(--space-lg) 0;
+  padding: var(--space-lg);
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 .feature-item {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--color-gray-100);
+  padding: var(--space-sm);
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-2);
+  transition: all var(--transition-md);
 }
 
-.feature-item:last-child {
-  border-bottom: none;
+.feature-item:hover {
+  background-color: var(--color-gray-200);
+  transform: translateX(4px);
 }
 
 .feature-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(20px, 1.25vw, 24px);
-  height: clamp(20px, 1.25vw, 24px);
+  width: 24px;
+  height: 24px;
   background-color: var(--color-primary);
   color: var(--color-secondary);
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   font-size: var(--font-size-xs);
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .feature-text {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   color: var(--color-gray-700);
+  line-height: var(--line-height-base);
 }
 
 .pricing-cta {
+  padding: var(--space-lg);
+  padding-top: 0;
   margin-top: auto;
 }
 
@@ -247,28 +247,31 @@ const toggleBilling = () => {
   text-align: center;
   padding-top: var(--space-lg);
   border-top: 1px solid var(--color-gray-200);
+  margin-top: var(--space-xl);
+}
+
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 .pricing-note {
   font-size: var(--font-size-sm);
   color: var(--color-gray-600);
-  margin-bottom: var(--space-sm);
+  line-height: var(--line-height-base);
 }
 
 .pricing-link {
   color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
+  transition: all var(--transition-md);
 }
 
 .pricing-link:hover {
+  color: var(--color-gray-700);
   text-decoration: underline;
-}
-
-@media (max-width: 1024px) {
-  .pricing-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
 }
 
 @media (max-width: 480px) {
