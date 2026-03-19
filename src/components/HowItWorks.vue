@@ -2,33 +2,36 @@
 const steps = [
   {
     number: "01",
-    title: "Upload Your Library",
-    description: "Drag and drop your minified JS, CSS, or any static files. We support all major formats and automatically optimize for delivery.",
-    detail: "Supports: .js, .css, .wasm, .json, images",
+    title: "Intelligent Deployment",
+    description:
+      "AI-powered upload with automatic optimization and compression. Smart format detection and intelligent bundling for supreme performance.",
+    detail: "Auto-optimization: .js, .css, .wasm, .json, images",
   },
   {
     number: "02",
-    title: "Configure & Customize",
-    description: "Set version numbers, access permissions, and custom domains. Generate embed codes and npm packages with one click.",
-    detail: "Semantic versioning, private/public access",
+    title: "Agentic Configuration",
+    description:
+      "Self-configuring version management with predictive routing. One-click generation of optimized embed codes and intelligent npm packages.",
+    detail: "AI versioning, zero-config deployment",
   },
   {
     number: "03",
-    title: "Share & Integrate",
-    description: "Copy your CDN URL or embed code. Users can install via npm, yarn, or direct script tag - whatever works for them.",
-    detail: "npm, yarn, script tag, ES modules",
+    title: "Universal Integration",
+    description:
+      "Framework-agnostic distribution with intelligent auto-detection. Seamless installation via npm, yarn, pnpm, or direct CDN injection.",
+    detail: "npm, yarn, pnpm, CDN, ES modules, UMD",
   },
   {
     number: "04",
-    title: "Monitor & Iterate",
-    description: "Track performance, usage patterns, and user feedback. Push updates seamlessly with automatic cache invalidation.",
-    detail: "Real-time dashboard, usage alerts",
+    title: "Predictive Analytics",
+    description: "Machine learning-powered insights with real-time monitoring. Automated performance optimization and intelligent cache management.",
+    detail: "AI dashboard, predictive scaling, auto-optimization",
   },
 ];
 
 const getStepIcon = (index) => {
-  const icons = ["📤", "⚙️", "🔗", "📊"];
-  return icons[index] || "📍";
+  const icons = ["�", "🧠", "🌐", "�"];
+  return icons[index] || "⚡";
 };
 </script>
 
@@ -36,9 +39,9 @@ const getStepIcon = (index) => {
   <section id="how-it-works" class="section section-dark">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-primary">How It Works</span>
-        <h2 class="section-title">Simple 4-Step Process</h2>
-        <p class="section-description">From upload to global distribution in minutes</p>
+        <span class="badge badge-primary">🔬 Innovation Process</span>
+        <h2 class="section-title">Intelligent 4-Phase Deployment</h2>
+        <p class="section-description">From deployment to global intelligence in seconds</p>
       </div>
 
       <!-- Visual Step Flow -->

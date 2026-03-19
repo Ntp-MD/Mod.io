@@ -53,13 +53,15 @@ const getSocialIcon = (platform) => {
         </div>
 
         <nav class="footer-nav">
-          <div v-for="(links, category) in footerLinks" :key="category" class="footer-column" v-if="category !== 'social'">
-            <h3 class="footer-heading">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</h3>
-            <ul class="footer-links">
-              <li v-for="link in links" :key="link.label">
-                <a :href="link.href" class="footer-link">{{ link.label }}</a>
-              </li>
-            </ul>
+          <div class="footer-grid" screen="3,2,2,1" gap="var(--gap-lg)">
+            <div v-for="(links, category) in footerLinks" :key="category" class="footer-column" v-if="category !== 'social'">
+              <h3 class="footer-heading">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</h3>
+              <div class="footer-links" screen="1,1,1,1" gap="var(--gap-sm)">
+                <div v-for="link in links" :key="link.label" class="footer-item">
+                  <a :href="link.href" class="footer-link">{{ link.label }}</a>
+                </div>
+              </div>
+            </div>
           </div>
         </nav>
       </div>
@@ -148,16 +150,20 @@ const getSocialIcon = (platform) => {
   transform: translateY(-2px);
 }
 
-.footer-nav {
+.footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-lg);
 }
 
 .footer-column {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
 }
 
 .footer-heading {
@@ -167,12 +173,6 @@ const getSocialIcon = (platform) => {
   letter-spacing: var(--letter-spacing-tight);
   color: var(--main-color-6);
   margin-bottom: var(--gap-sm);
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
 }
 
 .footer-link {
@@ -232,11 +232,6 @@ const getSocialIcon = (platform) => {
     align-items: center;
   }
 
-  .footer-nav {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap-lg);
-  }
-
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
@@ -247,11 +242,6 @@ const getSocialIcon = (platform) => {
 @media (max-width: 480px) {
   .footer {
     padding: var(--gap-lg) 0 var(--gap-md);
-  }
-
-  .footer-nav {
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
   }
 
   .footer-social {

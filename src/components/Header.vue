@@ -22,14 +22,14 @@ const toggleMenu = () => {
         <span class="logo-text">MOD.io</span>
       </a>
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <ul class="nav-list">
-          <li v-for="link in navLinks" :key="link.label">
+        <div class="nav-list">
+          <div v-for="link in navLinks" :key="link.label" class="nav-item">
             <a :href="link.href" class="nav-link">{{ link.label }}</a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
       <div class="header-actions">
-        <a href="#get-started" class="btn btn-primary">Get Started</a>
+        <a href="#get-started" class="btn btn-primary">🚀 Deploy Now</a>
         <button class="menu-toggle" @click="toggleMenu" :aria-expanded="isMenuOpen" aria-label="Toggle navigation menu">
           <span class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }"></span>
         </button>
@@ -79,7 +79,8 @@ const toggleMenu = () => {
 .nav-list {
   display: flex;
   align-items: center;
-  gap: var(--gap-lg);
+  justify-content: space-around;
+  width: 100%;
 }
 
 .nav-link {
@@ -205,9 +206,9 @@ const toggleMenu = () => {
   }
 
   .nav-list {
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: flex-start;
-    gap: var(--gap-md);
   }
 
   .menu-toggle {

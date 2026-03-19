@@ -1,5 +1,5 @@
 <script setup>
-const benefits = ["Free tier with 100GB bandwidth", "No credit card required", "Setup in under 5 minutes"];
+const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card required", "Supreme deployment in under 60 seconds"];
 </script>
 
 <template>
@@ -8,10 +8,11 @@ const benefits = ["Free tier with 100GB bandwidth", "No credit card required", "
       <div class="cta-grid">
         <div class="cta-content">
           <div class="cta-header">
-            <span class="badge badge-primary">Get Started</span>
-            <h2 class="cta-title">Ready to Ship Faster?</h2>
+            <span class="badge badge-primary">🚀 Deploy Innovation</span>
+            <h2 class="cta-title">Ready to Scale Intelligently?</h2>
             <p class="cta-description">
-              Join thousands of library creators who trust MOD.io for their CDN needs. Start delivering your libraries globally today.
+              Join 50M+ developers who trust MOD.io for supreme CDN intelligence. Start deploying your libraries globally with agentic optimization
+              today.
             </p>
           </div>
           <div class="cta-benefits">
@@ -23,10 +24,10 @@ const benefits = ["Free tier with 100GB bandwidth", "No credit card required", "
         </div>
         <div class="cta-actions">
           <div class="action-buttons">
-            <a href="#signup" class="btn btn-primary"> Create Free Account </a>
-            <a href="#demo" class="btn btn-secondary"> Watch Demo </a>
+            <a href="#signup" class="btn btn-primary">⚡ Deploy Free Now</a>
+            <a href="#demo" class="btn btn-secondary">🎬 Watch Innovation Demo</a>
           </div>
-          <p class="cta-note">Already have an account? <a href="#login" class="link">Sign in</a></p>
+          <p class="cta-note">Already innovating with us? <a href="#login" class="link">Access Dashboard</a></p>
         </div>
       </div>
     </div>
@@ -183,6 +184,11 @@ const benefits = ["Free tier with 100GB bandwidth", "No credit card required", "
 }
 
 @media (max-width: 768px) {
+  .cta-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
   .cta-content {
     grid-template-columns: 1fr;
     text-align: center;

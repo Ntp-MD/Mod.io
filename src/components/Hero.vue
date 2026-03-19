@@ -13,29 +13,29 @@ MOD.init({
       <div class="hero-grid">
         <div class="hero-content">
           <div class="hero-badge">
-            <span class="badge badge-primary">CDN Library Creator</span>
+            <span class="badge badge-primary">⚡ Supreme CDN Innovation</span>
           </div>
-          <h1 class="hero-title">Deliver Your Libraries Faster</h1>
+          <h1 class="hero-title">Intelligent Library Distribution at Scale</h1>
           <p>
-            MOD.io is a modern CDN platform designed for library creators. Upload once, deliver globally with lightning-fast performance, version
-            management, and real-time analytics.
+            MOD.io is an agentic CDN platform engineered for modern developers. Deploy once, distribute globally with supreme performance
+            optimization, intelligent version control, and real-time analytics intelligence.
           </p>
           <div class="hero-actions">
-            <a href="#get-started" class="btn btn-primary"> Start Free </a>
-            <a href="#docs" class="btn btn-secondary"> View Docs </a>
+            <a href="#get-started" class="btn btn-primary">🚀 Deploy Now</a>
+            <a href="#docs" class="btn btn-secondary">📚 Explore Innovation</a>
           </div>
           <div class="hero-stats">
             <div class="stat">
-              <div class="stat-number">10M+</div>
-              <div class="stat-label">Daily Requests</div>
+              <div class="stat-number">100M+</div>
+              <div class="stat-label">Intelligent Requests</div>
             </div>
             <div class="stat">
-              <div class="stat-number">99.9%</div>
-              <div class="stat-label">Uptime</div>
+              <div class="stat-number">99.99%</div>
+              <div class="stat-label">Supreme Uptime</div>
             </div>
             <div class="stat">
-              <div class="stat-number">50+</div>
-              <div class="stat-label">Edge Locations</div>
+              <div class="stat-number">150+</div>
+              <div class="stat-label">Global Edge Nodes</div>
             </div>
           </div>
         </div>

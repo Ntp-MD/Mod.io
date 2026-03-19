@@ -1,48 +1,50 @@
 <script setup>
 const plans = [
   {
-    name: "Starter",
+    name: "Innovation Starter",
     price: "Free",
-    description: "Perfect for personal projects and small libraries",
-    features: ["10GB bandwidth per month", "Up to 5 libraries", "Basic analytics", "Community support", "HTTP/HTTPS delivery"],
+    description: "Perfect for innovators and emerging projects",
+    features: ["50GB intelligent bandwidth", "Up to 10 libraries", "AI-powered analytics", "Community intelligence", "Supreme HTTPS delivery"],
     highlighted: false,
-    cta: "Get Started",
+    cta: "🚀 Deploy Free",
   },
   {
-    name: "Pro",
-    price: "$29",
+    name: "Professional Elite",
+    price: "$49",
     period: "/month",
-    description: "Ideal for professional developers and growing teams",
+    description: "Engineered for professional developers and agentic teams",
     features: [
-      "100GB bandwidth per month",
-      "Up to 50 libraries",
-      "Advanced analytics",
-      "Priority support",
-      "Custom domains",
-      "API access",
-      "Version control",
+      "500GB intelligent bandwidth",
+      "Unlimited libraries",
+      "Predictive analytics AI",
+      "Priority intelligence support",
+      "Custom domains + SSL",
+      "Advanced API access",
+      "Intelligent version control",
       "Real-time monitoring",
+      "Auto-optimization",
     ],
     highlighted: true,
-    cta: "Start Free Trial",
+    cta: "⚡ Start Innovation",
   },
   {
-    name: "Enterprise",
+    name: "Enterprise Supreme",
     price: "Custom",
-    description: "Tailored solutions for large organizations",
+    description: "Tailored intelligence for global organizations",
     features: [
-      "Unlimited bandwidth",
+      "Unlimited intelligent bandwidth",
       "Unlimited libraries",
-      "Custom analytics",
-      "Dedicated support",
-      "Private CDN",
-      "Advanced API",
-      "SSO integration",
-      "SLA guarantee",
-      "Custom contracts",
+      "AI-powered custom analytics",
+      "Dedicated innovation team",
+      "Private edge network",
+      "Enterprise API suite",
+      "SSO + zero-trust security",
+      "99.99% SLA guarantee",
+      "Blockchain verification",
+      "Custom innovation contracts",
     ],
     highlighted: false,
-    cta: "Contact Sales",
+    cta: "🎯 Contact Innovation Team",
   },
 ];
 
@@ -55,9 +57,9 @@ const toggleBilling = () => {
   <section id="pricing" class="section">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-primary">Pricing</span>
-        <h2 class="section-title">Simple, Transparent Pricing</h2>
-        <p class="section-description">Choose the perfect plan for your needs. Start free and scale as you grow.</p>
+        <span class="badge badge-primary">💎 Investment Plans</span>
+        <h2 class="section-title">Supreme, Transparent Pricing</h2>
+        <p class="section-description">Choose your innovation tier. Start free and scale intelligently as you grow.</p>
       </div>
 
       <div class="pricing-grid" large="3" medium="2" semi="2" small="1" gap="var(--gap-md)">
@@ -90,10 +92,10 @@ const toggleBilling = () => {
       </div>
 
       <div class="pricing-footer">
-        <p class="pricing-note">All plans include SSL certificates, global CDN, and 99.9% uptime guarantee.</p>
+        <p class="pricing-note">All plans include military-grade SSL, intelligent global CDN, and 99.99% supreme uptime guarantee.</p>
         <p class="pricing-note">
-          No hidden fees. Cancel anytime. Questions?
-          <a href="#contact" class="pricing-link">Contact our team</a>
+          Zero hidden fees. Cancel anytime. Questions?
+          <a href="#contact" class="pricing-link">Contact our innovation team</a>
         </p>
       </div>
     </div>

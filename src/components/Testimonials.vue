@@ -2,46 +2,50 @@
 const testimonials = [
   {
     name: "Sarah Chen",
-    role: "Frontend Developer",
-    company: "TechCorp",
+    role: "Lead Innovation Engineer",
+    company: "TechCorp Global",
     content:
-      "MOD.io transformed how we distribute our UI components. The CDN is incredibly fast and the analytics help us understand usage patterns.",
+      "MOD.io revolutionized our component distribution strategy. The intelligent edge network delivers sub-20ms latency globally, and the AI-powered analytics provide unprecedented insights.",
     avatar: "👩‍💻",
   },
   {
     name: "Marcus Johnson",
-    role: "Full Stack Engineer",
-    company: "StartupHub",
+    role: "Principal Architect",
+    company: "StartupHub Ventures",
     content:
-      "The version management is brilliant. We can roll back instantly if something breaks, and our users always get the latest stable version.",
+      "The agentic version management is extraordinary. Intelligent rollback capabilities and predictive deployment ensure our users always receive optimal builds.",
     avatar: "👨‍💻",
   },
   {
     name: "Emily Rodriguez",
-    role: "DevOps Lead",
-    company: "CloudScale",
-    content: "Global distribution is flawless. Our users in Asia get the same speed as those in Europe. The reliability is outstanding.",
+    role: "VP of Engineering",
+    company: "CloudScale Systems",
+    content:
+      "Supreme global distribution with self-healing infrastructure. Our users worldwide experience identical performance. The reliability is unmatched in the industry.",
     avatar: "👩‍💼",
   },
   {
     name: "David Kim",
-    role: "CTO",
-    company: "InnovateLabs",
-    content: "The real-time analytics are game-changing. We can see which versions are most popular and make data-driven decisions.",
+    role: "Chief Technology Officer",
+    company: "InnovateLabs AI",
+    content:
+      "The predictive analytics intelligence is transformative. Machine learning-powered insights enable data-driven decisions that accelerate our innovation cycle.",
     avatar: "👨‍🎓",
   },
   {
     name: "Lisa Thompson",
-    role: "Product Manager",
-    company: "DevTools Inc",
-    content: "Simple setup, powerful features. Our team was up and running in minutes. The documentation is excellent.",
+    role: "Director of Product",
+    company: "DevTools Innovation",
+    content:
+      "Zero-configuration deployment with supreme features. Our engineering team achieved production deployment in under 3 minutes. The documentation is world-class.",
     avatar: "👩‍🏫",
   },
   {
     name: "James Wilson",
-    role: "Software Architect",
-    company: "Enterprise Solutions",
-    content: "The security features give us peace of mind. SRI hashes and malware scanning are exactly what we need for enterprise clients.",
+    role: "Enterprise Architect",
+    company: "Fortune 500 Solutions",
+    content:
+      "Military-grade security with blockchain-verified integrity. The zero-trust architecture and automated threat detection exceed enterprise compliance requirements.",
     avatar: "👨‍💼",
   },
 ];
@@ -51,24 +55,24 @@ const testimonials = [
   <section id="testimonials" class="section section-dark">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-primary">Testimonials</span>
-        <h2 class="section-title">Trusted by Developers Worldwide</h2>
-        <p class="section-description">See what leading developers and companies say about MOD.io</p>
+        <span class="badge badge-primary">💬 Innovation Voices</span>
+        <h2 class="section-title">Trusted by Elite Developers Globally</h2>
+        <p class="section-description">Discover why industry leaders choose our supreme platform</p>
       </div>
 
       <!-- Stats Bar -->
       <div class="testimonials-stats">
         <div class="stat-item">
-          <div class="stat-number">10M+</div>
-          <div class="stat-label">Happy Developers</div>
+          <div class="stat-number">50M+</div>
+          <div class="stat-label">Empowered Developers</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">99.9%</div>
-          <div class="stat-label">Satisfaction Rate</div>
+          <div class="stat-number">99.99%</div>
+          <div class="stat-label">Supreme Satisfaction</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">150+</div>
-          <div class="stat-label">Countries</div>
+          <div class="stat-number">180+</div>
+          <div class="stat-label">Global Nations</div>
         </div>
       </div>
 
