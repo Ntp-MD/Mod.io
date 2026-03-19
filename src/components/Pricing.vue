@@ -60,7 +60,7 @@ const toggleBilling = () => {
         <p class="section-description">Choose the perfect plan for your needs. Start free and scale as you grow.</p>
       </div>
 
-      <div class="pricing-grid" large="3" medium="2" semi="1" small="1" gap="var(--space-md)">
+      <div class="pricing-grid" large="3" medium="2" semi="2" small="1" gap="var(--gap-md)">
         <article v-for="plan in plans" :key="plan.name" :class="['pricing-card', { 'pricing-card-highlighted': plan.highlighted }]">
           <div class="pricing-badge" v-if="plan.highlighted">
             <span class="badge badge-accent">MOST POPULAR</span>
@@ -106,22 +106,21 @@ const toggleBilling = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-xl);
 }
 
 .section-description {
-  font-size: var(--font-size-md);
-  color: var(--color-gray-600);
-  max-width: 600px;
+  font-size: var(--font-md);
+  color: var(--main-color-6);
   margin-inline: auto;
   line-height: var(--line-height-base);
 }
 
 .pricing-card {
-  background-color: var(--color-secondary);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-3);
+  background-color: var(--main-white);
+  border: 1px solid var(--main-color-8);
+  border-radius: var(--radius-lg);
   transition: all var(--transition-md);
   position: relative;
   display: flex;
@@ -146,23 +145,23 @@ const toggleBilling = () => {
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gray-700) 100%);
-  padding: var(--space-xs);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--main-color-4) 100%);
+  padding: var(--gap-xs);
   text-align: center;
 }
 
 .pricing-header {
-  padding: var(--space-lg);
-  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%);
+  padding: var(--gap-lg);
+  background: linear-gradient(135deg, var(--main-color-9) 0%, var(--main-color-8) 100%);
   text-align: center;
-  border-bottom: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid var(--main-color-8);
 }
 
 .pricing-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--gap-sm);
 }
 
 .pricing-name {
@@ -173,47 +172,47 @@ const toggleBilling = () => {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: var(--space-xs);
+  gap: var(--gap-xs);
 }
 
 .price-amount {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-lg);
   font-weight: 800;
   color: var(--color-primary);
   line-height: 1;
 }
 
 .price-period {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-600);
+  font-size: var(--font-sm);
+  color: var(--main-color-5);
 }
 
 .pricing-description {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-600);
+  font-size: var(--font-sm);
+  color: var(--main-color-4);
   line-height: var(--line-height-base);
 }
 
 .pricing-features {
-  padding: var(--space-lg);
+  padding: var(--gap-lg);
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--gap-sm);
 }
 
 .feature-item {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
-  background-color: var(--color-gray-100);
-  border-radius: var(--radius-2);
+  gap: var(--gap-sm);
+  padding: var(--gap-sm);
+  background-color: var(--main-color-9);
+  border-radius: var(--radius-md);
   transition: all var(--transition-md);
 }
 
 .feature-item:hover {
-  background-color: var(--color-gray-200);
+  background-color: var(--main-color-8);
   transform: translateX(4px);
 }
 
@@ -224,41 +223,41 @@ const toggleBilling = () => {
   width: 24px;
   height: 24px;
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
   border-radius: var(--radius-circle);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-xs);
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .feature-text {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-700);
+  font-size: var(--font-sm);
+  color: var(--main-color-3);
   line-height: var(--line-height-base);
 }
 
 .pricing-cta {
-  padding: var(--space-lg);
+  padding: var(--gap-lg);
   padding-top: 0;
   margin-top: auto;
 }
 
 .pricing-footer {
   text-align: center;
-  padding-top: var(--space-lg);
-  border-top: 1px solid var(--color-gray-200);
-  margin-top: var(--space-xl);
+  padding-top: var(--gap-lg);
+  border-top: 1px solid var(--main-color-8);
+  margin-top: var(--gap-xl);
 }
 
 .pricing-features {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--gap-sm);
 }
 
 .pricing-note {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-600);
+  font-size: var(--font-sm);
+  color: var(--main-color-4);
   line-height: var(--line-height-base);
 }
 
@@ -270,17 +269,18 @@ const toggleBilling = () => {
 }
 
 .pricing-link:hover {
-  color: var(--color-gray-700);
+  color: var(--main-color-4);
   text-decoration: underline;
 }
 
 @media (max-width: 480px) {
   .pricing-card {
-    padding: var(--space-md);
+    padding: var(--gap-md);
   }
 
   .price-amount {
-    font-size: var(--font-size-3xl);
+    /* Let calc() handle responsive sizing */
+    font-size: var(--font-lg);
   }
 }
 </style>

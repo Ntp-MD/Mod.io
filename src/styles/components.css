@@ -23,7 +23,7 @@
 }
 
 .text-secondary {
-  color: var(--color-secondary);
+  color: var(--main-white);
 }
 
 .bg-primary {
@@ -31,11 +31,11 @@
 }
 
 .bg-secondary {
-  background-color: var(--color-secondary);
+  background-color: var(--main-white);
 }
 
 .bg-gray-800 {
-  background-color: var(--color-gray-800);
+  background-color: var(--main-color-2);
 }
 
 .border-primary {
@@ -43,7 +43,7 @@
 }
 
 .border-gray-200 {
-  border-color: var(--color-gray-200);
+  border-color: var(--main-color-8);
 }
 
 /* Border utilities */
@@ -56,19 +56,19 @@
 }
 
 .border {
-  border: 1px solid var(--color-gray-200);
+  border: 1px solid var(--main-color-8);
 }
 
 /* Combined utility classes (max 3 per element) */
 .card-feature {
-  background-color: var(--color-secondary);
-  border: 1px solid var(--color-gray-200);
+  background-color: var(--main-white);
+  border: 1px solid var(--main-color-8);
   border-radius: var(--radius-3);
 }
 
 .icon-feature {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
   border-radius: var(--radius-circle);
 }
 
@@ -187,13 +187,13 @@
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
   border: 2px solid var(--color-primary);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-gray-800);
-  border-color: var(--color-gray-800);
+  background-color: var(--main-color-2);
+  border-color: var(--main-color-2);
 }
 
 .btn-secondary {
@@ -204,88 +204,179 @@
 
 .btn-secondary:hover {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
 }
 
-/* Card Component */
+/* Card Component - Following personal-css.md gap usage */
 .card {
-  background-color: var(--color-secondary);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-3);
-  padding: var(--space-lg);
-  transition: all var(--transition-md);
+  display: grid;
+  gap: var(--gap-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--gap-md);
+  transition: var(--transition-normal);
+  contain: layout;
 }
 
 .card:hover {
-  border-color: var(--color-gray-300);
+  border-color: var(--color-border);
   box-shadow: var(--shadow-lg);
 }
 
 .card-dark {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
-  border-color: var(--color-gray-800);
+  color: var(--main-white);
+  border-color: var(--main-color-3);
 }
 
 .card-dark:hover {
-  border-color: var(--color-gray-600);
+  border-color: var(--main-color-4);
 }
 
-/* Section Component */
+.card-dark {
+  background-color: var(--color-primary);
+  color: var(--main-white);
+  border-color: var(--main-color-3);
+}
+
+.card-dark:hover {
+  border-color: var(--main-color-4);
+}
+
+/* Section Component - Following personal-css.md gap usage */
 .section {
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
+  padding-top: var(--gap-xl);
+  padding-bottom: var(--gap-xl);
 }
 
 .section-dark {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
 }
 
-/* Badge Component */
+/* Badge Component - Following personal-css.md variables */
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: var(--space-xs) var(--space-sm);
-  font-size: var(--font-size-xs);
+  gap: var(--gap-xs);
+  padding: var(--gap-xs) var(--gap-sm);
+  font-size: var(--font-xs);
   font-weight: 600;
-  border-radius: var(--radius-1);
+  border-radius: var(--radius-sm);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .badge-primary {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
 }
 
 .badge-secondary {
-  background-color: var(--color-gray-200);
+  background-color: var(--main-color-8);
   color: var(--color-primary);
 }
 
-/* Icon Component */
+.badge-accent {
+  background-color: var(--color-primary);
+  color: var(--main-white);
+  font-weight: 600;
+}
+
+/* Icon Component - Following personal-css.md variables */
 .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(24px, 1.5vw, 32px);
-  height: clamp(24px, 1.5vw, 32px);
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
 }
 
 .icon-lg {
-  width: clamp(48px, 3vw, 64px);
-  height: clamp(48px, 3vw, 64px);
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
 }
 
-/* Divider */
+/* Divider - Following personal-css.md gap variables */
 .divider {
   width: 100%;
   height: 1px;
-  background-color: var(--color-gray-200);
-  margin: var(--space-xl) 0;
+  background-color: var(--color-border);
+  margin: var(--gap-xl) 0;
 }
 
 .section-dark .divider {
-  background-color: var(--color-gray-700);
+  background-color: var(--main-color-4);
+}
+
+/* Grid overflow fixes */
+.card-grid,
+.feature-grid,
+.grid-container {
+  min-width: 0;
+}
+
+.card-grid > *,
+.feature-grid > *,
+.grid-container > * {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Force single column on mobile for all grids */
+@media screen and (max-width: 768px) {
+  .card-grid,
+  .feature-grid,
+  .grid-container {
+    grid-template-columns: 1fr !important;
+    min-width: 0;
+  }
+}
+
+/* Mobile viewport fixes */
+@media screen and (max-width: 768px) {
+  .card {
+    gap: var(--gap-sm);
+    padding: var(--gap-sm);
+  }
+
+  .section {
+    gap: var(--gap-lg);
+    padding-top: var(--gap-lg);
+    padding-bottom: var(--gap-lg);
+  }
+
+  .badge {
+    padding: var(--gap-xs) var(--gap-sm);
+    font-size: var(--font-xs);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    gap: var(--gap-xs);
+    padding: var(--gap-xs);
+  }
+
+  .section {
+    gap: var(--gap-md);
+    padding-top: var(--gap-md);
+    padding-bottom: var(--gap-md);
+  }
+
+  .badge {
+    padding: var(--gap-xs);
+    font-size: var(--font-xs);
+  }
+
+  .icon {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
 }

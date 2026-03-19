@@ -11,8 +11,8 @@
 // Configuration
 const GRID_MOD_CONFIG = {
   hideAttributes: true, // Show attributes in DevTools
-  hideGridTemplate: true, // Hide complex CSS from DevTools
-  highPrecision: false, // Set to true for smooth transitions (less IP protection)
+  hideGridTemplate: false, // Hide complex CSS from DevTools
+  highPrecision: true, // Set to true for smooth transitions (less IP protection)
 
   // Cool features
   enableAnimations: true, // Enable cool grid animations

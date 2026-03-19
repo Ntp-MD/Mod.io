@@ -61,8 +61,8 @@ MOD.init({
 
 <style scoped>
 .hero {
-  padding: var(--space-xl) 0;
-  background: var(--color-secondary);
+  padding: var(--gap-xl) 0;
+  background: var(--main-white);
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -70,15 +70,14 @@ MOD.init({
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 55% 1fr;
-  gap: var(--space-lg);
+  grid-template-columns: auto auto;
+  gap: var(--gap-lg);
 }
 
 .hero-content {
-  max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--gap-sm);
 }
 
 .hero-title {
@@ -87,31 +86,31 @@ MOD.init({
 
 .hero-actions {
   display: flex;
-  gap: var(--space-sm);
+  gap: var(--gap-sm);
 }
 
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  gap: var(--gap-md);
 }
 
 .stat {
   display: grid;
   text-align: center;
-  gap: var(--space-xs);
+  gap: var(--gap-sm);
   transition: all var(--transition-md);
 }
 
 .stat-number {
-  font-size: var(--font-size-md);
+  font-size: var(--font-lg);
   font-weight: 800;
   color: var(--color-primary);
 }
 
 .stat-label {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-500);
+  font-size: var(--font-xs);
+  color: var(--main-color-5);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -124,7 +123,7 @@ MOD.init({
 
 .code-preview {
   background-color: var(--color-primary);
-  border-radius: var(--radius-3);
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   width: stretch;
@@ -140,14 +139,14 @@ MOD.init({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-sm) var(--space-md);
-  background-color: var(--color-gray-900);
-  border-bottom: 1px solid var(--color-gray-800);
+  padding: var(--gap-md) var(--gap-lg);
+  background-color: var(--main-color-2);
+  border-bottom: 1px solid var(--main-color-3);
 }
 
 .code-controls {
   display: flex;
-  gap: var(--space-xs);
+  gap: var(--gap-xs);
 }
 
 .code-dot {
@@ -169,15 +168,15 @@ MOD.init({
 }
 
 .code-title {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-400);
+  font-size: var(--font-sm);
+  color: var(--main-color-6);
 }
 
 .code-content {
-  padding: var(--space-lg);
+  padding: var(--gap-lg);
   margin: 0;
   overflow-x: auto;
-  background-color: var(--color-gray-900);
+  background-color: var(--main-color-2);
 }
 
 .code-content pre {
@@ -186,24 +185,26 @@ MOD.init({
 
 .code-content code {
   font-family: "Fira Code", "Monaco", monospace;
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-300);
+  font-size: var(--font-sm);
+  color: var(--main-color-7);
   line-height: var(--line-height-base);
   white-space: pre;
 }
 
 @media (max-width: 1200px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
 }
 
 @media (max-width: 992px) {
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-lg);
+  }
+
   .hero-content {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--gap-lg);
     text-align: center;
   }
 
@@ -219,22 +220,13 @@ MOD.init({
 
 @media (max-width: 480px) {
   .hero {
-    padding-top: var(--space-md);
-    padding-bottom: var(--space-md);
-  }
-
-  .hero-title {
-    font-size: var(--font-size-lg);
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
+    padding-top: var(--gap-md);
+    padding-bottom: var(--gap-md);
   }
 
   .hero-stats {
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--gap-md);
     width: 100%;
   }
 
@@ -243,10 +235,7 @@ MOD.init({
   }
 
   .code-content {
-    padding: var(--space-sm);
-  }
-  .code-content code {
-    font-size: var(--font-size-xs);
+    padding: var(--gap-sm);
   }
 }
 </style>

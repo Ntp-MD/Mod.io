@@ -41,7 +41,7 @@ const features = [
         <h2 class="section-title">Everything You Need</h2>
         <p class="section-description">Powerful tools for library creators and maintainers</p>
       </div>
-      <div class="features-grid mega-grid" screen="6,3,2,1,var(--space-sm)">
+      <div class="features-grid" screen="6,3,2,1,var(--gap-md)">
         <article v-for="feature in features" :key="feature.title" class="feature-card card-feature card-hover">
           <span class="feature-icon icon-feature icon-hover">{{ feature.icon }}</span>
           <h3 class="feature-title text-primary">{{ feature.title }}</h3>
@@ -58,14 +58,13 @@ const features = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
+  gap: var(--radius-sm);
+  margin-bottom: var(--gap-xs);
 }
 
 .section-description {
-  font-size: var(--font-size-md);
-  color: var(--color-gray-600);
-  max-width: 600px;
+  font-size: var(--font-md);
+  color: var(--main-color-5);
   margin-inline: auto;
   line-height: var(--line-height-base);
 }
@@ -73,8 +72,8 @@ const features = [
 .feature-card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
+  gap: var(--radius-sm);
+  padding: var(--radius-sm);
   text-align: center;
   container-type: inline-size;
 }
@@ -89,7 +88,7 @@ const features = [
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-lg);
   width: 60px;
   height: 60px;
   margin: 0 auto;
@@ -100,12 +99,12 @@ const features = [
 }
 
 .feature-title {
-  font-size: 15cqw;
+  font-size: var(--font-lg);
 }
 
 .feature-description {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-600);
+  font-size: var(--font-sm);
+  color: var(--main-color-5);
   line-height: var(--line-height-base);
 }
 </style>

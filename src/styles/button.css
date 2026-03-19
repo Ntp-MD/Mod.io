@@ -1,22 +1,46 @@
-/* Button Base Styles */
+/* Button Base Styles - Following personal-css.md rules */
 .btn,
 button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
   background: none;
   border: none;
   cursor: pointer;
-  font-size: var(--font-size-sm);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-1);
-  transition: all var(--transition-md);
+  font-size: var(--font-md);
+  padding: var(--gap-sm) var(--gap-md);
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
   width: auto;
 }
 
 button:focus {
   outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline-offset: var(--outline-offset);
 }
 
 button:disabled {
-  opacity: 0.6;
+  opacity: var(--opacity-disabled);
   cursor: not-allowed;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+/* Mobile viewport fixes */
+@media screen and (max-width: 768px) {
+  button {
+    padding: var(--gap-sm) var(--gap-md);
+    font-size: var(--font-sm);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  button {
+    padding: var(--gap-xs) var(--gap-sm);
+    font-size: var(--font-sm);
+    width: 100%;
+  }
 }

@@ -25,6 +25,11 @@ const steps = [
     detail: "Real-time dashboard, usage alerts",
   },
 ];
+
+const getStepIcon = (index) => {
+  const icons = ["📤", "⚙️", "🔗", "📊"];
+  return icons[index] || "📍";
+};
 </script>
 
 <template>
@@ -35,12 +40,32 @@ const steps = [
         <h2 class="section-title">Simple 4-Step Process</h2>
         <p class="section-description">From upload to global distribution in minutes</p>
       </div>
-      <div class="steps-grid" large="4" medium="2" semi="2" small="1" gap="var(--space-md)">
-        <article v-for="step in steps" :key="step.number" class="step-card">
-          <div class="step-number">{{ step.number }}</div>
-          <h3 class="step-title">{{ step.title }}</h3>
+
+      <!-- Visual Step Flow -->
+      <div class="steps-flow">
+        <div class="steps-visual">
+          <div class="flow-line"></div>
+          <div v-for="(step, index) in steps" :key="step.number" class="step-node" :class="`step-${index + 1}`">
+            <div class="step-circle">
+              <span class="step-icon">{{ getStepIcon(index) }}</span>
+            </div>
+            <div class="step-connector" v-if="index < steps.length - 1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards -->
+      <div class="steps-grid" large="4" medium="2" semi="2" small="1" gap="var(--gap-md)">
+        <article v-for="(step, index) in steps" :key="step.number" class="step-card" :class="`step-card-${index + 1}`">
+          <div class="step-header">
+            <div class="step-number">{{ step.number }}</div>
+            <h3 class="step-title">{{ step.title }}</h3>
+          </div>
           <p class="step-description">{{ step.description }}</p>
-          <span class="step-detail">{{ step.detail }}</span>
+          <div class="step-detail">
+            <span class="detail-icon">⚡</span>
+            <span>{{ step.detail }}</span>
+          </div>
         </article>
       </div>
     </div>
@@ -53,87 +78,248 @@ const steps = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-xl);
 }
 
 .section-description {
-  font-size: var(--font-size-md);
-  color: var(--color-gray-400);
-  max-width: 600px;
+  font-size: var(--font-md);
+  color: var(--main-color-7);
   margin-inline: auto;
   line-height: var(--line-height-base);
 }
 
-.step-card {
+/* Visual Step Flow */
+.steps-flow {
+  margin-bottom: var(--gap-xl);
   position: relative;
-  padding: var(--space-lg);
-  background-color: var(--color-gray-900);
-  border: 1px solid var(--color-gray-800);
-  border-radius: var(--radius-3);
-  transition: all var(--transition-md);
-  text-align: center;
 }
 
-.step-card:hover {
-  border-color: var(--color-primary);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+.steps-visual {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.step-number {
-  font-size: var(--font-size-xl);
-  font-weight: 800;
-  color: var(--color-primary);
-  width: 50px;
-  height: 50px;
-  background-color: var(--color-gray-800);
+.flow-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--main-color-5));
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.step-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.step-circle {
+  width: 60px;
+  height: 60px;
+  background-color: var(--main-color-2);
+  border: 3px solid var(--color-primary);
   border-radius: var(--radius-circle);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--space-md);
-  border: 2px solid var(--color-primary);
-  transition: all var(--transition-md);
+  transition: var(--transition-normal);
+  position: relative;
 }
 
-.step-card:hover .step-number {
+.step-circle::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--radius-circle);
+  background: linear-gradient(45deg, var(--color-primary), transparent);
+  opacity: 0;
+  transition: var(--transition-normal);
+}
+
+.step-node:hover .step-circle {
   transform: scale(1.1);
   background-color: var(--color-primary);
-  color: var(--color-secondary);
 }
 
+.step-node:hover .step-circle::before {
+  opacity: 0.4;
+}
+
+.step-icon {
+  font-size: var(--font-xl);
+  filter: grayscale(1) brightness(2);
+  transition: var(--transition-normal);
+}
+
+.step-node:hover .step-icon {
+  filter: none;
+}
+
+.step-connector {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Step Cards */
 .step-card {
+  position: relative;
+  padding: var(--gap-lg);
+  background-color: var(--main-color-2);
+  border: 1px solid var(--main-color-3);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-normal);
+  text-align: center;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--main-color-5));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition-normal);
+}
+
+.step-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.step-card:hover::before {
+  transform: scaleX(1);
+}
+
+.step-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-md);
+}
+
+.step-number {
+  font-size: var(--font-lg);
+  color: var(--main-white);
+  font-weight: 800;
+  width: 50px;
+  height: 50px;
+  background-color: var(--main-color-3);
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-primary);
+  transition: var(--transition-normal);
+}
+
+.step-card:hover .step-number {
+  background-color: var(--color-primary);
+  color: var(--main-white);
+  transform: rotate(360deg);
 }
 
 .step-title {
-  color: var(--color-secondary);
+  color: var(--main-white);
+  font-size: var(--font-lg);
+  font-weight: 600;
 }
 
 .step-description {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-400);
+  font-size: var(--font-sm);
+  color: var(--main-color-7);
   line-height: var(--line-height-base);
+  margin-bottom: var(--gap-md);
 }
 
 .step-detail {
-  display: inline-block;
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-500);
-  padding: var(--space-xs) var(--space-sm);
-  background-color: var(--color-gray-800);
-  border-radius: var(--radius-1);
-  border: 1px solid var(--color-gray-700);
-  transition: all var(--transition-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  font-size: var(--font-xs);
+  color: var(--main-color-6);
+  padding: var(--gap-sm) var(--gap-md);
+  background-color: var(--main-color-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--main-color-4);
+  transition: var(--transition-normal);
+}
+
+.detail-icon {
+  font-size: var(--font-sm);
 }
 
 .step-card:hover .step-detail {
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--main-white);
   border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .steps-visual {
+    flex-direction: column;
+    gap: var(--gap-lg);
+  }
+
+  .flow-line {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .step-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .step-icon {
+    font-size: var(--font-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .step-card {
+    padding: var(--gap-md);
+  }
+
+  .step-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .step-icon {
+    font-size: var(--font-md);
+  }
 }
 </style>

@@ -43,9 +43,9 @@ const toggleMenu = () => {
   position: relative;
   top: 0;
   z-index: var(--z-sticky);
-  background-color: var(--color-secondary);
-  border-bottom: 1px solid var(--color-gray-200);
-  padding: var(--space-sm) var(--space-md);
+  background-color: var(--main-white);
+  border-bottom: 1px solid var(--main-color-8);
+  padding: var(--gap-sm) var(--gap-md);
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.95);
 }
@@ -54,14 +54,14 @@ const toggleMenu = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-lg);
+  gap: var(--gap-lg);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-size: var(--font-size-lg);
+  gap: var(--gap-sm);
+  font-size: var(--font-lg);
   font-weight: 800;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -79,16 +79,16 @@ const toggleMenu = () => {
 .nav-list {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--gap-lg);
 }
 
 .nav-link {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-xs);
   font-weight: 500;
-  color: var(--color-gray-600);
+  color: var(--main-color-5);
   text-decoration: none;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-1);
+  padding: var(--gap-xxl) var(--gap-sm);
+  border-radius: var(--radius-md);
   transition: all var(--transition-md);
   position: relative;
 }
@@ -107,7 +107,7 @@ const toggleMenu = () => {
 
 .nav-link:hover {
   color: var(--color-primary);
-  background-color: var(--color-gray-100);
+  background-color: var(--main-color-9);
 }
 
 .nav-link:hover::before {
@@ -117,11 +117,11 @@ const toggleMenu = () => {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--gap-md);
 }
 
 .header-actions .btn {
-  padding: var(--space-sm) var(--space-lg);
+  padding: var(--gap-sm) var(--gap-lg);
   font-weight: 600;
   transition: all var(--transition-md);
 }
@@ -139,12 +139,12 @@ const toggleMenu = () => {
   background: transparent;
   border: none;
   cursor: pointer;
-  border-radius: var(--radius-1);
+  border-radius: var(--radius-md);
   transition: all var(--transition-md);
 }
 
 .menu-toggle:hover {
-  background-color: var(--color-gray-100);
+  background-color: var(--main-color-9);
 }
 
 .menu-icon,
@@ -194,9 +194,9 @@ const toggleMenu = () => {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--color-secondary);
-    border-bottom: 1px solid var(--color-gray-200);
-    padding: var(--space-md);
+    background-color: var(--main-white);
+    border-bottom: 1px solid var(--main-color-8);
+    padding: var(--gap-md);
     display: none;
   }
 
@@ -207,7 +207,7 @@ const toggleMenu = () => {
   .nav-list {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-md);
+    gap: var(--gap-md);
   }
 
   .menu-toggle {

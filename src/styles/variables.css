@@ -1,51 +1,76 @@
 :root {
-  /* Colors */
+  /* Colors Theme*/
+  --main-color-1: #000000;
+  --main-color-2: #171717;
+  --main-color-3: #262626;
+  --main-color-4: #404040;
+  --main-color-5: #525252;
+  --main-color-6: #737373;
+  --main-color-7: #d4d4d4;
+  --main-color-8: #e5e5e5;
+  --main-color-9: #f5f5f5;
+  --main-white: #ffffff; /* Colors - Following personal-css.md naming */
   --color-primary: #000000;
   --color-secondary: #ffffff;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #e5e5e5;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #a3a3a3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-800: #262626;
-  --color-gray-900: #171717;
+  --color-success: #16a34a;
+  --color-warning: #ea580c;
+  --color-error: #dc2626;
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
 
-  /* Typography */
+  /* Typography - Following personal-css.md naming with clamp() */
   --font-family: "Inter", sans-serif;
-  --font-size-xs: clamp(12px, 1vw, 14px);
-  --font-size-sm: clamp(16px, 1vw, 18px);
-  --font-size-md: clamp(20px, 2vw, 30px);
-  --font-size-lg: clamp(24px, 3vw, 60px);
-  --font-size-xl: clamp(48px, 4vw, 80px);
+  --font-xs: clamp(10px, 2vw, 12px); /* Small text (captions, labels) */
+  --font-sm: clamp(12px, 2.5vw, 14px); /* Body text (paragraphs, descriptions) */
+  --font-md: clamp(14px, 3vw, 16px); /* Standard text (buttons, inputs) */
+  --font-lg: clamp(16px, 3.5vw, 18px); /* Large text (subheadings) */
+  --font-xl: clamp(20px, 4vw, 24px); /* Extra large (headings, titles) */
 
-  /* Spacing */
-  --space-xs: 8px;
-  --space-sm: 16px;
-  --space-md: 32px;
-  --space-lg: 64px;
-  --space-xl: 128px;
+  /* Line Heights - Progressive scaling */
+  --line-height-xs: 1.6; /* Small text needs more breathing room */
+  --line-height-sm: 1.5; /* Standard body text */
+  --line-height-md: 1.4; /* Medium text, tighter */
+  --line-height-lg: 1.3; /* Large text, impactful */
+  --line-height-xl: 1.2; /* Headings, bold and tight */
+
+  /* Gap Scale - Following personal-css.md 5-10-20-30-50 scale */
+  --gap-xs: 5px; /* Tight spacing (icons, dense UI) */
+  --gap-sm: 10px; /* Standard spacing (forms, buttons) */
+  --gap-md: 20px; /* Medium spacing (cards, sections) */
+  --gap-lg: 30px; /* Large spacing (major sections) */
+  --gap-xl: 50px; /* Extra large spacing (hero, layout breaks) */
 
   /* Layout */
   --container-max: 1200px;
 
-  /* Border Radius */
-  --radius-1: 6px;
-  --radius-2: 12px;
-  --radius-3: 16px;
-  --radius-circle: 50%;
+  /* Border Radius - Following personal-css.md naming */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --radius-1: 6px; /* Keep for backward compatibility */
+  --radius-2: 12px; /* Keep for backward compatibility */
+  --radius-3: 16px; /* Keep for backward compatibility */
+  --radius-circle: 50%; /* Keep for backward compatibility */
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  /* Shadows - Following personal-css.md naming */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
 
-  /* Transitions */
-  --transition-sm: 150ms ease;
-  --transition-md: 250ms ease;
-  --transition-lg: 350ms ease;
+  /* Transitions - Following personal-css.md naming */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-sm: 150ms ease; /* Keep for backward compatibility */
+  --transition-md: 250ms ease; /* Keep for backward compatibility */
+  --transition-lg: 350ms ease; /* Keep for backward compatibility */
 
   /* Z-index */
   --z-dropdown: 100;
@@ -53,19 +78,16 @@
   --z-modal: 300;
   --z-tooltip: 400;
 
-  /* Icon Sizes */
-  --icon-size-sm: 24px;
-  --icon-size-lg: 64px;
+  /* Icon Sizes - Following personal-css.md naming */
+  --icon-size-xs: 12px;
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-xl: 32px;
 
-  /* Line Height */
-  --line-height-base: 1.6;
-
-  /* Letter Spacing */
-  --letter-spacing-tight: 0.05em;
-
-  /* Opacity */
+  /* Common Variables - Following personal-css.md */
   --opacity-disabled: 0.6;
-
-  /* Outline */
+  --line-height-base: 1.6;
+  --letter-spacing-tight: 0.05em;
   --outline-offset: 2px;
 }
