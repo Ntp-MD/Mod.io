@@ -1,195 +1,142 @@
 /**
  * Grid Mod - Dynamic Responsive Grid System
- * Usage: Add attributes to any element
- * <div large="6" medium="4" semi="3" small="1" gap="var(--space-md)">
+ * Usage: Add grid attribute to any element
+ * <div grid="6,4,3,1,var(--space-md)">
  *
  * Options:
- * - hideAttributes: true/false - Hide grid-mod attributes from DOM
- * - hideGridTemplate: true/false - Hide complex CSS from DevTools
+ * - TogglePrecision: true/false - Use precision or simple grid template
  */
 
 // Configuration
 const GRID_MOD_CONFIG = {
-  hideAttributes: true, // Show attributes in DevTools
-  hideGridTemplate: false, // Hide complex CSS from DevTools
-  highPrecision: true, // Set to true for smooth transitions (less IP protection)
+  TogglePrecision: false, // true = use TogglePrecision, false = use GridTemplate
+};
 
-  // Cool features
-  enableAnimations: true, // Enable cool grid animations
-  debugMode: false, // Enable debug mode with visual indicators
-  autoNaming: true, // Auto-generate cool grid names
-  visualEffects: true, // Enable hover effects and visual feedback
+// Breakpoint constants - ensure consistency
+const BREAKPOINTS = {
+  SMALL: 480,
+  SEMI: 992,
+  MEDIUM: 1200,
 };
 
 function gridModDefault(element) {
-  GridModPerformance.startTiming("gridModInit");
+  try {
+    // Skip if already processed
+    if (element._gridModProcessed) {
+      return;
+    }
 
-  // Skip if already processed
-  if (element._gridModProcessed) {
-    GridModPerformance.trackCacheHit();
-    return;
-  }
+    let large, medium, semi, small, gap;
 
-  let large, medium, semi, small, gap;
-  let gridName = "";
+    // Check for grid attribute first (most compact)
+    const gridAttr = element.getAttribute("grid");
+    if (gridAttr) {
+      // Validate input format (temporarily disabled for debugging)
+      // if (!/^[\d,\s\-\(\)\.var\-\-]+$/.test(gridAttr.trim())) {
+      //   console.warn(`Invalid grid attribute: "${gridAttr}"`);
+      //   return;
+      // }
+      console.log(`Processing grid attribute: "${gridAttr}"`);
 
-  // Check for screen attribute first (most compact)
-  const screenAttr = element.getAttribute("screen");
-  if (screenAttr) {
-    const values = screenAttr.split(",");
-    large = values[0] || "4";
-    medium = values[1] || "3";
-    semi = values[2] || "2";
-    small = values[3] || "1";
-    gap = values[4] || "var(--space-sm)";
+      const values = gridAttr.split(",").map((v) => v.trim());
 
-    // Generate cool grid name
-    gridName = generateGridName(large, medium, semi, small);
-  } else {
-    // Use individual attributes (fallback)
-    large = element.getAttribute("large") || "4";
-    medium = element.getAttribute("medium") || "3";
-    semi = element.getAttribute("semi") || "2";
-    small = element.getAttribute("small") || "1";
-    gap = element.getAttribute("gap") || "var(--space-sm)";
-
-    // Generate cool grid name
-    gridName = generateGridName(large, medium, semi, small);
-  }
-
-  // Add cool grid name as data attribute
-  if (GRID_MOD_CONFIG.autoNaming) {
-    element.dataset.gridName = gridName;
-    element.classList.add(gridName);
-  }
-
-  // Add cool animations
-  if (GRID_MOD_CONFIG.enableAnimations) {
-    element.classList.add("grid-entrance");
-  }
-
-  // Add debug mode
-  if (GRID_MOD_CONFIG.debugMode) {
-    element.classList.add("grid-debug");
-  }
-
-  // Add visual effects
-  if (GRID_MOD_CONFIG.visualEffects) {
-    element.classList.add("grid-visual");
-  }
-
-  // Hide attributes if enabled
-  if (GRID_MOD_CONFIG.hideAttributes) {
-    hideGridModAttributes(element, { large, medium, semi, small, gap });
-  }
-
-  // Simple grid template (hide complex logic from DevTools)
-  element.style.display = "grid";
-  element.style.gap = gap;
-
-  // Use simple responsive columns instead of complex clamp
-  const updateColumns = () => {
-    const width = window.innerWidth;
-    let columns = large;
-
-    if (GRID_MOD_CONFIG.hideGridTemplate) {
-      // Hide complex CSS from DevTools
-      if (width <= 480 && small !== "1") columns = small;
-      else if (width <= 768 && semi !== "2") columns = semi;
-      else if (width <= 1024 && medium !== "3") columns = medium;
-
-      element.style.gridTemplateColumns = columns === "1" ? "1fr" : `repeat(${columns}, 1fr)`;
-
-      // Add resize animation
-      if (GRID_MOD_CONFIG.enableAnimations) {
-        element.classList.add("grid-resize");
-        setTimeout(() => element.classList.remove("grid-resize"), 300);
+      // Handle variable number of parameters
+      if (values.length === 2) {
+        // Format: "1,var(--gap-md)" - single column with gap
+        const columns = parseInt(values[0]) || 1;
+        // Temporarily disabled for debugging
+        // if (columns < 1 || columns > 12) {
+        //   console.warn(`Invalid column count: "${values[0]}" (must be 1-12)`);
+        //   return;
+        // }
+        console.log(`Columns: ${columns}`);
+        large = medium = semi = small = columns.toString();
+        gap = values[1] || "20px";
+      } else if (values.length === 5) {
+        // Format: "2,2,1,1,var(--gap-md)" - full responsive
+        const cols = [values[0], values[1], values[2], values[3]].map((v) => parseInt(v) || 1);
+        // Temporarily disabled for debugging
+        // if (cols.some((c) => c < 1 || c > 12)) {
+        //   console.warn(`Invalid column count in "${gridAttr}" (must be 1-12)`);
+        //   return;
+        // }
+        console.log(`Cols array: [${cols.join(",")}]`);
+        large = cols[0].toString();
+        medium = cols[1].toString();
+        semi = cols[2].toString();
+        small = cols[3].toString();
+        gap = values[4] || "20px";
+      } else {
+        // Default fallback
+        large = values[0] || "4";
+        medium = values[1] || values[0] || "3";
+        semi = values[2] || values[0] || "2";
+        small = values[3] || values[0] || "1";
+        gap = values[4] || values[values.length - 1] || "20px";
       }
-
-      // Add cool visual indicator
-      addGridIndicator(element, columns, width);
     } else {
-      // Show full complex CSS in DevTools
-      const gridTemplate = `
+      // Use individual attributes (fallback)
+      large = element.getAttribute("large") || "4";
+      medium = element.getAttribute("medium") || "3";
+      semi = element.getAttribute("semi") || "2";
+      small = element.getAttribute("small") || "1";
+      gap = element.getAttribute("gap") || "20px";
+    }
+
+    // Apply grid styles
+    if (element.style.display !== "grid") {
+      element.style.display = "grid";
+    }
+    element.style.gap = gap;
+
+    // Responsive columns
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      let columns = large;
+
+      if (!GRID_MOD_CONFIG.TogglePrecision) {
+        // Hide complex CSS from DevTools
+        if (width <= BREAKPOINTS.SMALL && small !== "1") columns = small;
+        else if (width <= BREAKPOINTS.SEMI && semi !== "2") columns = semi;
+        else if (width <= BREAKPOINTS.MEDIUM && medium !== "3") columns = medium;
+
+        element.style.gridTemplateColumns = columns === "1" ? "1fr" : `repeat(${columns}, 1fr)`;
+      } else {
+        // TogglePrecision mode - complex CSS
+        const gridTemplate = `
         repeat(
           auto-fit,
           minmax(
             clamp(
               calc(100% / ${large} - ${gap}),
-              (1200px - 100vw) * 999,
-              clamp(calc(100% / ${medium} - ${gap}), (992px - 100vw) * 999, clamp(calc(100% / ${semi} - ${gap}), (480px - 100vw) * 999, 100%))
+              (${BREAKPOINTS.MEDIUM}px - 100vw) * 999,
+              clamp(calc(100% / ${medium} - ${gap}), (${BREAKPOINTS.SEMI}px - 100vw) * 999, clamp(calc(100% / ${semi} - ${gap}), (${BREAKPOINTS.SMALL}px - 100vw) * 999, 100%))
             ),
             1fr
           )
         )
       `;
-      element.style.gridTemplateColumns = gridTemplate;
+        element.style.gridTemplateColumns = gridTemplate;
+      }
+    };
+
+    updateColumns();
+
+    // Single global resize listener
+    if (!window._gridModResizeListener) {
+      window._gridModResizeListener = throttle(updateColumns, 16);
+      window.addEventListener("resize", window._gridModResizeListener);
     }
-  };
 
-  updateColumns();
-
-  // Single global resize listener
-  if (!window._gridModResizeListener) {
-    window._gridModResizeListener = throttle(updateColumns, 16);
-    window.addEventListener("resize", window._gridModResizeListener);
-  }
-
-  element._gridModProcessed = true;
-  GridModPerformance.trackElement();
-  const duration = GridModPerformance.endTiming("gridModInit");
-  GridModPerformance.metrics.initializationTime += duration;
-}
-
-// Generate cool grid names based on pattern
-function generateGridName(large, medium, semi, small) {
-  const patterns = {
-    "6,3,2,1": "mega-grid",
-    "4,3,2,1": "flex-grid",
-    "3,2,2,1": "compact-grid",
-    "4,2,2,1": "balanced-grid",
-    "2,2,1,1": "mobile-grid",
-    "3,3,2,1": "uniform-grid",
-    "5,3,2,1": "dynamic-grid",
-    "4,4,2,1": "wide-grid",
-  };
-
-  const key = `${large},${medium},${semi},${small}`;
-  return patterns[key] || `custom-grid-${large}-${medium}-${semi}-${small}`;
-}
-
-// Add cool visual indicator
-function addGridIndicator(element, columns, width) {
-  // Add visual feedback in console during development
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    const gridName = element.dataset.gridName;
-    const breakpoint = width <= 480 ? "mobile" : width <= 768 ? "tablet" : width <= 1024 ? "desktop" : "large";
-
-    // Cool console logging
-    console.log(`🎯 ${gridName} → ${breakpoint}: ${columns} columns`);
-
-    // Add subtle visual indicator
-    if (!element.dataset.gridIndicator) {
-      element.dataset.gridIndicator = `${gridName} (${breakpoint}: ${columns} cols)`;
-      element.style.setProperty("--grid-debug", `"${columns}"`);
-    }
-  }
-}
-
-// Cool initialization message
-function showCoolInit() {
-  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-    console.log("%c🚀 Grid-Mod Initialized!", "color: #ff6b6b; font-size: 16px; font-weight: bold;");
-    console.log("%c✨ Ultra-compact responsive grid system", "color: #4ecdc4; font-size: 12px;");
-    console.log("%c🎯 Features: Auto-naming, animations, visual effects", "color: #45b7d1; font-size: 12px;");
+    element._gridModProcessed = true;
+  } catch (error) {
+    console.error("Grid-mod error:", error);
   }
 }
 
 // Auto-initialize on DOM load
 function initGridMod() {
-  showCoolInit(); // Show cool message
-
-  const elements = document.querySelectorAll("[screen], [large], [medium], [semi], [small], [gap]");
+  const elements = document.querySelectorAll("[grid], [large], [medium], [semi], [small], [gap]");
   elements.forEach(gridModDefault);
 
   // Initialize smart observer
@@ -212,7 +159,7 @@ const GridModObserver = {
     this.globalObserver.observe(document.body, {
       attributes: true,
       subtree: true,
-      attributeFilter: ["large", "medium", "semi", "small", "gap"],
+      attributeFilter: ["grid", "large", "medium", "semi", "small", "gap"],
     });
 
     // Smart intersection observer for lazy initialization
@@ -250,7 +197,7 @@ const GridModObserver = {
   },
 
   hasGridModAttributes(element) {
-    const attrs = ["large", "medium", "semi", "small", "gap"];
+    const attrs = ["grid", "large", "medium", "semi", "small", "gap"];
     return attrs.some((attr) => element.hasAttribute(attr));
   },
 
@@ -271,7 +218,7 @@ const GridModObserver = {
 
       observer.observe(element, {
         attributes: true,
-        attributeFilter: ["large", "medium", "semi", "small", "gap"],
+        attributeFilter: ["grid", "large", "medium", "semi", "small", "gap"],
       });
 
       this.observers.set(element, observer);
@@ -297,6 +244,7 @@ function hideGridModAttributes(element, attrs) {
   });
 
   // Remove visible attributes
+  element.removeAttribute("screen");
   element.removeAttribute("large");
   element.removeAttribute("medium");
   element.removeAttribute("semi");
@@ -460,14 +408,10 @@ const GridModPerformance = {
   },
 };
 
-// Export performance metrics
-window.gridModPerformance = GridModPerformance.getMetrics.bind(GridModPerformance);
-window.cleanupGridMod = GridModPerformance.cleanup.bind(GridModPerformance);
-
 // Export for manual usage
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { gridModDefault, initGridMod, GridModObserver, GridModPerformance };
+  module.exports = { gridModDefault, initGridMod, GridModObserver };
 }
 
 // Global access
-window.gridMod = { gridModDefault, initGridMod, GridModObserver, GridModPerformance };
+window.gridMod = { gridModDefault, initGridMod, GridModObserver };

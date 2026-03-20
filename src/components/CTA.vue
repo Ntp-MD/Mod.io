@@ -36,89 +36,65 @@ const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card
 
 <style scoped>
 .cta-section {
-  background: linear-gradient(135deg, var(--main-color-9) 0%, var(--main-white) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 50%, var(--color-primary) 0%, transparent 50%);
-  opacity: 0.05;
+  background: linear-gradient(135deg, var(--main-color-1) 0%, var(--main-color-2) 100%);
+  color: var(--color-white);
+  padding: var(--gap-section) 0;
 }
 
 .cta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--gap-md);
+  gap: var(--gap-xl);
   align-items: center;
-  padding: var(--gap-md);
-  background-color: var(--color-primary);
-  color: var(--main-white);
-  border-radius: var(--radius-sm);
-  position: relative;
-  z-index: 1;
-  box-shadow: var(--shadow-xl);
+}
+
+.cta-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
 }
 
 .cta-header {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
-  margin-bottom: var(--gap-xs);
+}
+
+.cta-title {
+  font-size: calc(var(--font-xl) * 1.8);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
 }
 
 .cta-description {
   font-size: var(--font-md);
-  color: var(--main-color-4);
-  line-height: var(--line-height-base);
+  line-height: 1.6;
+  color: var(--main-color-8);
+  margin: 0;
 }
 
 .cta-benefits {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-md);
+  gap: var(--gap-sm);
 }
 
 .benefit-item {
   display: flex;
   align-items: center;
   gap: var(--gap-sm);
-  padding: var(--gap-sm);
-  background-color: var(--main-color-3);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-md);
 }
 
-.benefit-item:hover {
-  background-color: var(--main-color-4);
-  transform: translateX(4px);
-}
-
-.benefit-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background-color: var(--color-primary);
-  color: var(--main-white);
-  border-radius: var(--radius-sm);
-  position: relative;
-  z-index: 1;
-  font-weight: 700;
-  flex-shrink: 0;
+.benefit-icon {
+  color: var(--accent-success);
+  font-weight: bold;
+  font-size: var(--font-md);
 }
 
 .benefit-text {
   font-size: var(--font-sm);
-  color: var(--main-color-4);
-  line-height: var(--line-height-base);
+  color: var(--main-color-7);
 }
 
 .cta-actions {
@@ -131,76 +107,61 @@ const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card
 .action-buttons {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-sm);
-  width: 100%;
-}
-
-.cta-actions .btn-primary {
-  background-color: var(--main-white);
-  color: var(--color-primary);
-  border-color: var(--main-white);
-  padding: var(--gap-md) var(--gap-lg);
-  font-weight: 600;
-  transition: all var(--transition-md);
-}
-
-.cta-actions .btn-primary:hover {
-  background-color: var(--main-color-8);
-  border-color: var(--main-color-8);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.cta-actions .btn-secondary {
-  background-color: transparent;
-  color: var(--main-white);
-  border-color: var(--main-white);
-  padding: var(--gap-md) var(--gap-lg);
-  font-weight: 600;
-  transition: all var(--transition-md);
-}
-
-.cta-actions .btn-secondary:hover {
-  background-color: var(--main-white);
-  color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  gap: var(--gap-md);
 }
 
 .cta-note {
   font-size: var(--font-sm);
-  color: var(--main-color-6);
-  line-height: var(--line-height-base);
+  color: var(--main-color-7);
+  margin: 0;
 }
 
 .link {
-  color: var(--main-white);
-  text-decoration: underline;
-  transition: all var(--transition-md);
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .link:hover {
-  color: var(--main-color-4);
+  text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .cta-grid {
-    display: flex;
+    grid-template-columns: 1fr;
+    gap: var(--gap-lg);
+  }
+
+  .cta-title {
+    font-size: calc(var(--font-xl) * 1.5);
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    min-width: auto;
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cta-section {
+    padding: var(--gap-lg) 0;
+  }
+
+  .cta-title {
+    font-size: var(--font-xl);
+  }
+
+  .action-buttons {
     flex-direction: column;
   }
 
-  .cta-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: var(--gap-lg);
-  }
-
-  .cta-benefits {
-    align-items: center;
-  }
-
-  .cta-actions {
-    align-items: center;
+  .btn {
+    width: 100%;
   }
 }
 </style>

@@ -3,19 +3,22 @@
 button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--gap-xs);
-  background: none;
   border: none;
   cursor: pointer;
   font-size: var(--font-md);
-  padding: var(--gap-sm) var(--gap-md);
+  padding: var(--gap-md) var(--gap-lg);
   border-radius: var(--radius-md);
+  font-weight: 500;
+  text-decoration: none;
   transition: var(--transition-normal);
   width: auto;
+  background: var(--accent-primary);
 }
 
 button:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--main-color-1);
   outline-offset: var(--outline-offset);
 }
 
@@ -24,23 +27,34 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.btn:hover,
 button:hover {
   transform: translateY(-2px);
-  transition: transform 0.2s ease;
+  box-shadow: var(--shadow-md);
 }
 
-/* Mobile viewport fixes */
-@media screen and (max-width: 768px) {
-  button {
-    padding: var(--gap-sm) var(--gap-md);
-    font-size: var(--font-sm);
-  }
+/* Button Accent Color Variants */
+.btn-primary {
+  background: var(--accent-primary);
+  color: var(--color-white);
 }
 
-@media screen and (max-width: 480px) {
-  button {
-    padding: var(--gap-xs) var(--gap-sm);
-    font-size: var(--font-sm);
-    width: 100%;
-  }
+.btn-secondary {
+  background: var(--accent-secondary);
+  color: var(--color-white);
+}
+
+.btn-success {
+  background: var(--accent-success);
+  color: var(--color-white);
+}
+
+.btn-warning {
+  background: var(--accent-warning);
+  color: var(--color-white);
+}
+
+.btn-error {
+  background: var(--accent-error);
+  color: var(--color-white);
 }

@@ -42,7 +42,7 @@ const features = [
         <h2 class="section-title">Supreme Technology Stack</h2>
         <p class="section-description">Agentic tools engineered for modern developers and innovators</p>
       </div>
-      <div class="features-grid" screen="6,3,2,1,var(--gap-md)">
+      <div class="features-grid" grid="3,3,2,1,var(--gap-md)">
         <article v-for="feature in features" :key="feature.title" class="feature-card card-feature card-hover">
           <span class="feature-icon icon-feature icon-hover">{{ feature.icon }}</span>
           <h3 class="feature-title text-primary">{{ feature.title }}</h3>
@@ -54,58 +54,94 @@ const features = [
 </template>
 
 <style scoped>
-.section-header {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--radius-sm);
-  margin-bottom: var(--gap-xs);
-}
-
-.section-description {
-  font-size: var(--font-md);
-  color: var(--main-color-5);
-  margin-inline: auto;
-  line-height: var(--line-height-base);
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--gap-md);
 }
 
 .feature-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-lg);
+  border: 1px solid var(--main-color-8);
+  transition: var(--transition-normal);
   display: flex;
   flex-direction: column;
-  gap: var(--radius-sm);
-  padding: var(--radius-sm);
-  text-align: center;
-  container-type: inline-size;
+  gap: var(--gap-md);
+  height: 100%;
 }
 
-.feature-card:hover {
-  border-color: var(--color-primary);
+.card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--accent-primary);
 }
 
 .feature-icon {
-  display: flex;
+  font-size: calc(var(--font-xl) * 1.5);
+  line-height: 1;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-lg);
-  width: 60px;
-  height: 60px;
-  margin: 0 auto;
+  width: calc(var(--font-xl) * 2);
+  height: calc(var(--font-xl) * 2);
+  background: linear-gradient(135deg, var(--accent-primary), var(--main-color-1));
+  border-radius: var(--radius-md);
+  color: var(--color-white);
 }
 
-.feature-card:hover .feature-icon {
+.icon-hover:hover {
   transform: scale(1.1);
+  transition: var(--transition-fast);
 }
 
 .feature-title {
   font-size: var(--font-lg);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--main-color-1);
+}
+
+.text-primary {
+  color: var(--main-color-1);
 }
 
 .feature-description {
   font-size: var(--font-sm);
+  line-height: 1.5;
   color: var(--main-color-5);
-  line-height: var(--line-height-base);
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Responsive Grid */
+@media screen and (max-width: 1200px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: var(--gap-md);
+  }
+
+  .feature-icon {
+    font-size: var(--font-xl);
+    width: calc(var(--font-xl) * 1.5);
+    height: calc(var(--font-xl) * 1.5);
+  }
 }
 </style>

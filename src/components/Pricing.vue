@@ -103,71 +103,61 @@ const toggleBilling = () => {
 </template>
 
 <style scoped>
-.section-header {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--gap-sm);
-  margin-bottom: var(--gap-xl);
-}
-
-.section-description {
-  font-size: var(--font-md);
-  color: var(--main-color-6);
-  margin-inline: auto;
-  line-height: var(--line-height-base);
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-section);
 }
 
 .pricing-card {
-  background-color: var(--main-white);
-  border: 1px solid var(--main-color-8);
+  background: var(--color-white);
   border-radius: var(--radius-lg);
-  transition: all var(--transition-md);
-  position: relative;
+  padding: var(--gap-lg);
+  border: 2px solid var(--main-color-8);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  height: 100%;
+  position: relative;
 }
 
 .pricing-card:hover {
-  border-color: var(--color-primary);
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
+  border-color: var(--accent-primary);
 }
 
 .pricing-card-highlighted {
-  border-color: var(--color-primary);
+  border-color: var(--accent-primary);
   transform: scale(1.05);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.pricing-card-highlighted:hover {
+  transform: scale(1.05) translateY(-4px);
 }
 
 .pricing-badge {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--main-color-4) 100%);
-  padding: var(--gap-xs);
-  text-align: center;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pricing-header {
-  padding: var(--gap-lg);
-  background: linear-gradient(135deg, var(--main-color-9) 0%, var(--main-color-8) 100%);
   text-align: center;
+  margin-bottom: var(--gap-lg);
+  padding-bottom: var(--gap-lg);
   border-bottom: 1px solid var(--main-color-8);
 }
 
-.pricing-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--gap-sm);
-}
-
 .pricing-name {
-  color: var(--color-primary);
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--main-color-1);
+  margin: 0 0 var(--gap-md) 0;
 }
 
 .pricing-price {
@@ -175,114 +165,137 @@ const toggleBilling = () => {
   align-items: baseline;
   justify-content: center;
   gap: var(--gap-xs);
+  margin-bottom: var(--gap-md);
 }
 
 .price-amount {
-  font-size: var(--font-lg);
-  font-weight: 800;
-  color: var(--color-primary);
+  font-size: calc(var(--font-xl) * 2.5);
+  font-weight: 700;
+  color: var(--accent-primary);
   line-height: 1;
 }
 
 .price-period {
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   color: var(--main-color-5);
+  font-weight: 500;
 }
 
 .pricing-description {
   font-size: var(--font-sm);
-  color: var(--main-color-4);
-  line-height: var(--line-height-base);
+  line-height: 1.5;
+  color: var(--main-color-5);
+  margin: 0;
 }
 
 .pricing-features {
-  padding: var(--gap-lg);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
+  flex-grow: 1;
+  margin-bottom: var(--gap-lg);
 }
 
 .feature-item {
   display: flex;
   align-items: center;
   gap: var(--gap-sm);
-  padding: var(--gap-sm);
-  background-color: var(--main-color-9);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-md);
+  padding: var(--gap-sm) 0;
+  border-bottom: 1px solid var(--main-color-9);
 }
 
-.feature-item:hover {
-  background-color: var(--main-color-8);
-  transform: translateX(4px);
+.feature-item:last-child {
+  border-bottom: none;
 }
 
 .feature-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background-color: var(--color-primary);
-  color: var(--main-white);
-  border-radius: var(--radius-circle);
-  font-size: var(--font-xs);
-  font-weight: 700;
+  color: var(--accent-success);
+  font-weight: bold;
+  font-size: var(--font-md);
   flex-shrink: 0;
+  width: 20px;
+  text-align: center;
 }
 
 .feature-text {
   font-size: var(--font-sm);
-  color: var(--main-color-3);
-  line-height: var(--line-height-base);
+  line-height: 1.4;
+  color: var(--main-color-4);
 }
 
 .pricing-cta {
-  padding: var(--gap-lg);
-  padding-top: 0;
   margin-top: auto;
 }
 
 .pricing-footer {
   text-align: center;
-  padding-top: var(--gap-lg);
-  border-top: 1px solid var(--main-color-8);
-  margin-top: var(--gap-xl);
-}
-
-.pricing-features {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
+  padding: var(--gap-lg);
+  background: var(--main-color-9);
+  border-radius: var(--radius-lg);
+  margin-top: var(--gap-lg);
 }
 
 .pricing-note {
   font-size: var(--font-sm);
-  color: var(--main-color-4);
-  line-height: var(--line-height-base);
+  line-height: 1.5;
+  color: var(--main-color-5);
+  margin: var(--gap-sm) 0;
 }
 
 .pricing-link {
-  color: var(--color-primary);
+  color: var(--accent-primary);
   text-decoration: none;
-  font-weight: 600;
-  transition: all var(--transition-md);
+  font-weight: 500;
 }
 
 .pricing-link:hover {
-  color: var(--main-color-4);
   text-decoration: underline;
 }
 
-@media (max-width: 480px) {
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    margin: 0 auto var(--gap-section);
+    padding: 0 var(--gap-lg);
+  }
+
+  .pricing-card-highlighted {
+    transform: none;
+  }
+
+  .pricing-card-highlighted:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media screen and (max-width: 768px) {
   .pricing-card {
     padding: var(--gap-md);
   }
 
   .price-amount {
-    /* Let calc() handle responsive sizing */
+    font-size: calc(var(--font-xl) * 2);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pricing-card {
+    padding: var(--gap-sm);
+  }
+
+  .price-amount {
+    font-size: calc(var(--font-xl) * 1.5);
+  }
+
+  .pricing-name {
     font-size: var(--font-lg);
+  }
+
+  .btn {
+    padding: var(--gap-sm) var(--gap-md);
+    font-size: var(--font-sm);
+  }
+
+  .pricing-footer {
+    padding: var(--gap-md);
   }
 }
 </style>
