@@ -1,0 +1,562 @@
+# MOD.io · AI Agent Development Rules
+
+## 🤖 AGENT BEHAVIOR PROTOCOLS
+
+### **Primary Directives**
+
+- **Plan First**: Always summarize plan in chat → wait for confirmation before writing code
+- **Verify Build**: Run `npm run build` after significant changes to ensure no regressions
+- **Environment Check**: Verify required environment variables exist in `.env.example` before implementation
+- **Error Handling**: Wrap all async operations in try-catch blocks with Zod validation
+
+### **Decision Making Priority**
+
+1. **Shared Classes First** → Check `shared.css` before creating new styles
+2. **Existing Variables Only** → Never create new CSS variables without approval
+3. **Semantic HTML** → Use `<section>`, `<article>`, `<header>`, `<nav>`, `<main>`
+4. **Performance Impact** → Consider reflow, repaint, and bundle size
+
+---
+
+## 🚫 STRICT CONSTRAINTS (NEVER BREAK)
+
+### **CSS Hard Rules**
+
+- **❌ NO AUTO-CREATE VARIABLES** — Use only existing variables from `variables.css`
+- **❌ NO INLINE STYLES** — Use CSS classes only
+- **❌ NO DISPLAY: GRID** — Use `display: flex; flex-direction: column;` instead
+- **❌ NO MAGIC NUMBERS** — Use CSS variables and named constants
+- **⚠️ HARD-CODED VALUES EXCEPTIONS** — Only for truly unique cases:
+
+#### **🚫 GRID-MOD VIOLATIONS (NEVER BREAK)**
+
+- **❌ NO CSS DECLARATIONS FOR GRID-MOD ELEMENTS** — If element uses `grid="..."` attribute, DO NOT declare:
+  - `display: grid`, `display: flex`, `flex-direction`
+  - `grid-template-columns`, `grid-template-rows`
+  - `gap`, `grid-gap`
+  - Any responsive `@media` rules for layout
+- **✅ GRID-MOD HANDLES AUTOMATICALLY**:
+  - Layout structure (display, grid, flex)
+  - Responsive breakpoints
+  - Gap spacing
+  - Column calculations
+- **✅ ALLOWED CSS FOR GRID-MOD ELEMENTS**:
+  - Component-specific styles (colors, borders, shadows)
+  - Typography (font-size, font-weight)
+  - Transforms and animations
+  - Padding and margins (not layout-related)
+
+#### **Allowed Hard-coded Values**
+
+- **Single elements without siblings** (hamburger menu lines, icon parts, borders)
+- **Specific design requirements** where no suitable variable exists
+- **Performance critical** elements where direct values are optimal
+- **Special positioning** effects (negative margins, complex transforms)
+- **Micro-interactions** that require precise pixel values
+- **SVG viewBox** and icon dimensions
+- **Complex calculations** where direct values are clearer than calc()
+
+#### **Examples of Allowed Hard-coding**
+
+````css
+.hamburger-line {
+  height: 2px; /* Unique menu line thickness */
+}
+
+.icon-part {
+  width: 1px; /* Specific icon detail */
+}
+
+.micro-animation {
+  transform: translateY(-3px); /* Precise hover effect */
+}
+
+.special-border {
+  border: 1px solid #f0f0f0; /* Very specific border */
+}
+```
+
+### **Animation Performance**
+
+- **✅ ALLOWED**: `transform` and `opacity` only (60fps)
+- **❌ FORBIDDEN**: `width`, `height`, `left`, `top`, `margin`, `padding`
+
+### **Variable Violations**
+
+- **❌ NEVER**: `--color-border`, `--color-background`, `--color-text`, `--color-text-muted`, `--color-primary`
+- **✅ ALWAYS**: `--main-color-8`, `--color-white`, `--main-color-2`, `--main-color-6`, `--main-color-1`
+
+---
+
+## 🎯 REQUIRED WORKFLOW PATTERNS
+
+### **Before Any Code Writing**
+
+```bash
+# 1. Check shared classes first
+cat src/styles/shared.css | grep -i "pattern"
+
+# 2. Verify variable exists
+grep -r "var(--variable-name)" src/styles/variables.css
+
+# 3. Search existing usage
+grep -r "var(--variable-name)" src/ --include="*.css" --include="*.vue"
+
+# 4. Plan confirmation required
+````
+
+### **Component Development Sequence**
+
+```vue
+<script setup>
+// 1. Imports (auto-imported via unplugin-vue-components)
+</script>
+
+<template>
+  <!-- 2. Semantic HTML + shared classes -->
+</template>
+
+<style scoped>
+/* 3. Component-specific only (minimal) */
+</style>
+```
+
+### **CSS Development Sequence**
+
+```css
+/* 1. Check shared.css first */
+/* 2. Use existing variables only */
+/* 3. Follow import order exactly */
+@import "./variables.css";
+@import "./reset.css";
+@import "./shared.css";
+@import "./button.css";
+@import "./form.css";
+@import "./animations.css";
+```
+
+---
+
+## 🧼 CLEAN CODE PRINCIPLES
+
+### **DRY (Don't Repeat Yourself)**
+
+- **Extract Common Patterns**: Create reusable functions, components, and CSS classes
+- **Avoid Duplication**: If code appears 3+ times, extract it to shared utility
+- **Single Source of Truth**: Each piece of logic should have one authoritative source
+- **Component Composition**: Build complex UI from simple, reusable components
+
+### **SOLID Principles**
+
+- **S - Single Responsibility**: Each function/component has one clear purpose
+- **O - Open/Closed**: Open for extension, closed for modification
+- **L - Liskov Substitution**: Derived classes must be substitutable for base classes
+- **I - Interface Segregation**: Small, focused interfaces rather than large ones
+- **D - Dependency Inversion**: Depend on abstractions, not concrete implementations
+
+### **Code Quality Standards**
+
+- **Readability First**: Write code that humans can understand easily
+- **Consistent Naming**: Use clear, descriptive names for variables, functions, classes
+- **Minimal Complexity**: Keep functions short and focused (single responsibility)
+- **Documentation**: Add comments for complex logic and business rules
+- **Error Handling**: Graceful error handling with meaningful messages
+
+### **Vue Component Best Practices**
+
+- **Composition over Inheritance**: Use composables for shared logic
+- **Props Validation**: Always define and validate component props
+- **Emit Events**: Use events for child-to-parent communication
+- **Scoped Styles**: Keep component styles isolated
+- **Reactive Data**: Use `ref` and `reactive` appropriately
+
+### **CSS Architecture Best Practices**
+
+- **Utility Classes**: Create reusable utility classes for common patterns
+- **Component Classes**: Keep component-specific styles minimal
+- **Semantic Naming**: Use meaningful class names that describe purpose
+- **Consistent Patterns**: Follow established patterns for similar components
+- **Performance**: Optimize for maintainability and bundle size
+- **REDUNDANCY PREVENTION**: Never create duplicate classes or overlapping functionality
+  - Check existing classes before creating new ones
+  - Use semantic variations (btn-primary, btn-secondary) instead of duplicates
+  - Avoid multiple classes serving same purpose
+  - Consolidate similar styling patterns
+- **FONT-SIZE RESPONSIVE**: All font-size variables use clamp() for responsive scaling
+  - Never override font-size in media queries - variables.css handles responsive sizing
+  - Use only CSS variables: --font-xs, --font-sm, --font-md, --font-lg, --font-xl
+  - clamp() provides automatic responsive scaling across all breakpoints
+- **MOBILE-FIRST APPROACH**: Design for mobile first, then enhance for larger screens
+  - Use min-width media queries only (not max-width)
+  - Base styles should target mobile devices (320px+)
+  - Progressive enhancement for tablet (768px+) and desktop (1200px+)
+  - Avoid max-width queries - prefer min-width for mobile-first scaling
+
+---
+
+## 🔧 TECHNICAL SPECIFICATIONS
+
+### **Technology Stack**
+
+- **Vue 3** (`<script setup>`) + **Vite** + **CSS Variables** + **Grid-Mod**
+- **Deploy**: GitHub Pages (`/Mod.io/` base path)
+- **Auto-Import**: Components via `unplugin-vue-components`
+
+### **Naming Conventions**
+
+- **CSS Files**: kebab-case (`shared.css`)
+- **Vue Components**: PascalCase (`Hero.vue`)
+- **JS Files**: kebab-case (`grid-mod.js`)
+
+### **Media Queries (Exact Breakpoints Only)**
+
+```css
+@media screen and (min-width: 1201px) {
+  /* Large   */
+}
+@media screen and (max-width: 1200px) {
+  /* Medium  */
+}
+@media screen and (max-width: 992px) {
+  /* Semi    */
+}
+@media screen and (max-width: 676px) {
+  /* Small   */
+}
+@media screen and (max-width: 480px) {
+  /* X-Small */
+}
+```
+
+---
+
+## 📋 SHARED CLASSES CATALOG (USE THESE FIRST)
+
+### **Section Patterns**
+
+```css
+.section           /* Base section padding */
+.section-dark      /* Dark gradient background */
+.section-header    /* Centered header with spacing */
+.section-title     /* Large responsive title */
+.section-description /* Medium description text */
+```
+
+### **Component Patterns**
+
+```css
+.badge .badge-primary .badge-accent
+.btn .btn-primary .btn-secondary
+.feature-card .card-feature .card-hover
+.icon-feature .icon-hover
+.text-primary .text-secondary
+```
+
+### **Common Variable Replacements**
+
+| Wrong                | Correct             |
+| -------------------- | ------------------- |
+| `--color-border`     | `--main-color-8`    |
+| `--color-background` | `--color-white`     |
+| `--color-text`       | `--main-color-2`    |
+| `--color-text-muted` | `--main-color-6`    |
+| `--color-primary`    | `--main-color-1`    |
+| `--space-sm/md/lg`   | `--gap-sm/md/lg`    |
+| `--transition-quick` | `--transition-fast` |
+
+---
+
+## 🎨 GRID-MOD SYSTEM RULES
+
+### **When to Use Grid-Mod**
+
+- **✅ USE**: Components with 3+ items requiring complex responsive behavior
+- **❌ SKIP**: Hero, CTA, Header, Footer, simple 2-column layouts
+
+### **Grid-Mod Patterns**
+
+```html
+<!-- Features: 6→3→2→1 columns -->
+<div grid="6,3,2,1,var(--gap-md)">...</div>
+
+<!-- Testimonials: 4→2→1→1 columns -->
+<div grid="4,2,1,1,var(--gap-lg)">...</div>
+
+<!-- Pricing: 3→2→1→1 columns -->
+<div grid="3,2,1,1,var(--gap-xl)">...</div>
+```
+
+### **Breakpoint Mapping**
+
+- **Small**: ≤480px (mobile)
+- **Semi**: ≤992px (tablet)
+- **Medium**: ≤1200px (desktop)
+- **Large**: >1200px (wide)
+
+---
+
+## 📏 SPACING: GAP VS MARGIN
+
+### **Use Gap When**
+
+- Flex/Grid containers with 3+ children
+- Consistent spacing across all children
+- Responsive layouts
+- Cleaner code maintenance
+
+### **Use Margin When**
+
+- Single element spacing
+- Asymmetric spacing (top ≠ bottom)
+- Negative spacing
+- Responsive exceptions
+- Complex positioning
+
+---
+
+## 🔄 VARIABLE CHANGE PROTOCOL
+
+### **Before Any Variable Modification**
+
+```bash
+# 1. Search all usages
+grep -r "var(--variable-name)" src/ --include="*.css" --include="*.vue"
+
+# 2. Update all dependent components
+
+# 3. Run validation
+npm run validate:variables
+
+# 4. Verify build
+npm run build
+```
+
+### **Replacement Priority Chain**
+
+- **Gap**: `--gap-xs → sm → md → lg → xl`
+- **Radius**: `--radius-xs → sm → md → lg → xl`
+- **Transition**: `--transition-fast → normal → slow`
+- **Colors**: Find closest match from existing palette
+
+### **Emergency Variable Mapping**
+
+| Deleted Variable     | Replacement         | Context         |
+| -------------------- | ------------------- | --------------- |
+| `--color-primary`    | `--main-color-1`    | Primary actions |
+| `--color-secondary`  | `--main-color-6`    | Secondary text  |
+| `--space-sm`         | `--gap-sm`          | Small spacing   |
+| `--space-md`         | `--gap-md`          | Medium spacing  |
+| `--border-radius-sm` | `--radius-sm`       | Small borders   |
+| `--transition-quick` | `--transition-fast` | Fast animations |
+
+---
+
+## 🚀 PERFORMANCE REQUIREMENTS
+
+### **CSS Performance**
+
+- **Selector Efficiency**: Class-based selectors only
+- **Reflow Minimization**: Batch DOM operations
+- **Animation Performance**: Transform/opacity for 60fps
+- **File Size**: Keep CSS files under 50KB gzipped
+
+### **JavaScript Performance**
+
+- **Lazy Loading**: Intersection observer for off-screen elements
+- **Event Throttling**: 16ms throttling for resize events
+- **Memory Management**: Cleanup observers on component unmount
+
+### **Accessibility Standards**
+
+- **WCAG 2.1 Compliance**: Proper contrast ratios, ARIA usage
+- **Keyboard Navigation**: All interactive elements accessible
+- **Screen Reader Support**: Semantic HTML, proper labels
+- **Focus Management**: Visible focus states, logical tab order
+
+---
+
+## 📝 VALIDATION CHECKLISTS
+
+### **Pre-Deploy Variable Validation**
+
+- [ ] All CSS variables used exist in `variables.css`
+- [ ] No hard-coded values found in any CSS files
+- [ ] Variable names match exactly (case-sensitive)
+- [ ] No new CSS variables created without approval
+- [ ] All `var()` functions reference valid variables
+- [ ] Component-specific CSS files checked for violations
+- [ ] Vue component `<style>` sections validated
+- [ ] Variable validation script run before deploy
+
+### **Code Review Checklist**
+
+- [ ] No hard-coded values (use CSS variables)
+- [ ] Shared classes used where available
+- [ ] Proper semantic HTML structure
+- [ ] Accessibility compliance (focus states, ARIA)
+- [ ] Performance optimization (lazy loading, throttling)
+- [ ] Component naming conventions followed
+- [ ] Grid-Mod used appropriately (3+ items only)
+
+---
+
+## 🛠️ DEVELOPMENT SCRIPTS
+
+```bash
+npm run dev      # Development server
+npm run build    # Production build
+npm run preview  # Preview production build
+npm run deploy   # Build and deploy to GitHub Pages
+npm run validate:variables  # Variable validation
+```
+
+---
+
+## 📁 PROJECT STRUCTURE
+
+```
+Mod.io/
+├── public/favicon.svg
+├── src/
+│   ├── components/           # Vue components (auto-imported)
+│   ├── styles/
+│   │   ├── variables.css    # CSS custom properties (READ-ONLY)
+│   │   ├── reset.css        # CSS reset
+│   │   ├── shared.css       # Reusable component classes (USE FIRST)
+│   │   ├── button.css       # Button styles
+│   │   ├── form.css         # Form styles
+│   │   ├── animations.css   # Animation utilities
+│   │   └── main.css         # Style imports
+│   ├── js/
+│   │   └── grid-mod.js      # Custom responsive grid system
+│   ├── App.vue              # Root component
+│   ├── main.js              # Application entry point
+│   └── components.d.ts      # Auto-import type definitions
+├── index.html               # HTML template
+├── package.json             # Dependencies and scripts
+└── vite.config.js           # Vite configuration
+```
+
+---
+
+## 🎯 COMMON PATTERNS
+
+### **Section Template**
+
+```html
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-primary">Badge</span>
+      <h2 class="section-title">Title</h2>
+      <p class="section-description">Description</p>
+    </div>
+  </div>
+</section>
+```
+
+### **Grid-Mod Template**
+
+```html
+<div class="features-grid" grid="6,3,2,1,var(--gap-md)">
+  <article class="feature-card card-feature card-hover">
+    <span class="icon-feature icon-hover">⚡</span>
+    <h3 class="text-primary">Feature Title</h3>
+    <p>Feature description</p>
+  </article>
+</div>
+```
+
+### **CSS Component Template**
+
+```css
+.component {
+  color: var(--main-color-2);
+  background: var(--color-white);
+  padding: var(--gap-md);
+  font-size: var(--font-md);
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+}
+```
+
+---
+
+## ⚡ CRITICAL REMINDERS
+
+### **Before Writing Code**
+
+1. **Plan First** → Summarize plan → Wait for confirmation
+2. **Check Shared Classes** → Always check `shared.css` first
+3. **Verify Variables** → Ensure variables exist in `variables.css`
+4. **Consider Performance** → Impact on reflow, repaint, bundle size
+5. **🔍 Grid-Mod Check** → If element uses `grid="..."`, DO NOT declare layout CSS
+
+### **After Writing Code**
+
+1. **Run Build** → `npm run build` to verify no regressions
+2. **Validate Variables** → `npm run validate:variables`
+3. **Test Responsiveness** → All breakpoints (480px, 992px, 1200px)
+4. **Check Accessibility** → Keyboard navigation, screen reader
+5. **🚫 Grid-Mod Validation** → Ensure no CSS conflicts with `grid="..."` elements
+
+### **Never Do This**
+
+- Create new CSS variables without approval
+- Use hard-coded values for common properties (spacing, colors, fonts)
+- Write inline styles
+- Use `display: grid` instead of flexbox
+- Skip shared classes when they exist
+- **Violate DRY** - Repeat code instead of creating reusable components
+- **Break SOLID** - Create monolithic components with multiple responsibilities
+- **Ignore Clean Code** - Write unreadable or undocumented code
+- **🚫 GRID-MOD CSS CONFLICTS** - Declare CSS for elements using `grid="..."` attribute
+
+### **When Hard-coded Values Are Allowed**
+
+- Unique design elements (hamburger menu lines, icon details)
+- Performance-critical micro-interactions
+- Special positioning effects
+- Complex calculations where direct values are clearer
+- SVG dimensions and viewBox values
+
+### **Clean Code Violations to Avoid**
+
+- **DRY Violations**: Copy-pasting code 3+ times without extraction
+- **Single Responsibility Violations**: Components doing too many things
+- **Inconsistent Naming**: Using unclear or inconsistent variable names
+- **Missing Documentation**: Complex logic without explanatory comments
+- **Poor Error Handling**: Silent failures or unhelpful error messages
+
+### **🚫 Grid-Mod Anti-Patterns (NEVER DO)**
+
+- **❌ CSS Grid-Mod Conflict**:
+  ```css
+  /* WRONG - Element uses grid="3,2,2,1,var(--gap-md)" */
+  .pricing-grid {
+    display: flex; /* ❌ Conflicts with Grid-Mod */
+    flex-direction: column; /* ❌ Conflicts with Grid-Mod */
+    gap: var(--gap-md); /* ❌ Conflicts with Grid-Mod */
+  }
+  ```
+- **❌ Responsive CSS Overlap**:
+  ```css
+  /* WRONG - Grid-Mod handles responsive automatically */
+  @media screen and (min-width: 992px) {
+    .pricing-grid {
+      flex-direction: row; /* ❌ Conflicts with Grid-Mod */
+    }
+  }
+  ```
+- **✅ Correct Grid-Mod Usage**:
+  ```css
+  /* CORRECT - Only component-specific styles */
+  .pricing-card {
+    background: var(--color-white); /* ✅ Allowed */
+    border-radius: var(--radius-lg); /* ✅ Allowed */
+    padding: var(--gap-lg); /* ✅ Allowed */
+    transform: translateY(-4px); /* ✅ Allowed */
+  }
+  ```
+
+---

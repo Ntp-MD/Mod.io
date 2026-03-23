@@ -62,7 +62,7 @@ const toggleBilling = () => {
         <p class="section-description">Choose your innovation tier. Start free and scale intelligently as you grow.</p>
       </div>
 
-      <div class="pricing-grid" large="3" medium="2" semi="2" small="1" gap="var(--gap-md)">
+      <div class="pricing-grid" grid="3,2,2,1,var(--gap-md)">
         <article v-for="plan in plans" :key="plan.name" :class="['pricing-card', { 'pricing-card-highlighted': plan.highlighted }]">
           <div class="pricing-badge" v-if="plan.highlighted">
             <span class="badge badge-accent">MOST POPULAR</span>
@@ -103,13 +103,6 @@ const toggleBilling = () => {
 </template>
 
 <style scoped>
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
-  margin-bottom: var(--gap-section);
-}
-
 .pricing-card {
   background: var(--color-white);
   border-radius: var(--radius-lg);
@@ -251,12 +244,6 @@ const toggleBilling = () => {
 
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    margin: 0 auto var(--gap-section);
-    padding: 0 var(--gap-lg);
-  }
-
   .pricing-card-highlighted {
     transform: none;
   }
@@ -266,13 +253,9 @@ const toggleBilling = () => {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .pricing-card {
     padding: var(--gap-md);
-  }
-
-  .price-amount {
-    font-size: calc(var(--font-xl) * 2);
   }
 }
 
@@ -281,17 +264,8 @@ const toggleBilling = () => {
     padding: var(--gap-sm);
   }
 
-  .price-amount {
-    font-size: calc(var(--font-xl) * 1.5);
-  }
-
-  .pricing-name {
-    font-size: var(--font-lg);
-  }
-
   .btn {
     padding: var(--gap-sm) var(--gap-md);
-    font-size: var(--font-sm);
   }
 
   .pricing-footer {

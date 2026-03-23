@@ -107,26 +107,52 @@ const testimonials = [
 
 <style scoped>
 .testimonials-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--gap-md);
   margin: 0 auto var(--gap-section);
-  padding: var(--gap-lg);
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 800px;
+}
+
+@media screen and (min-width: 992px) {
+  .testimonials-stats {
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+  }
+}
+
+.testimonials-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+@media screen and (min-width: 992px) {
+  .testimonials-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(100% / 3 - var(--gap-md));
+  }
+}
+
+@media screen and (min-width: 676px) and (max-width: 991px) {
+  .testimonials-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(100% / 2 - var(--gap-md));
+  }
 }
 
 .stat-item {
   text-align: center;
   padding: var(--gap-md);
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
 }
 
 .testimonial-card {
@@ -283,21 +309,13 @@ const testimonials = [
 
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .testimonials-stats {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     padding: var(--gap-md);
   }
 }
 
-@media screen and (max-width: 768px) {
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-
+@media screen and (max-width: 992px) {
   .testimonial-card {
     padding: var(--gap-md);
   }
@@ -305,10 +323,6 @@ const testimonials = [
   .author-avatar {
     width: 50px;
     height: 50px;
-  }
-
-  .avatar-emoji {
-    font-size: var(--font-xl);
   }
 }
 
@@ -318,38 +332,13 @@ const testimonials = [
     gap: var(--gap-sm);
   }
 
-  .testimonial-card {
-    padding: var(--gap-sm);
-  }
-
   .testimonial-quote {
     padding-left: var(--gap-md);
-  }
-
-  .quote-icon {
-    font-size: calc(var(--font-xl) * 2);
   }
 
   .author-avatar {
     width: 40px;
     height: 40px;
-  }
-
-  .avatar-emoji {
-    font-size: var(--font-lg);
-  }
-
-  .author-name {
-    font-size: var(--font-sm);
-  }
-
-  .author-role,
-  .author-company {
-    font-size: var(--font-xs);
-  }
-
-  .testimonial-quote blockquote {
-    font-size: var(--font-xs);
   }
 }
 </style>

@@ -28,7 +28,9 @@
   border-radius: var(--radius-xs);
   font-size: var(--font-xs);
   font-weight: 500;
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   margin-bottom: var(--gap-md);
 }
@@ -82,30 +84,4 @@
   font-size: var(--font-xs);
   font-weight: 500;
   letter-spacing: 0.05em;
-}
-
-/* Responsive Typography */
-@media screen and (max-width: 768px) {
-  .section-title {
-    font-size: calc(var(--font-xl) * 1.5);
-  }
-
-  .stat-number {
-    font-size: calc(var(--font-lg) * 1.5);
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .section-title {
-    font-size: var(--font-xl);
-  }
-
-  .stat-number {
-    font-size: var(--font-lg);
-  }
-
-  .btn {
-    padding: var(--gap-sm) var(--gap-md);
-    font-size: var(--font-sm);
-  }
 }

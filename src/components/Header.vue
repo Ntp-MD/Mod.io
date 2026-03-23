@@ -43,10 +43,10 @@ const toggleMenu = () => {
 <style scoped>
 /* Header Container */
 .header-container {
-  display: grid;
-  grid-template-columns: 15% auto 15%;
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap-lg);
   width: 100%;
   padding: var(--gap-md) var(--gap-xl);
   min-height: calc(var(--gap-xl) * 1.5);
@@ -208,8 +208,10 @@ const toggleMenu = () => {
 .menu-icon {
   position: relative;
   aspect-ratio: 1;
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   gap: 7px;
 }
 
@@ -240,8 +242,7 @@ const toggleMenu = () => {
 @media screen and (max-width: 1200px) {
   .header-container {
     padding: var(--gap-sm) var(--gap-md);
-    grid-template-columns: auto 1fr auto;
-    justify-items: start;
+    justify-content: space-between;
   }
 
   .nav {
@@ -297,7 +298,7 @@ const toggleMenu = () => {
   }
 
   .menu-toggle {
-    display: grid;
+    display: flex;
   }
 
   .menu-icon-line {
