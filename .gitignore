@@ -22,3 +22,8 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+
+# Test files (keep main scripts, ignore temporary tests)
+test-*.css
+test-scenarios/
+variable-dependencies.json

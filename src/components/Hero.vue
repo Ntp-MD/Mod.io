@@ -24,7 +24,7 @@ MOD.init({
             <a href="#get-started" class="btn btn-primary">🚀 Deploy Now</a>
             <a href="#docs" class="btn btn-secondary">📚 Explore Innovation</a>
           </div>
-          <div class="hero-stats" grid="3,3,1,1,var(--gap-md)">
+          <div class="hero-stats" grid="3,3,3,1,var(--gap-md)">
             <div class="stat" grid="1,var(--gap-xs)">
               <div class="stat-number">100M+</div>
               <div class="stat-label">Intelligent Requests</div>
@@ -81,18 +81,12 @@ MOD.init({
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-md);
-  align-items: center;
   position: relative;
   z-index: 1;
 }
 
 .hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
+  position: relative;
 }
 
 .hero-badge {
@@ -125,20 +119,11 @@ MOD.init({
 }
 
 .hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
   margin-top: var(--gap-lg);
 }
 
 .stat {
-  text-align: center;
-  padding: var(--gap-md);
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--main-color-8);
-  transition: var(--transition-normal);
+  position: relative;
 }
 
 .stat:hover {
@@ -241,45 +226,9 @@ MOD.init({
 }
 
 /* Responsive Design */
-@media screen and (max-width: 1200px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
-  }
-
-  .hero-title {
-    font-size: calc(var(--font-xl) * 2);
-  }
-
-  .hero-visual {
-    justify-self: center;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .hero {
     padding: var(--gap-lg) 0;
-  }
-
-  .hero-title {
-    font-size: calc(var(--font-xl) * 1.5);
-  }
-
-  .hero-content p {
-    font-size: var(--font-md);
-  }
-
-  .hero-actions {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .hero-stats {
-    grid-template-columns: 1fr;
   }
 
   .hero-visual {
@@ -288,25 +237,17 @@ MOD.init({
 }
 
 @media screen and (max-width: 480px) {
-  .hero {
-    padding: var(--gap-md) 0;
+  .hero-actions {
+    flex-direction: column;
   }
 
-  .hero-title {
-    font-size: var(--font-xl);
+  .hero {
+    padding: var(--gap-md) 0;
   }
 
   .code-content {
     padding: var(--gap-sm);
     min-height: 200px;
-  }
-
-  .code-content pre {
-    font-size: var(--font-xs);
-  }
-
-  .stat-number {
-    font-size: var(--font-lg);
   }
 }
 </style>

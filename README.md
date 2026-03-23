@@ -1,131 +1,134 @@
-# MOD.io - Modern CDN Creator Library
+# MOD.io · Windsurf Rules
 
-A modern landing page for MOD.io, a CDN platform designed for library creators.
+## Identity
 
-## Features
+- Stack: Vue 3 (`<script setup>`) · Vite · CSS Variables · Grid-Mod system
+- Deploy: GitHub Pages (`/Mod.io/` base path)
+- **Plan First**: summarize plan in chat → wait for confirmation before writing code
+- **Verify Build**: run `npm run build` after significant changes
+- Async operations: always wrap in try-catch
 
-- ⚡ Vue 3 with Vite for fast development
-- 🎨 White and black theme with CSS variables
-- 📱 Fully responsive design using clamp() and calc()
-- 🔧 Auto-import components with unplugin-vue-components
-- 📦 Configured for GitHub Pages deployment
+## Naming
 
-## Getting Started
+- CSS files: kebab-case (`shared.css`)
+- Vue components: PascalCase (`Hero.vue`)
+- JS files: kebab-case (`grid-mod.js`)
 
-### Install Dependencies
+---
 
-```bash
-npm install
+## CSS Hard Rules (never break)
+
+- **No auto-create variables** — only use what exists in `variables.css`
+- **No hard-coded values** — all values via CSS variables
+- **No inline styles** — use classes only
+- Use `display: flex; flex-direction: column;` NOT `display: grid; grid-template-columns: 1fr`
+- Animations: `transform` and `opacity` only (60fps)
+
+## Shared Classes — always check `shared.css` first
+
+- Sections: `.section` `.section-dark` `.section-header` `.section-title` `.section-description`
+- Badges: `.badge` `.badge-primary` `.badge-accent`
+- Buttons: `.btn` `.btn-primary` `.btn-secondary`
+- Cards: `.feature-card` `.card-feature` `.card-hover`
+- Icons: `.icon-feature` `.icon-hover`
+- Text: `.text-primary` `.text-secondary`
+
+## Common Variable Replacements
+
+| Wrong                | Correct             |
+| -------------------- | ------------------- |
+| `--color-border`     | `--main-color-8`    |
+| `--color-background` | `--color-white`     |
+| `--color-text`       | `--main-color-2`    |
+| `--color-text-muted` | `--main-color-6`    |
+| `--color-primary`    | `--main-color-1`    |
+| `--space-sm/md/lg`   | `--gap-sm/md/lg`    |
+| `--transition-quick` | `--transition-fast` |
+
+## Spacing: Gap vs Margin
+
+- **Gap**: flex/grid containers with 3+ children
+- **Margin**: single elements, asymmetric spacing, negative spacing, breakpoint exceptions
+
+## Media Queries (exact breakpoints only)
+
+```css
+@media screen and (min-width: 1201px) {
+  /* Large   */
+}
+@media screen and (max-width: 1200px) {
+  /* Medium  */
+}
+@media screen and (max-width: 992px) {
+  /* Semi    */
+}
+@media screen and (max-width: 676px) {
+  /* Small   */
+}
+@media screen and (max-width: 480px) {
+  /* X-Small */
+}
 ```
 
-### Development
+## CSS Import Order
 
-```bash
-npm run dev
+```css
+@import "./variables.css";
+@import "./reset.css";
+@import "./shared.css";
+@import "./button.css";
+@import "./form.css";
+@import "./animations.css";
 ```
 
-### Build for Production
+---
 
-```bash
-npm run build
+## Vue Component Structure (always follow this order)
+
+```vue
+<script setup>
+// imports
+</script>
+
+<template>
+  <!-- semantic HTML + shared classes -->
+</template>
+
+<style scoped>
+/* component-specific only */
+</style>
 ```
 
-### Preview Production Build
+- Semantic HTML: use `<section>` `<article>` `<header>` `<nav>` `<main>`
+- Components auto-imported via `unplugin-vue-components` — no manual imports needed
+- Composition over inheritance: prefer composables for shared logic
 
-```bash
-npm run preview
+## Grid-Mod System
+
+- **Use when**: 3+ items with complex responsive behavior
+- **Skip for**: Hero, CTA, Header, Footer
+
+```html
+<div grid="large,medium,semi,small,gap">
+  <!-- Common patterns -->
+  <div grid="6,3,2,1,var(--gap-md)">
+    <!-- Features     -->
+    <div grid="4,2,1,1,var(--gap-lg)">
+      <!-- Testimonials -->
+      <div grid="3,2,1,1,var(--gap-xl)"><!-- Pricing      --></div>
+    </div>
+  </div>
+</div>
 ```
 
-## Manual Deployment to GitHub Pages
+---
 
-### Prerequisites
+## Variable Change Protocol
 
-- Git repository on GitHub
-- Node.js installed locally
+Before any add / edit / delete on `variables.css`:
 
-### Step 1: Install Dependencies
+1. Search all usages: `grep -r "var(--name)" src/ --include="*.css" --include="*.vue"`
+2. Update all dependent components
+3. Run `npm run validate:variables`
 
-```bash
-npm install
-```
-
-### Step 2: Build the Project
-
-```bash
-npm run build
-```
-
-### Step 3: Deploy to GitHub Pages
-
-```bash
-npm run deploy
-```
-
-This command will:
-
-1. Build the project to the `dist` folder
-2. Deploy the `dist` folder to the `gh-pages` branch
-3. Your site will be available at `https://Ntp-MD.github.io/Mod.io/`
-
-### Alternative Manual Deployment
-
-If you prefer not to use the gh-pages package:
-
-1. Build the project:
-
-```bash
-npm run build
-```
-
-2. Push the dist folder to gh-pages branch:
-
-```bash
-git subtree push --prefix dist origin gh-pages
-```
-
-### Configuration Notes
-
-- The `base` in `vite.config.js` is set to `/Mod.io/`
-- Update this to match your repository name if different
-- The project is configured for GitHub Pages with proper asset paths
-
-## Project Structure
-
-```
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── Header.vue
-│   │   ├── Hero.vue
-│   │   ├── Features.vue
-│   │   ├── HowItWorks.vue
-│   │   ├── Testimonials.vue
-│   │   ├── Pricing.vue
-│   │   ├── CTA.vue
-│   │   └── Footer.vue
-│   ├── styles/
-│   │   ├── variables.css
-│   │   ├── base.css
-│   │   ├── utilities.css
-│   │   ├── components.css
-│   │   └── main.css
-│   ├── App.vue
-│   ├── main.js
-│   └── components.d.ts
-├── index.html
-├── package.json
-└── vite.config.js
-```
-
-## CSS Architecture
-
-- **variables.css** - CSS custom properties for colors, spacing, typography
-- **base.css** - Reset and global element styles
-- **utilities.css** - Reusable utility classes
-- **components.css** - Shared component styles
-- **main.css** - Import all styles
-
-## License
-
-MIT
+Replacement priority: `--gap-xs → sm → md → lg → xl` · `--radius-xs → sm → md → lg → xl` · `--transition-fast → normal → slow`

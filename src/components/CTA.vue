@@ -5,7 +5,7 @@ const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card
 <template>
   <section id="get-started" class="section cta-section">
     <div class="container">
-      <div class="cta-grid">
+      <div class="cta-grid" grid="2,2,1,1,var(--gap-xl)">
         <div class="cta-content">
           <div class="cta-header">
             <span class="badge badge-primary">🚀 Deploy Innovation</span>
@@ -41,13 +41,7 @@ const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card
   padding: var(--gap-section) 0;
 }
 
-.cta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-xl);
-  align-items: center;
-}
-
+/* Grid-Mod handles layout: grid="2,2,1,1,var(--gap-xl)" */
 .cta-content {
   display: flex;
   flex-direction: column;
@@ -127,11 +121,6 @@ const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card
 }
 
 @media screen and (max-width: 992px) {
-  .cta-grid {
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
-  }
-
   .cta-title {
     font-size: calc(var(--font-xl) * 1.5);
   }

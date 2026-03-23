@@ -43,8 +43,8 @@ const features = [
         <p class="section-description">Agentic tools engineered for modern developers and innovators</p>
       </div>
       <div class="features-grid" grid="3,3,2,1,var(--gap-md)">
-        <article v-for="feature in features" :key="feature.title" class="feature-card card-feature card-hover">
-          <span class="feature-icon icon-feature icon-hover">{{ feature.icon }}</span>
+        <article v-for="feature in features" :key="feature.title" class="feature-card card-hover">
+          <span class="feature-icon icon-hover">{{ feature.icon }}</span>
           <h3 class="feature-title text-primary">{{ feature.title }}</h3>
           <p class="feature-description">{{ feature.description }}</p>
         </article>
@@ -54,12 +54,7 @@ const features = [
 </template>
 
 <style scoped>
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: var(--gap-md);
-}
-
+/* Grid-Mod handles layout: grid="3,3,2,1,var(--gap-md)" */
 .feature-card {
   background: var(--color-white);
   border-radius: var(--radius-lg);
@@ -116,24 +111,8 @@ const features = [
   flex-grow: 1;
 }
 
-/* Responsive Grid */
-@media screen and (max-width: 1200px) {
-  .features-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+/* Component-specific responsive styles */
 @media screen and (max-width: 480px) {
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
   .feature-card {
     padding: var(--gap-md);
   }

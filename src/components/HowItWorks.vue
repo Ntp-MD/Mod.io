@@ -58,7 +58,7 @@ const getStepIcon = (index) => {
       </div>
 
       <!-- Step Cards -->
-      <div class="steps-grid" large="4" medium="2" semi="2" small="1" gap="var(--gap-md)">
+      <div class="steps-grid" grid="4,2,2,1,var(--gap-md)">
         <article v-for="(step, index) in steps" :key="step.number" class="step-card" :class="`step-card-${index + 1}`">
           <div class="step-header">
             <div class="step-number">{{ step.number }}</div>
@@ -144,10 +144,17 @@ const getStepIcon = (index) => {
   z-index: 1;
 }
 
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--gap-md);
+/* Grid-Mod handles layout: grid="4,2,2,1,var(--gap-md)" */
+@media screen and (min-width: 1200px) {
+  .step-card {
+    transform: translateY(-4px);
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .step-card {
+    transform: translateY(-2px);
+  }
 }
 
 .step-card {
@@ -234,12 +241,8 @@ const getStepIcon = (index) => {
 
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
-  .steps-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .steps-visual {
-    padding: 0 var(--gap-md);
+    transform: scale(0.9);
   }
 
   .step-circle {
@@ -252,7 +255,7 @@ const getStepIcon = (index) => {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .steps-visual {
     flex-direction: column;
     gap: var(--gap-lg);
@@ -275,10 +278,6 @@ const getStepIcon = (index) => {
 
   .step-connector {
     display: none;
-  }
-
-  .steps-grid {
-    grid-template-columns: 1fr;
   }
 }
 

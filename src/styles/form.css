@@ -39,12 +39,11 @@ select {
 }
 
 /* Mobile viewport fixes */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   input,
   textarea,
   select {
     padding: var(--gap-sm);
-    font-size: var(--font-sm);
   }
 }
 
@@ -53,7 +52,6 @@ select {
   textarea,
   select {
     padding: var(--gap-xs);
-    font-size: var(--font-sm);
     width: 100%;
   }
 }
