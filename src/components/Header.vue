@@ -13,342 +13,398 @@ const navLinks = [
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
+};
 </script>
 
 <template>
-  <header class="header-container">
-    <a href="/" class="nav-logo">
-      <span class="logo-text">M</span>
+  <header class="header-container" role="banner">
+    <a href="/" class="nav-logo" aria-label="MOD.io - Home">
+      <span class="logo-mark" aria-hidden="true">M</span>
+      <span class="logo-name">MOD<span class="logo-dot">.io</span></span>
     </a>
-    <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-      <div class="nav-menu">
-        <div v-for="link in navLinks" :key="link.label" class="nav-item">
-          <a :href="link.href" class="nav-link">{{ link.label }}</a>
+
+    <nav class="nav" :class="{ 'nav-open': isMenuOpen }" aria-label="Main navigation" :aria-hidden="!isMenuOpen ? 'true' : 'false'">
+      <div class="nav-overlay" @click="closeMenu" aria-hidden="true"></div>
+      <div class="nav-drawer">
+        <div class="nav-drawer-header">
+          <span class="nav-drawer-logo">MOD.io</span>
+          <button class="nav-close" @click="closeMenu" aria-label="Close navigation">✕</button>
         </div>
+        <ul class="nav-menu" role="list">
+          <li v-for="link in navLinks" :key="link.label" class="nav-item">
+            <a :href="link.href" class="nav-link" @click="closeMenu">{{ link.label }}</a>
+          </li>
+        </ul>
+        <a href="#get-started" class="btn btn-primary nav-cta" @click="closeMenu">🚀 Deploy Free</a>
       </div>
     </nav>
+
     <div class="header-actions">
-      <a href="#get-started" class="btn btn-primary">🚀 Deploy Now</a>
-      <div class="menu-toggle" @click="toggleMenu" :aria-expanded="isMenuOpen" aria-label="Toggle navigation menu">
-        <div class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }">
-          <span class="menu-icon-line"></span>
-          <span class="menu-icon-line"></span>
-          <span class="menu-icon-line"></span>
-        </div>
-      </div>
+      <a href="#get-started" class="btn btn-primary header-cta" aria-label="Deploy Now - Get started with MOD.io">🚀 Deploy Now</a>
+      <button
+        class="menu-toggle"
+        @click="toggleMenu"
+        :aria-expanded="isMenuOpen.toString()"
+        aria-label="Toggle navigation menu"
+        aria-controls="main-nav"
+      >
+        <span class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }" aria-hidden="true">
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </span>
+      </button>
     </div>
   </header>
 </template>
 
 <style scoped>
-/* Header Container */
+/* ── BASE: Mobile (320px+) ── */
 .header-container {
-  display: grid;
-  grid-template-columns: 15% auto 15%;
+  display: flex;
   align-items: center;
-  justify-items: center;
-  width: 100%;
-  padding: var(--gap-md) var(--gap-xl);
-  min-height: calc(var(--gap-xl) * 1.5);
-  background: var(--color-white);
+  justify-content: space-between;
+  padding: var(--gap-sm) var(--gap-md);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--main-color-8);
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  min-height: 60px;
+  transition: box-shadow var(--transition-normal);
 }
 
-/* Navigation */
+.header-container:has(+ *) {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
+  gap: var(--gap-xs);
   text-decoration: none;
+  flex-shrink: 0;
 }
 
-.logo-text {
+.logo-mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
-  background-color: var(--main-color-2);
+  width: 36px;
+  height: 36px;
+  background: var(--main-color-1);
   border-radius: var(--radius-sm);
   color: var(--color-white);
-  padding: var(--gap-md);
-  font-size: var(--font-xl);
+  font-size: var(--font-md);
   font-weight: 700;
   line-height: 1;
-  transition: all var(--transition-normal);
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
 }
 
-.logo-text:hover {
-  background-color: var(--accent-primary);
+.nav-logo:hover .logo-mark {
+  background: var(--main-color-3);
   transform: scale(1.05);
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-}
-
-.nav-menu {
-  display: flex;
-  gap: var(--gap-lg);
-  align-items: center;
-}
-
-.nav-item {
-  position: relative;
-}
-
-.nav-link {
-  font-size: var(--font-lg);
-  color: var(--main-color-1);
-  text-decoration: none;
-  transition: all var(--transition-normal);
-  font-weight: 500;
-  position: relative;
-  padding: var(--gap-xs) var(--gap-sm);
-  border-radius: var(--radius-xs);
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--accent-primary);
-  transition: all var(--transition-fast);
-  transform: translateX(-50%);
-}
-
-.nav-link:hover {
-  color: var(--accent-primary);
-  background: rgba(0, 105, 217, 0.1);
-}
-
-.nav-link:hover::after {
-  width: 80%;
-}
-
-/* Header Actions */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-md);
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--gap-xs);
-  padding: var(--gap-sm) var(--gap-lg);
-  border-radius: var(--radius-sm);
+.logo-name {
   font-size: var(--font-md);
-  font-weight: 500;
-  text-decoration: none;
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  border: none;
-  position: relative;
-  overflow: hidden;
+  font-weight: 700;
+  color: var(--main-color-1);
+  letter-spacing: -0.02em;
 }
 
-.btn::before {
-  content: "";
+.logo-dot {
+  color: var(--main-color-5);
+  font-weight: 400;
+}
+
+/* Mobile nav drawer — base hidden state */
+.nav {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.nav-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.nav-open .nav-overlay {
+  opacity: 1;
+}
+
+.nav-drawer {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.btn:hover::before {
-  left: 100%;
-}
-
-.btn-primary {
-  background: var(--accent-primary);
-  color: var(--color-white);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary:hover {
-  background: #000000;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Mobile Menu Toggle */
-.menu-toggle {
-  display: none;
+  width: min(80vw, 300px);
+  height: 100vh;
+  background: var(--main-color-1);
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: var(--gap-md);
+  gap: var(--gap-md);
+  overflow-y: auto;
+  transition: left var(--transition-normal);
+}
+
+.nav-open .nav-drawer {
+  left: 0;
+}
+
+.nav-drawer-header {
+  display: flex;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  background: none;
+  justify-content: space-between;
+  padding-bottom: var(--gap-md);
+  border-bottom: 1px solid var(--main-color-3);
+}
+
+.nav-drawer-logo {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.nav-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--main-color-3);
   border: none;
-  cursor: pointer;
-  aspect-ratio: 1;
   border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
+  color: var(--color-white);
+  font-size: var(--font-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.nav-close:hover {
+  background: var(--main-color-4);
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.nav-link {
+  display: block;
+  padding: var(--gap-sm) var(--gap-md);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--main-color-7);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  background: var(--main-color-3);
+  color: var(--color-white);
+}
+
+.nav-cta {
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
+  min-height: 48px;
+}
+
+/* Header right actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.header-cta {
+  display: none;
+}
+
+/* Hamburger button */
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 1px solid var(--main-color-8);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .menu-toggle:hover {
-  background: var(--main-color-8);
+  background: var(--main-color-9);
+  border-color: var(--main-color-7);
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--main-color-1);
+  outline-offset: 2px;
 }
 
 .menu-icon {
-  position: relative;
-  aspect-ratio: 1;
-  display: grid;
-  place-content: center;
-  gap: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.menu-icon-line {
-  position: relative;
+.menu-line {
   display: block;
-  width: 28px;
+  width: 22px;
   height: 2px;
   background: var(--main-color-1);
-  transition: all var(--transition-normal);
   border-radius: 1px;
+  transition:
+    transform var(--transition-normal),
+    opacity var(--transition-normal);
+  transform-origin: center;
 }
 
-.menu-icon-open .menu-icon-line:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+.menu-icon-open .menu-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
 
-.menu-icon-open .menu-icon-line:nth-child(2) {
+.menu-icon-open .menu-line:nth-child(2) {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: scaleX(0);
 }
 
-.menu-icon-open .menu-icon-line:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+.menu-icon-open .menu-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile Styles */
-@media screen and (max-width: 1200px) {
+/* ── TABLET (992px+) ── */
+@media screen and (max-width: 992px) {
+  .header-cta {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 993px) {
   .header-container {
-    padding: var(--gap-sm) var(--gap-md);
-    grid-template-columns: auto 1fr auto;
-    justify-items: start;
+    padding: var(--gap-sm) var(--gap-lg);
   }
 
-  .nav {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 80%;
-    height: 100vh;
-    background: var(--main-color-1);
-    transition: left var(--transition-normal);
-    z-index: var(--z-modal);
-    box-shadow: var(--shadow-xl);
-  }
-
-  .nav-open {
-    left: 0;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    padding: var(--gap-lg);
-    gap: var(--gap-lg);
-    width: 100%;
-  }
-
-  .nav-link {
-    font-size: var(--font-md);
-    text-align: center;
-    padding: var(--gap-sm);
-    color: var(--color-white);
-    display: block;
-    width: 100%;
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
-  }
-
-  .nav-link:hover {
-    background: var(--accent-primary);
-    color: var(--color-white);
-  }
-
-  .nav-link::after {
-    display: none;
-  }
-
-  .logo-text {
-    font-size: var(--font-lg);
-    padding: var(--gap-sm);
-  }
-
-  .btn {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: grid;
-  }
-
-  .menu-icon-line {
-    background: var(--main-color-1);
-  }
-}
-
-/* Desktop Styles */
-@media screen and (min-width: 1201px) {
-  .menu-toggle {
-    display: none;
-  }
-
-  .nav-menu {
-    flex-direction: row;
-  }
-
-  .nav-link {
-    font-size: var(--font-lg);
-  }
-
-  .logo-text {
-    font-size: var(--font-xl);
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .header-container {
-    padding: var(--gap-xs) var(--gap-sm);
-  }
-
-  .nav {
-    width: 90%;
-  }
-
-  .nav-menu {
-    padding: var(--gap-md);
-  }
-
-  .logo-text {
-    font-size: var(--font-md);
-    padding: var(--gap-xs);
-  }
-
-  .menu-toggle {
+  .logo-mark {
     width: 40px;
     height: 40px;
   }
 
-  .menu-icon-line {
-    width: 24px;
+  .header-cta {
+    display: inline-flex;
+  }
+}
+
+/* ── DESKTOP (1200px+) ── */
+@media screen and (min-width: 1201px) {
+  .header-container {
+    padding: var(--gap-md) var(--gap-xl);
+  }
+
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Show inline desktop nav, hide hamburger */
+  .nav {
+    position: static;
+    pointer-events: auto;
+    visibility: visible;
+    inset: auto;
+  }
+
+  .nav-overlay,
+  .nav-drawer-header,
+  .nav-cta {
+    display: none;
+  }
+
+  .nav-drawer {
+    position: static;
+    width: auto;
+    height: auto;
+    background: none;
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    overflow: visible;
+    transition: none;
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    gap: var(--gap-xs);
+  }
+
+  .nav-link {
+    color: var(--main-color-4);
+    padding: var(--gap-xs) var(--gap-sm);
+    font-size: var(--font-sm);
+    position: relative;
+    min-height: 44px;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: var(--gap-sm);
+    right: var(--gap-sm);
+    height: 2px;
+    background: var(--main-color-1);
+    transform: scaleX(0);
+    transition: transform var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    background: var(--main-color-9);
+    color: var(--main-color-1);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .menu-toggle {
+    display: none;
   }
 }
 </style>

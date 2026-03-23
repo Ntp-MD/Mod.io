@@ -1,33 +1,37 @@
 <script setup>
-const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card required", "Supreme deployment in under 60 seconds"];
+const benefits = ["50 GB bandwidth — no credit card needed", "Deploy globally in under 60 seconds", "Cancel or upgrade anytime"];
 </script>
 
 <template>
-  <section id="get-started" class="section cta-section">
+  <section id="get-started" class="section cta-section section-light" aria-labelledby="cta-title">
+    <div class="cta-glow" aria-hidden="true"></div>
     <div class="container">
-      <div class="cta-grid">
-        <div class="cta-content">
-          <div class="cta-header">
-            <span class="badge badge-primary">🚀 Deploy Innovation</span>
-            <h2 class="cta-title">Ready to Scale Intelligently?</h2>
-            <p class="cta-description">
-              Join 50M+ developers who trust MOD.io for supreme CDN intelligence. Start deploying your libraries globally with agentic optimization
-              today.
-            </p>
-          </div>
-          <div class="cta-benefits">
-            <div v-for="benefit in benefits" :key="benefit" class="benefit-item">
-              <span class="benefit-icon">✓</span>
+      <div class="cta-layout">
+        <!-- Left: copy -->
+        <div class="cta-copy">
+          <span class="badge badge-primary" aria-label="Section category">🚀 Get started</span>
+          <h2 class="cta-title" id="cta-title">Start distributing in minutes</h2>
+          <p class="cta-description">
+            Join 50M+ developers who rely on MOD.io for fast, reliable library delivery. Free tier is generous — no tricks.
+          </p>
+          <ul class="cta-benefits" aria-label="Benefits">
+            <li v-for="benefit in benefits" :key="benefit" class="benefit-row">
+              <span class="benefit-check" aria-hidden="true">✓</span>
               <span class="benefit-text">{{ benefit }}</span>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
+
+        <!-- Right: actions -->
         <div class="cta-actions">
-          <div class="action-buttons">
-            <a href="#signup" class="btn btn-primary">⚡ Deploy Free Now</a>
-            <a href="#demo" class="btn btn-secondary">🎬 Watch Innovation Demo</a>
+          <div class="action-group">
+            <a href="#signup" class="cta-btn cta-btn-primary" aria-label="Deploy free — create your MOD.io account"> ⚡ Deploy Free Now </a>
+            <a href="#demo" class="cta-btn cta-btn-ghost" aria-label="Watch a live demo of MOD.io"> 🎬 Watch demo </a>
           </div>
-          <p class="cta-note">Already innovating with us? <a href="#login" class="link">Access Dashboard</a></p>
+          <p class="cta-sub">
+            Already have an account?
+            <a href="#login" class="cta-link">Sign in →</a>
+          </p>
         </div>
       </div>
     </div>
@@ -35,133 +39,189 @@ const benefits = ["Free tier with 50GB intelligent bandwidth", "Zero credit card
 </template>
 
 <style scoped>
+/* ── BASE: Mobile (320px+) ── */
 .cta-section {
-  background: linear-gradient(135deg, var(--main-color-1) 0%, var(--main-color-2) 100%);
-  color: var(--color-white);
+  background: var(--color-white);
+  color: var(--main-color-1);
   padding: var(--gap-section) 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.cta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-xl);
-  align-items: center;
+.cta-glow {
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(127, 44, 134, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
 }
 
-.cta-content {
+.cta-layout {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-lg);
+  gap: var(--gap-xl);
+  position: relative;
+  z-index: 1;
+  padding: var(--gap-xl);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--main-color-8);
+  border-radius: var(--radius-xl);
 }
 
-.cta-header {
+/* Copy */
+.cta-copy {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
 }
 
 .cta-title {
-  font-size: calc(var(--font-xl) * 1.8);
+  font-size: clamp(24px, 6vw, 36px);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   margin: 0;
+  color: var(--main-color-1);
 }
 
 .cta-description {
   font-size: var(--font-md);
   line-height: 1.6;
-  color: var(--main-color-8);
+  color: var(--main-color-4);
   margin: 0;
+  max-width: 48ch;
 }
 
 .cta-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
 }
 
-.benefit-item {
+.benefit-row {
   display: flex;
   align-items: center;
   gap: var(--gap-sm);
 }
 
-.benefit-icon {
+.benefit-check {
   color: var(--accent-success);
-  font-weight: bold;
-  font-size: var(--font-md);
+  font-weight: 700;
+  font-size: var(--font-sm);
+  flex-shrink: 0;
 }
 
 .benefit-text {
   font-size: var(--font-sm);
-  color: var(--main-color-7);
+  color: var(--main-color-4);
 }
 
+/* Actions */
 .cta-actions {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-lg);
-  align-items: flex-start;
+  gap: var(--gap-md);
+  justify-content: center;
 }
 
-.action-buttons {
+.action-group {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-md);
+  gap: var(--gap-sm);
 }
 
-.cta-note {
+.cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: var(--gap-sm) var(--gap-lg);
+  border-radius: var(--radius-md);
+  font-size: var(--font-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  gap: var(--gap-xs);
+}
+
+.cta-btn-primary {
+  background: var(--color-white);
+  color: var(--main-color-1);
+  border: 2px solid var(--color-white);
+}
+
+.cta-btn-primary:hover {
+  background: var(--main-color-8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
+}
+
+.cta-btn-ghost {
+  background: transparent;
+  color: var(--main-color-4);
+  border: 1px solid var(--main-color-8);
+}
+
+.cta-btn-ghost:hover {
+  border-color: var(--main-color-6);
+  color: var(--main-color-1);
+  transform: translateY(-1px);
+}
+
+.cta-sub {
   font-size: var(--font-sm);
-  color: var(--main-color-7);
+  color: var(--main-color-4);
   margin: 0;
+  text-align: center;
 }
 
-.link {
-  color: var(--accent-primary);
+.cta-link {
+  color: var(--main-color-1);
   text-decoration: none;
   font-weight: 500;
+  transition: color var(--transition-fast);
 }
 
-.link:hover {
-  text-decoration: underline;
+.cta-link:hover {
+  color: var(--accent-secondary);
 }
 
+/* ── TABLET (992px+) ── */
 @media screen and (max-width: 992px) {
-  .cta-grid {
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
-  }
-
-  .cta-title {
-    font-size: calc(var(--font-xl) * 1.5);
-  }
-
-  .action-buttons {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    min-width: auto;
-    flex: 1;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .cta-section {
-    padding: var(--gap-lg) 0;
-  }
-
-  .cta-title {
-    font-size: var(--font-xl);
-  }
-
-  .action-buttons {
+  .action-group {
     flex-direction: column;
   }
+}
 
-  .btn {
-    width: 100%;
+/* ── DESKTOP (1200px+) ── */
+@media screen and (min-width: 1201px) {
+  .cta-layout {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-xl);
+    padding: var(--gap-section);
+  }
+
+  .cta-copy {
+    flex: 1;
+  }
+
+  .cta-actions {
+    flex: 0 0 auto;
+    min-width: 260px;
+  }
+
+  .cta-sub {
+    text-align: left;
   }
 }
 </style>

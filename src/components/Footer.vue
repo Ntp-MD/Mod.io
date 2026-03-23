@@ -1,79 +1,83 @@
 <script setup>
 const currentYear = new Date().getFullYear();
 
-const footerLinks = {
-  product: [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Documentation", href: "#docs" },
-    { label: "API Reference", href: "#api" },
-  ],
-  company: [
-    { label: "About", href: "#about" },
-    { label: "Blog", href: "#blog" },
-    { label: "Careers", href: "#careers" },
-    { label: "Contact", href: "#contact" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "#privacy" },
-    { label: "Terms of Service", href: "#terms" },
-    { label: "Cookie Policy", href: "#cookies" },
-  ],
-  social: [
-    { label: "GitHub", href: "#github" },
-    { label: "Twitter", href: "#twitter" },
-    { label: "Discord", href: "#discord" },
-  ],
-};
+const navGroups = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "Documentation", href: "#docs" },
+      { label: "API Reference", href: "#api" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About", href: "#about" },
+      { label: "Blog", href: "#blog" },
+      { label: "Careers", href: "#careers" },
+      { label: "Contact", href: "#contact" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "#privacy" },
+      { label: "Terms of Service", href: "#terms" },
+      { label: "Cookie Policy", href: "#cookies" },
+    ],
+  },
+];
 
-const getSocialIcon = (platform) => {
-  const icons = {
-    GitHub: "🐙",
-    Twitter: "🐦",
-    Discord: "💬",
-  };
-  return icons[platform] || "🔗";
-};
+const socialLinks = [
+  { label: "GitHub", href: "#github", icon: "🐙" },
+  { label: "Twitter / X", href: "#twitter", icon: "🐦" },
+  { label: "Discord", href: "#discord", icon: "🎯" },
+];
 </script>
 
 <template>
-  <footer class="footer">
+  <footer class="section footer" role="contentinfo">
     <div class="container">
-      <div class="footer-content">
+      <!-- Main footer grid -->
+      <div class="footer-main">
+        <!-- Brand column -->
         <div class="footer-brand">
-          <a href="/" class="logo">
-            <span class="logo-text">MOD.io</span>
+          <a href="/" class="brand-logo" aria-label="MOD.io home">
+            <span class="brand-mark" aria-hidden="true">M</span>
+            <span class="brand-name">MOD<span class="brand-dot">.io</span></span>
           </a>
-          <p class="footer-tagline">Modern CDN platform for library creators. Fast, secure, and reliable content delivery worldwide.</p>
-          <div class="footer-social">
-            <a v-for="link in footerLinks.social" :key="link.label" :href="link.href" class="social-link" :aria-label="link.label">
-              {{ getSocialIcon(link.label) }}
+          <p class="brand-tagline">Intelligent CDN for developers. Fast, reliable library delivery at global scale.</p>
+          <div class="social-row" aria-label="Social media links">
+            <a v-for="link in socialLinks" :key="link.label" :href="link.href" class="social-btn" :aria-label="link.label">
+              {{ link.icon }}
             </a>
           </div>
         </div>
 
-        <nav class="footer-nav">
-          <div class="footer-grid" grid="3,2,2,1,var(--gap-lg)">
-            <div v-for="(links, category) in footerLinks" :key="category" class="footer-column" v-if="category !== 'social'">
-              <h3 class="footer-heading">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</h3>
-              <div class="footer-links" grid="1,1,1,1,var(--gap-sm)">
-                <div v-for="link in links" :key="link.label" class="footer-item">
+        <!-- Nav columns -->
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-grid">
+            <div v-for="group in navGroups" :key="group.heading" class="footer-col">
+              <h3 class="footer-col-heading">{{ group.heading }}</h3>
+              <ul class="footer-col-links" role="list">
+                <li v-for="link in group.links" :key="link.label">
                   <a :href="link.href" class="footer-link">{{ link.label }}</a>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
         </nav>
       </div>
 
+      <!-- Bottom bar -->
       <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <p class="copyright">{{ currentYear }} MOD.io. All rights reserved.</p>
-          <div class="footer-bottom-links">
-            <a href="#privacy" class="footer-link-small">Privacy</a>
-            <a href="#terms" class="footer-link-small">Terms</a>
-            <a href="#cookies" class="footer-link-small">Cookies</a>
-          </div>
+        <p class="footer-copy">© {{ currentYear }} MOD.io. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#privacy" class="footer-small-link">Privacy</a>
+          <a href="#terms" class="footer-small-link">Terms</a>
+          <a href="#cookies" class="footer-small-link">Cookies</a>
         </div>
       </div>
     </div>
@@ -81,157 +85,205 @@ const getSocialIcon = (platform) => {
 </template>
 
 <style scoped>
+/* ── BASE: Mobile (320px+) ── */
 .footer {
   background: var(--main-color-1);
   color: var(--color-white);
-  padding: var(--gap-section) 0 var(--gap-md) 0;
+  padding: var(--gap-section) 0 var(--gap-md);
+  border-top: 1px solid var(--main-color-3);
 }
 
-.footer-content {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: var(--gap-section);
-  margin-bottom: var(--gap-section);
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
+  padding-bottom: var(--gap-xl);
+  border-bottom: 1px solid var(--main-color-3);
+  margin-bottom: var(--gap-md);
 }
 
+/* Brand */
 .footer-brand {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
-  padding-right: var(--gap-lg);
 }
 
-.logo {
+.brand-logo {
   display: inline-flex;
   align-items: center;
+  gap: var(--gap-xs);
   text-decoration: none;
+  width: fit-content;
 }
 
-.logo-text {
-  font-size: calc(var(--font-xl) * 1.5);
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--main-color-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
+  font-size: var(--font-md);
+  font-weight: 700;
+  line-height: 1;
+  transition: background var(--transition-fast);
+}
+
+.brand-logo:hover .brand-mark {
+  background: var(--main-color-4);
+}
+
+.brand-name {
+  font-size: var(--font-lg);
   font-weight: 700;
   color: var(--color-white);
-  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
-.footer-description {
+.brand-dot {
+  color: var(--main-color-5);
+  font-weight: 400;
+}
+
+.brand-tagline {
   font-size: var(--font-sm);
   line-height: 1.6;
-  color: var(--main-color-7);
+  color: var(--main-color-5);
   margin: 0;
+  max-width: 36ch;
 }
 
-.social-links {
+.social-row {
   display: flex;
-  gap: var(--gap-sm);
+  gap: var(--gap-xs);
 }
 
-.social-link {
-  display: inline-flex;
+.social-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
   background: var(--main-color-2);
+  border: 1px solid var(--main-color-3);
   border-radius: var(--radius-sm);
-  color: var(--color-white);
+  font-size: var(--font-md);
   text-decoration: none;
-  transition: var(--transition-normal);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.social-link:hover {
-  background: var(--accent-primary);
+.social-btn:hover {
+  background: var(--main-color-3);
+  border-color: var(--main-color-4);
   transform: translateY(-2px);
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--gap-lg);
+/* Nav columns */
+.footer-nav-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap-xl) var(--gap-lg);
 }
 
-.footer-column h3 {
-  font-size: var(--font-md);
+.footer-col {
+  flex: 1 1 120px;
+}
+
+.footer-col-heading {
+  font-size: var(--font-xs);
   font-weight: 600;
-  margin: 0 0 var(--gap-md) 0;
-  color: var(--color-white);
+  color: var(--main-color-7);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--gap-md);
 }
 
-.footer-links {
+.footer-col-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
 }
 
 .footer-link {
-  color: var(--main-color-7);
-  text-decoration: none;
   font-size: var(--font-sm);
-  transition: var(--transition-fast);
+  color: var(--main-color-5);
+  text-decoration: none;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--transition-fast);
 }
 
 .footer-link:hover {
-  color: var(--accent-primary);
+  color: var(--color-white);
 }
 
+/* Bottom bar */
 .footer-bottom {
-  border-top: 1px solid var(--main-color-3);
-  padding-top: var(--gap-md);
-  margin-top: var(--gap-lg);
-}
-
-.footer-bottom-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--gap-md);
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding-top: var(--gap-md);
 }
 
-.copyright {
-  font-size: var(--font-sm);
-  color: var(--main-color-7);
+.footer-copy {
+  font-size: var(--font-xs);
+  color: var(--main-color-5);
   margin: 0;
 }
 
 .footer-bottom-links {
   display: flex;
   gap: var(--gap-md);
+  flex-wrap: wrap;
 }
 
-.footer-social {
-  display: flex;
-  gap: var(--gap-xs);
+.footer-small-link {
+  font-size: var(--font-xs);
+  color: var(--main-color-5);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-small-link:hover {
+  color: var(--main-color-7);
 }
 
 @media screen and (max-width: 992px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap-lg);
+  .footer-main {
+    flex-direction: column;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .footer {
-    padding: var(--gap-lg) 0 var(--gap-md) 0;
+@media screen and (min-width: 1201px) {
+  .footer-main {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--gap-section);
   }
 
   .footer-brand {
-    padding-right: 0;
+    flex: 0 0 260px;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
+  .footer-nav {
+    flex: 1;
   }
 
-  .footer-bottom-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-sm);
-  }
-
-  .footer-bottom-links {
-    gap: var(--gap-md);
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 </style>

@@ -1,56 +1,77 @@
 <script setup>
-const codeExample = `<script src="https://cdn.mod.io/library/latest.min.js"><\/script>
+const codeExample = `<script src="https://cdn.mod.io/v2/latest.min.js"><\/script>
 
 MOD.init({
   project: 'your-project-id',
-  version: '1.0.0'
+  version: '2.0.0',
+  edge: 'auto'
+});
+
+// Verify delivery
+MOD.on('ready', ({ latency, node }) => {
+  console.log(\`⚡ \${latency}ms · \${node}\`);
 });`;
+
+const stats = [
+  { number: "100M+", label: "Requests / day" },
+  { number: "99.99%", label: "Uptime SLA" },
+  { number: "150+", label: "Edge nodes" },
+];
 </script>
 
 <template>
-  <section class="hero">
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="container">
-      <div class="hero-grid" grid="2,2,1,1,var(--gap-md)">
-        <div class="hero-content" grid="1,var(--gap-md)">
-          <div class="hero-badge">
-            <span class="badge badge-accent">⚡ CDN Innovation</span>
+      <div class="hero-layout">
+        <!-- Content column -->
+        <div class="hero-content">
+          <div class="hero-badge" aria-label="Product category">
+            <span class="badge-pill">⚡ CDN Platform</span>
           </div>
-          <h1 class="hero-title">Intelligent Library Distribution at Scale</h1>
-          <p>
-            MOD.io is an agentic CDN platform engineered for modern developers. Deploy once, distribute globally with supreme performance
-            optimization, intelligent version control, and real-time analytics intelligence.
+          <h1 class="hero-title" id="hero-title">
+            Library distribution<br />
+            <span class="hero-title-accent">at global scale</span>
+          </h1>
+          <p class="hero-description">
+            MOD.io is an intelligent CDN engineered for developers. Deploy once, distribute globally with sub-20ms latency, smart versioning, and
+            real-time analytics.
           </p>
           <div class="hero-actions">
-            <a href="#get-started" class="btn btn-primary">🚀 Deploy Now</a>
-            <a href="#docs" class="btn btn-secondary">📚 Explore Innovation</a>
+            <a href="#get-started" class="btn btn-primary hero-btn-primary">🚀 Deploy Free</a>
+            <a href="#docs" class="btn-ghost">📚 Read the docs →</a>
           </div>
-          <div class="hero-stats" grid="3,3,1,1,var(--gap-md)">
-            <div class="stat" grid="1,var(--gap-xs)">
-              <div class="stat-number">100M+</div>
-              <div class="stat-label">Intelligent Requests</div>
+
+          <!-- Stats row -->
+          <dl class="hero-stats">
+            <div v-for="stat in stats" :key="stat.label" class="hero-stat">
+              <dt class="hero-stat-label">{{ stat.label }}</dt>
+              <dd class="hero-stat-number">{{ stat.number }}</dd>
             </div>
-            <div class="stat" grid="1,var(--gap-xs)">
-              <div class="stat-number">99.99%</div>
-              <div class="stat-label">Supreme Uptime</div>
-            </div>
-            <div class="stat" grid="1,var(--gap-xs)">
-              <div class="stat-number">150+</div>
-              <div class="stat-label">Global Edge Nodes</div>
-            </div>
-          </div>
+          </dl>
         </div>
-        <div class="hero-visual">
-          <div class="code-preview">
-            <div class="code-header">
-              <div class="code-controls">
-                <span class="code-dot dot-red"></span>
-                <span class="code-dot dot-yellow"></span>
-                <span class="code-dot dot-green"></span>
+
+        <!-- Visual column -->
+        <div class="hero-visual" aria-label="Code integration example">
+          <div class="code-window">
+            <div class="code-titlebar" aria-hidden="true">
+              <div class="code-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
               </div>
-              <span class="code-title">index.html</span>
+              <span class="code-filename">index.html</span>
+              <span class="code-badge">v2.0</span>
             </div>
-            <div class="code-content">
-              <pre><code>{{ codeExample }}</code></pre>
+            <div class="code-body">
+              <pre class="code-pre"><code>{{ codeExample }}</code></pre>
+            </div>
+            <div class="code-footer" aria-hidden="true">
+              <span class="code-status">
+                <span class="status-dot"></span>
+                Connected · SG-EDGE-14
+              </span>
+              <span class="code-latency">12ms</span>
             </div>
           </div>
         </div>
@@ -60,142 +81,190 @@ MOD.init({
 </template>
 
 <style scoped>
+/* ── BASE: Mobile (320px+) ── */
 .hero {
-  background: linear-gradient(135deg, var(--main-color-9) 0%, var(--color-white) 100%);
-  padding: var(--gap-section) 0;
+  background: var(--main-color-1);
+  color: var(--color-white);
+  padding: var(--gap-xl) 0 var(--gap-section);
   position: relative;
   overflow: hidden;
 }
 
-.hero::before {
-  content: "";
+.hero-glow {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(circle at 20% 50%, rgba(0, 105, 217, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 214, 79, 0.05) 0%, transparent 50%);
+  top: -30%;
+  right: -20%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(127, 44, 134, 0.15) 0%, transparent 65%);
   pointer-events: none;
+  border-radius: 50%;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-md);
-  align-items: center;
+.hero-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
   position: relative;
   z-index: 1;
 }
 
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
-}
-
+/* Badge */
 .hero-badge {
   margin-bottom: var(--gap-sm);
 }
 
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: 6px var(--gap-md);
+  border: 1px solid var(--main-color-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  color: var(--main-color-7);
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Title */
 .hero-title {
-  font-size: calc(var(--font-xl) * 2.5);
+  font-size: clamp(28px, 7vw, 32px);
   font-weight: 700;
   line-height: 1.1;
-  margin: 0;
-  color: var(--main-color-1);
-  background: linear-gradient(135deg, var(--main-color-1) 0%, var(--accent-primary) 100%);
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--gap-md);
+  color: var(--color-white);
+}
+
+.hero-title-accent {
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-success));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.hero-content p {
-  font-size: var(--font-lg);
-  line-height: 1.6;
-  color: var(--main-color-5);
+/* Description */
+.hero-description {
+  font-size: var(--font-md);
+  line-height: 1.7;
+  color: var(--main-color-6);
+  margin: 0 0 var(--gap-lg);
+  max-width: 52ch;
+}
+
+/* Actions */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-xl);
+}
+
+.hero-btn-primary {
+  min-height: 48px;
+  font-size: var(--font-md);
+  font-weight: 600;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--main-color-1);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--gap-sm) var(--gap-md);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--main-color-6);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--main-color-3);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.btn-ghost:hover {
+  color: var(--color-white);
+  border-color: var(--main-color-5);
+}
+
+/* Stats */
+.hero-stats {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-md);
+  padding: var(--gap-md) 0;
+  border-top: 1px solid var(--main-color-3);
   margin: 0;
 }
 
-.hero-actions {
+.hero-stat {
   display: flex;
-  gap: var(--gap-md);
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  gap: 2px;
 }
 
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
-  margin-top: var(--gap-lg);
-}
-
-.stat {
-  text-align: center;
-  padding: var(--gap-md);
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--main-color-8);
-  transition: var(--transition-normal);
-}
-
-.stat:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.stat-number {
-  font-size: calc(var(--font-lg) * 1.5);
+.hero-stat-number {
+  font-size: var(--font-xl);
   font-weight: 700;
-  color: var(--accent-primary);
-  margin-bottom: var(--gap-xs);
+  color: var(--color-white);
+  line-height: 1;
+  margin: 0;
 }
 
-.stat-label {
+.hero-stat-label {
+  font-size: var(--font-xs);
   color: var(--main-color-6);
   text-transform: uppercase;
-  font-size: var(--font-xs);
-  font-weight: 500;
   letter-spacing: 0.05em;
 }
 
+/* Code window */
 .hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
-.code-preview {
+.code-window {
   background: var(--main-color-2);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  width: 100%;
-  transform: perspective(1000px) rotateY(-5deg);
-  transition: var(--transition-normal);
+  border: 1px solid var(--main-color-3);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
 }
 
-.code-preview:hover {
-  transform: perspective(1000px) rotateY(0deg);
-}
-
-.code-header {
-  background: var(--main-color-3);
-  padding: var(--gap-sm);
+.code-titlebar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--gap-sm);
+  padding: var(--gap-sm) var(--gap-md);
+  background: var(--main-color-3);
   border-bottom: 1px solid var(--main-color-4);
 }
 
-.code-controls {
+.code-dots {
   display: flex;
-  gap: var(--gap-xs);
+  gap: 6px;
 }
 
-.code-dot {
+.dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -204,109 +273,118 @@ MOD.init({
 .dot-red {
   background: #ff5f56;
 }
-
 .dot-yellow {
   background: #ffbd2e;
 }
-
 .dot-green {
   background: #27c93f;
 }
 
-.code-title {
+.code-filename {
   font-size: var(--font-xs);
-  color: var(--main-color-7);
+  color: var(--main-color-6);
   font-weight: 500;
+  flex: 1;
 }
 
-.code-content {
+.code-badge {
+  font-size: var(--font-xs);
+  color: var(--accent-success);
+  font-weight: 600;
+  background: rgba(0, 214, 79, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 214, 79, 0.2);
+}
+
+.code-body {
   padding: var(--gap-md);
   background: var(--main-color-1);
-  aspect-ratio: 16/10;
-  min-height: 300px;
 }
 
-.code-content pre {
+.code-pre {
   margin: 0;
-  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
-  font-size: var(--font-sm);
-  line-height: 1.5;
-  color: var(--main-color-8);
-  white-space: pre-wrap;
-  word-break: break-all;
+  font-family: "Monaco", "Menlo", "Consolas", monospace;
+  font-size: var(--font-xs);
+  line-height: 1.7;
+  color: var(--main-color-7);
+  white-space: pre;
+  overflow-x: auto;
 }
 
-.code-content code {
-  color: var(--main-color-8);
+.code-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gap-sm) var(--gap-md);
+  background: var(--main-color-2);
+  border-top: 1px solid var(--main-color-3);
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1200px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
-  }
+.code-status {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-size: var(--font-xs);
+  color: var(--main-color-6);
+}
 
-  .hero-title {
-    font-size: calc(var(--font-xl) * 2);
-  }
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-success);
+  box-shadow: 0 0 6px var(--accent-success);
+  animation: pulse-dot 2s ease infinite;
+}
 
-  .hero-visual {
-    justify-self: center;
-    width: 100%;
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .hero {
-    padding: var(--gap-lg) 0;
-  }
+.code-latency {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--accent-success);
+  font-family: "Monaco", "Menlo", monospace;
+}
 
-  .hero-title {
-    font-size: calc(var(--font-xl) * 1.5);
-  }
-
-  .hero-content p {
-    font-size: var(--font-md);
-  }
-
+/* ── TABLET (992px+) ── */
+@media screen and (max-width: 992px) {
   .hero-actions {
     flex-direction: column;
   }
+}
 
-  .btn {
-    width: 100%;
+/* ── DESKTOP (1200px+) ── */
+@media screen and (min-width: 1201px) {
+  .hero-layout {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-section);
   }
 
-  .hero-stats {
-    grid-template-columns: 1fr;
+  .hero-content {
+    flex: 0 0 50%;
   }
 
   .hero-visual {
-    justify-self: stretch;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .hero {
-    padding: var(--gap-md) 0;
+    flex: 1;
   }
 
-  .hero-title {
-    font-size: var(--font-xl);
+  .code-window {
+    transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+    transition: transform var(--transition-slow);
   }
 
-  .code-content {
-    padding: var(--gap-sm);
-    min-height: 200px;
-  }
-
-  .code-content pre {
-    font-size: var(--font-xs);
-  }
-
-  .stat-number {
-    font-size: var(--font-lg);
+  .code-window:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg);
   }
 }
 </style>

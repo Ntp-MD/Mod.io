@@ -2,307 +2,237 @@
 const steps = [
   {
     number: "01",
-    title: "Intelligent Deployment",
-    description:
-      "AI-powered upload with automatic optimization and compression. Smart format detection and intelligent bundling for supreme performance.",
-    detail: "Auto-optimization: .js, .css, .wasm, .json, images",
+    icon: "📦",
+    title: "Upload & Optimize",
+    description: "Drop your library files. MOD.io auto-detects formats, compresses assets, and generates optimized bundles in seconds.",
+    detail: ".js · .css · .wasm · .json · images",
   },
   {
     number: "02",
-    title: "Agentic Configuration",
-    description:
-      "Self-configuring version management with predictive routing. One-click generation of optimized embed codes and intelligent npm packages.",
-    detail: "AI versioning, zero-config deployment",
+    icon: "🧠",
+    title: "Version & Configure",
+    description: "Semantic versioning kicks in automatically. Generate CDN embed codes, npm packages, and ES module URLs instantly.",
+    detail: "Zero-config · canary · rollback",
   },
   {
     number: "03",
-    title: "Universal Integration",
-    description:
-      "Framework-agnostic distribution with intelligent auto-detection. Seamless installation via npm, yarn, pnpm, or direct CDN injection.",
-    detail: "npm, yarn, pnpm, CDN, ES modules, UMD",
+    icon: "🌐",
+    title: "Distribute Globally",
+    description: "Your files propagate to 150+ edge nodes within seconds. Any framework, any runtime — npm, CDN, or ES modules.",
+    detail: "npm · yarn · pnpm · CDN · ESM · UMD",
   },
   {
     number: "04",
-    title: "Predictive Analytics",
-    description: "Machine learning-powered insights with real-time monitoring. Automated performance optimization and intelligent cache management.",
-    detail: "AI dashboard, predictive scaling, auto-optimization",
+    icon: "📊",
+    title: "Monitor & Scale",
+    description: "Real-time analytics surface usage patterns, latency by region, and anomalies. Auto-scaling handles any traffic spike.",
+    detail: "Live dashboard · alerts · auto-scale",
   },
 ];
-
-const getStepIcon = (index) => {
-  const icons = ["�", "🧠", "🌐", "�"];
-  return icons[index] || "⚡";
-};
 </script>
 
 <template>
-  <section id="how-it-works" class="section section-dark">
+  <section id="how-it-works" class="section section-dark" aria-labelledby="hiw-title">
     <div class="container">
-      <div class="section-header">
-        <span class="badge badge-primary">🔬 Innovation Process</span>
-        <h2 class="section-title">Intelligent 4-Phase Deployment</h2>
-        <p class="section-description">From deployment to global intelligence in seconds</p>
-      </div>
+      <header class="section-header">
+        <span class="badge badge-primary" aria-label="Section category">🔬 How It Works</span>
+        <h2 class="section-title" id="hiw-title">Deploy in four steps</h2>
+        <p class="section-description">From upload to global distribution in under 60 seconds</p>
+      </header>
 
-      <!-- Visual Step Flow -->
-      <div class="steps-flow">
-        <div class="steps-visual">
-          <div class="flow-line"></div>
-          <div v-for="(step, index) in steps" :key="step.number" class="step-node" :class="`step-${index + 1}`">
-            <div class="step-circle">
-              <span class="step-icon">{{ getStepIcon(index) }}</span>
+      <ol class="steps-list" aria-label="Deployment steps">
+        <li v-for="(step, index) in steps" :key="step.number" class="step-item">
+          <!-- Vertical connector line (between steps) -->
+          <div class="step-connector" aria-hidden="true" v-if="index < steps.length - 1"></div>
+
+          <div class="step-inner">
+            <div class="step-left">
+              <div class="step-num-wrap" aria-hidden="true">
+                <span class="step-num">{{ step.number }}</span>
+              </div>
             </div>
-            <div class="step-connector" v-if="index < steps.length - 1"></div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Step Cards -->
-      <div class="steps-grid" large="4" medium="2" semi="2" small="1" gap="var(--gap-md)">
-        <article v-for="(step, index) in steps" :key="step.number" class="step-card" :class="`step-card-${index + 1}`">
-          <div class="step-header">
-            <div class="step-number">{{ step.number }}</div>
-            <h3 class="step-title">{{ step.title }}</h3>
+            <article class="step-card">
+              <div class="step-icon-row">
+                <span class="step-icon" aria-hidden="true">{{ step.icon }}</span>
+                <h3 class="step-title">{{ step.title }}</h3>
+              </div>
+              <p class="step-description">{{ step.description }}</p>
+              <div class="step-tags" aria-label="Supported formats">
+                <span class="step-tag">⚡ {{ step.detail }}</span>
+              </div>
+            </article>
           </div>
-          <p class="step-description">{{ step.description }}</p>
-          <div class="step-detail">
-            <span class="detail-icon">⚡</span>
-            <span>{{ step.detail }}</span>
-          </div>
-        </article>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 </template>
 
 <style scoped>
-.steps-flow {
-  margin-bottom: var(--gap-section);
-  position: relative;
-}
-
-.steps-visual {
+.steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0;
   position: relative;
-  margin: 0 auto var(--gap-lg);
-  padding: 0 var(--gap-lg);
 }
 
-.flow-line {
+.step-item {
+  position: relative;
+}
+
+/* Vertical connecting line between steps */
+.step-connector {
   position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-success) 100%);
-  z-index: 1;
-  transform: translateY(-50%);
+  left: 20px;
+  top: 64px;
+  bottom: -8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--main-color-3) 0%, transparent 100%);
+  z-index: 0;
 }
 
-.step-node {
+.step-inner {
+  display: flex;
+  gap: var(--gap-md);
+  padding-bottom: var(--gap-xl);
   position: relative;
-  z-index: 2;
+  z-index: 1;
+}
+
+.step-left {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--gap-sm);
 }
 
-.step-circle {
-  width: 80px;
-  height: 80px;
+.step-num-wrap {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-primary), var(--main-color-1));
+  border: 2px solid var(--main-color-3);
+  background: var(--main-color-2);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-lg);
-  border: 3px solid var(--color-white);
-  transition: var(--transition-normal);
+  flex-shrink: 0;
 }
 
-.step-circle:hover {
-  transform: scale(1.1);
-  box-shadow: var(--shadow-xl);
+.step-num {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--main-color-6);
+  font-family: "Monaco", "Menlo", monospace;
 }
 
-.step-icon {
-  font-size: calc(var(--font-xl) * 1.5);
-  line-height: 1;
-}
-
-.step-connector {
-  position: absolute;
-  top: 50%;
-  right: -50%;
-  width: 50%;
-  height: 2px;
-  background: var(--accent-primary);
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--gap-md);
-}
-
+/* Step card */
 .step-card {
-  background: var(--color-white);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--main-color-3);
   border-radius: var(--radius-lg);
-  padding: var(--gap-lg);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--main-color-8);
-  transition: var(--transition-normal);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
-  height: 100%;
+  padding: var(--gap-md) var(--gap-lg);
+  flex: 1;
+  transition:
+    border-color var(--transition-normal),
+    background var(--transition-normal);
 }
 
 .step-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--accent-primary);
+  border-color: var(--main-color-4);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.step-header {
+.step-icon-row {
   display: flex;
-  align-items: flex-start;
-  gap: var(--gap-md);
+  align-items: center;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-sm);
 }
 
-.step-number {
-  font-size: calc(var(--font-xl) * 1.5);
-  font-weight: 700;
-  color: var(--accent-primary);
+.step-icon {
+  font-size: var(--font-xl);
   line-height: 1;
-  min-width: 50px;
-  text-align: center;
 }
 
 .step-title {
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
   font-weight: 600;
-  line-height: 1.3;
+  color: var(--color-white);
   margin: 0;
-  color: var(--main-color-1);
+  line-height: 1.3;
 }
 
 .step-description {
   font-size: var(--font-sm);
   line-height: 1.6;
-  color: var(--main-color-5);
-  margin: 0;
-  flex-grow: 1;
+  color: var(--main-color-6);
+  margin: 0 0 var(--gap-sm);
 }
 
-.step-detail {
+.step-tags {
   display: flex;
-  align-items: center;
-  gap: var(--gap-sm);
-  padding: var(--gap-sm);
-  background: var(--main-color-9);
-  border-radius: var(--radius-sm);
+  flex-wrap: wrap;
+  gap: var(--gap-xs);
+}
+
+.step-tag {
   font-size: var(--font-xs);
-  color: var(--main-color-4);
-}
-
-.detail-icon {
   color: var(--accent-success);
+  background: rgba(0, 214, 79, 0.08);
+  border: 1px solid rgba(0, 214, 79, 0.15);
+  border-radius: var(--radius-full);
+  padding: 3px var(--gap-sm);
+  font-family: "Monaco", "Menlo", monospace;
 }
 
-/* Step-specific colors */
-.step-1 .step-circle {
-  background: linear-gradient(135deg, var(--accent-primary), #0056b3);
-}
-
-.step-2 .step-circle {
-  background: linear-gradient(135deg, var(--accent-success), #00a846);
-}
-
-.step-3 .step-circle {
-  background: linear-gradient(135deg, var(--accent-warning), #cc4a00);
-}
-
-.step-4 .step-circle {
-  background: linear-gradient(135deg, var(--accent-error), #b91c1c);
-}
-
-/* Responsive Design */
-@media screen and (max-width: 1200px) {
-  .steps-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .steps-visual {
-    padding: 0 var(--gap-md);
-  }
-
-  .step-circle {
-    width: 70px;
-    height: 70px;
-  }
-
-  .step-icon {
-    font-size: var(--font-xl);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .steps-visual {
-    flex-direction: column;
-    gap: var(--gap-lg);
-    padding: 0 var(--gap-md);
-  }
-
-  .flow-line {
-    width: 2px;
-    height: 100%;
-    top: 0;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-  }
-
-  .step-node {
+/* ── DESKTOP (1200px+) ── */
+@media screen and (min-width: 1201px) {
+  /* Flip to horizontal flow */
+  .steps-list {
     flex-direction: row;
-    width: 100%;
+    align-items: flex-start;
+    gap: 0;
   }
 
+  .step-item {
+    flex: 1;
+  }
+
+  /* Horizontal connector line between steps */
   .step-connector {
-    display: none;
+    position: absolute;
+    left: auto;
+    right: 0;
+    top: 24px;
+    bottom: auto;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--main-color-3) 0%, transparent 100%);
+    transform: translateX(50%);
   }
 
-  .steps-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .step-circle {
-    width: 60px;
-    height: 60px;
+  .step-inner {
+    flex-direction: column;
+    padding-bottom: 0;
+    padding-right: var(--gap-md);
   }
 
-  .step-icon {
-    font-size: var(--font-lg);
+  .step-left {
+    flex-direction: row;
+    margin-bottom: var(--gap-md);
+  }
+
+  .step-num-wrap {
+    width: 48px;
+    height: 48px;
   }
 
   .step-card {
-    padding: var(--gap-md);
-  }
-
-  .step-number {
-    font-size: var(--font-lg);
-    min-width: 40px;
-  }
-
-  .step-title {
-    font-size: var(--font-md);
+    padding: var(--gap-lg);
   }
 }
 </style>

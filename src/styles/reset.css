@@ -86,22 +86,27 @@ p {
 }
 
 .container {
-  width: 70vw;
-  padding: 0 var(--font-md);
+  width: 100%;
+  padding: 0 var(--gap-md);
   margin: 0 auto;
-}
-
-@media screen and (max-width: 1200px) {
-  .container {
-    width: 90%;
-  }
 }
 
 @media screen and (max-width: 992px) {
   .container {
-    width: 100%;
+    padding: 0 var(--gap-md);
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1200px) {
+  .container {
+    padding: 0 var(--gap-lg);
+    max-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .container {
+    padding: 0 var(--gap-xl);
+    max-width: 1200px;
+  }
 }
