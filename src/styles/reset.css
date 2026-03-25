@@ -11,7 +11,6 @@ html {
 body {
   font-family: var(--font-family);
   font-size: var(--font-xs);
-  color: var(--main-color-2);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
@@ -86,7 +85,7 @@ p {
 }
 
 .container {
-  width: 100%;
+  width: 75vw;
   padding: 0 var(--gap-md);
   margin: 0 auto;
 }
