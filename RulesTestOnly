@@ -1,0 +1,215 @@
+# Development Workflow & Standards
+
+---
+
+## �️ Tech Stack
+
+- **Vue 3** + Composition API + TypeScript
+- **Nuxt 3** (SSR, auto-imports)
+- **CSS Variables Only** — No Tailwind, BEM naming
+
+---
+
+## 📋 Workflow
+
+1. Plan architecture first
+2. Check `variables.css` for available values
+3. Use existing classes before creating new ones
+4. Add missing CSS to the appropriate file
+5. Auto error handling with `console.log` solutions
+
+---
+
+## 🚨 Auto Error Handling
+
+```typescript
+// composables/useErrorHandler.ts
+const logError = (error: Error, context?: string) => {
+  console.group(`🚨 ${error.constructor.name}: ${error.message}`);
+  console.info("🔧 Solution:", getSolution(error.message));
+  console.log("📝 Context:", context);
+  console.groupEnd();
+};
+```
+
+**Solutions Map:** `Cannot find name` → remove manual import | `Cannot find module` → `npm install` | `ref/useHead` → Nuxt auto-imports, remove import
+
+---
+
+## 📁 CSS Structure
+
+```
+/assets/styles/
+├── variables.css    # USER ONLY (colors, fonts, spacing, accents) *(this file can use px)*
+├── reset.css        # HTML element resets
+├── utilities.css    # Reusable classes (.card, .container, etc.)
+├── button.css       # Base button styles
+├── form.css         # Base form styles
+├── animations.css   # Animations
+└── main.css         # Import order
+```
+
+---
+
+## 🎨 CSS Variables Usage Rule
+
+**Core Principle**: Always use CSS variables from styles folder as primary source
+
+**When to Apply**:
+
+- All component styling in projects
+- Any new CSS declarations
+- Hover states and transitions
+- Colors, spacing, typography, shadows
+
+**Variable Priority Order**:
+
+1. **Colors**: Use `--main-color-*`, `--accent-*`, `--color-white`
+2. **Spacing**: Use `--gap-*`, `--radius-*`
+3. **Typography**: Use `--font-*`, `--font-family`
+4. **Transitions**: Use `--transition-*`
+5. **Shadows**: Use `--shadow-*`
+6. **Other**: Use `--opacity-*`, `--letter-spacing-*`, `--icon-size-*`
+
+**Examples**:
+
+- ✅ `background: var(--main-color-8)`
+- ❌ `background: rgba(255, 255, 255, 0.05)`
+- ✅ `transition: var(--transition-normal)`
+- ❌ `transition: all 0.3s ease`
+- ✅ `border-radius: var(--radius-lg)`
+- ❌ `border-radius: 20px`
+
+**[example] Components Pattern**:
+
+- Base styles inherit from `.[example]` class in utilities.css
+- Override only specific properties needed
+- Use semantic variable names from variables.css
+
+**AI Learning**: This pattern teaches AI to prioritize design system variables over hardcoded values for consistency and maintainability.
+
+---
+
+## 🎨 CSS Variables
+
+**Background**: `--[example-color]` (custom naming)
+
+**Font Color**: `--font-color1` … `--font-color4`, `--font-white`
+
+**Font Size**: `--font-xs` `--font-sm` `--font-md` `--font-lg` `--font-xl`
+
+**Spacing**: `--gap-xs` `--gap-sm` `--gap-md` `--gap-lg` `--gap-xl`
+
+**Accent**: `--accent-primary` `--accent-success` `--accent-danger` `--accent-warning` `--accent-reserved`
+`--accent-base`
+
+#### What allowed
+
+- **Feature-specific Styles** in ` [example-name].vue <style scoped>`
+
+```css
+.[example-name] .container {
+  width: 90vw;
+}
+
+.[example-name] {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+```
+
+#### **Allowed px Hard-coded Values No em/rem anyway**
+
+- **Single elements without siblings** (hamburger menu lines, icon parts, borders)
+- **Specific design requirements** where no suitable variable exists
+- **Performance critical** elements where direct values are optimal
+- **Special positioning** effects (negative margins, complex transforms)
+- **Micro-interactions** that require precise pixel values
+- **SVG viewBox** and icon dimensions
+- **Complex calculations** where direct values are clearer than calc()
+
+### WCAG Color Contrast Guidelines
+
+**CRITICAL**: WCAG 2.1 AA standards
+**Tools**: WebAIM, Chrome DevTools Lighthouse
+
+---
+
+## CSS Separation Rules
+
+**Vue `<style scoped>`** → Feature-specific layout & styles (`.pricing-parent`, `.hero-title`)
+
+**`utilities.css`** → Reusable across features (`.card`, `.container`, `.grid`)
+
+**Not use em, rem units** in CSS files.
+
+**Not use max-width or max-height** in CSS files.
+
+**Quick test:** Can it be used in multiple features? → `utilities.css`. Specific to one feature? → Vue component.
+
+---
+
+## 🔍 Lighthouse Score Guidelines
+
+### h1-h2 Usage for SEO & Accessibility
+
+**CRITICAL**: One `<h1>` per page for optimal Lighthouse SEO score
+
+**Rules:**
+
+- **h1**: Use ONCE per page (main title/hero section)
+- **h2**: Use for major section headers (features, pricing, contact)
+- **h3-h6**: Use for subsections and nested content
+
+**Best Practices:**
+
+- Semantic hierarchy: h1 → h2 → h3 → h4 → h5 → h6
+- No skipping levels (h1 → h3 is invalid)
+- Descriptive, concise text for screen readers
+
+**Lighthouse Impact:**
+
+- ✅ Proper heading structure = Better SEO score
+- ✅ One h1 = Higher accessibility score
+- ✅ Semantic HTML = Better performance metrics
+
+**Current Implementation:**
+
+- `index.vue`: Uses h1 in HeroSection, h2 in contact section
+- Components: Use h3 for card titles, h2 for section headers
+
+---
+
+## 1. BEM Naming
+
+```css
+.[example-name]          /* Block */
+.[example-name-card]     /* Block + Element */
+.[example-name-hover]    /* Block + Element */
+```
+
+## 2. HTML Pattern
+
+```html
+<div class="[example-parent]">
+  <div class="[utility-class] [example-child]">
+    <span class="[example-title]"></span>
+  </div>
+</div>
+```
+
+---
+
+## ✅ Code Checklist
+
+- [ ] Checking CSS files for undefined variables...
+- [ ] All CSS variables are defined in variables.css
+- [ ] Checking Vue components for undefined variables...
+- [ ] All Vue variables are defined in styles/
+
+---
+
+## 🚫 AI Constraints
+
+- **NO** Can't Modify `variables.css`
+- **NO** auto-generation without explicit user permission
