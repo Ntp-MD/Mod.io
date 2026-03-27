@@ -59,200 +59,255 @@ const testimonials = [
 const accentColors = ["var(--accent-secondary)", "var(--accent-success)", "var(--accent-warning)"];
 
 const stats = [
-  { number: "50M+", label: "Developers" },
-  { number: "99.99%", label: "Satisfaction" },
-  { number: "180+", label: "Countries" },
+  { number: "50M+", label: "Developers", icon: "👥" },
+  { number: "99.99%", label: "Satisfaction", icon: "⭐" },
+  { number: "180+", label: "Countries", icon: "🌍" },
 ];
+
+const accentColorMap = {
+  0: "primary",
+  1: "success",
+  2: "warning",
+};
 </script>
 
 <template>
-  <section id="testimonials" class="section section-light" aria-labelledby="testimonials-title">
+  <section id="testimonials" class="section section-dark testimonials-section" aria-labelledby="testimonials-title">
     <div class="container">
       <header class="section-header">
         <span class="badge badge-primary" aria-label="Section category">💬 Testimonials</span>
-        <h2 class="section-title" id="testimonials-title">Trusted by developers worldwide</h2>
-        <p class="section-description">From solo hackers to Fortune 500 infrastructure teams</p>
+        <h2 class="section-title" id="testimonials-title">What developers say</h2>
+        <p class="section-description">Real feedback from teams using MOD.io every day</p>
       </header>
 
-      <!-- Stats bar -->
-      <dl class="testi-stats" aria-label="Platform statistics">
-        <div v-for="stat in stats" :key="stat.label" class="testi-stat">
-          <dd class="testi-stat-number">{{ stat.number }}</dd>
-          <dt class="testi-stat-label">{{ stat.label }}</dt>
+      <!-- Stats showcase -->
+      <div class="stats-showcase">
+        <div class="stats-grid">
+          <div v-for="stat in stats" :key="stat.label" class="stat-card card">
+            <div class="stat-icon">{{ stat.icon }}</div>
+            <div class="stat-content">
+              <div class="stat-number">{{ stat.number }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
+            </div>
+          </div>
         </div>
-      </dl>
+      </div>
 
-      <!-- Grid -->
-      <ul class="testi-grid" grid="3,2,1,1,var(--gap-md)" role="list">
-        <li v-for="(t, index) in testimonials" :key="t.name" class="testi-card" :style="`--accent-color: ${accentColors[t.accentIndex]}`">
-          <article>
-            <div class="testi-rating" aria-label="5 out of 5 stars">
-              <span v-for="i in 5" :key="i" class="star" aria-hidden="true">★</span>
+      <!-- Testimonials grid -->
+      <div class="testimonials-grid" grid="3,2,1,1,var(--gap-lg)">
+        <article
+          v-for="(testimonial, index) in testimonials"
+          :key="testimonial.name"
+          class="testimonial-card card"
+          :class="`testimonial-card--${accentColors[testimonial.accentIndex]}`"
+        >
+          <div class="testimonial-content">
+            <div class="testimonial-rating">
+              <span v-for="i in 5" :key="i" class="rating-star">⭐</span>
             </div>
 
-            <blockquote class="testi-quote">
-              <p>"{{ t.content }}"</p>
+            <blockquote class="testimonial-quote">
+              <p>{{ testimonial.content }}</p>
             </blockquote>
 
-            <footer class="testi-author">
-              <div class="author-avatar" aria-hidden="true">{{ t.avatar }}</div>
+            <div class="testimonial-author">
+              <div class="author-avatar">{{ testimonial.avatar }}</div>
               <div class="author-info">
-                <cite class="author-name">{{ t.name }}</cite>
-                <p class="author-meta">
-                  {{ t.role }} · <span class="author-company">{{ t.company }}</span>
-                </p>
+                <div class="author-name">{{ testimonial.name }}</div>
+                <div class="author-role">{{ testimonial.role }}</div>
+                <div class="author-company">{{ testimonial.company }}</div>
               </div>
-            </footer>
-          </article>
-        </li>
-      </ul>
+            </div>
+          </div>
+
+          <div class="testimonial-decoration"></div>
+        </article>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-/* Grid-Mod handles layout via grid="3,2,1,1,var(--gap-md)" */
-
-/* Stats bar */
-.testi-stats {
-  display: flex;
-  flex-direction: row;
-  gap: var(--gap-md);
+/* Stats Showcase */
+.stats-showcase {
   margin: 0 0 var(--gap-section);
-  padding: var(--gap-lg);
-  background: rgba(0, 0, 0, 0.03);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  background: var(--main-color-8);
   border: 1px solid var(--main-color-8);
   border-radius: var(--radius-lg);
-  text-align: center;
-  justify-content: space-evenly;
+  backdrop-filter: blur(10px);
+  transition: var(--transition-normal);
 }
 
-.testi-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.stat-card:hover {
+  transform: translateY(-2px);
+  background: var(--main-color-7);
+  border-color: var(--main-color-6);
 }
 
-.testi-stat-number {
+.stat-icon {
   font-size: var(--font-xl);
+  opacity: 0.8;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: var(--font-lg);
   font-weight: 700;
-  color: var(--main-color-1);
+  color: var(--color-white);
   line-height: 1;
-  margin: 0;
+  margin-bottom: 2px;
 }
 
-.testi-stat-label {
+.stat-label {
   font-size: var(--font-xs);
-  color: var(--main-color-4);
+  color: var(--main-color-6);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.05px;
 }
 
-/* Grid-Mod handles columns/gap */
-.testi-grid {
+/* Testimonials Grid */
+.testimonials-grid {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Card */
-.testi-card {
-  background: rgba(0, 0, 0, 0.03);
+/* Testimonial Card */
+.testimonial-card {
+  position: relative;
+  background: var(--main-color-8);
   border: 1px solid var(--main-color-8);
-  border-top: 3px solid var(--accent-color);
-  border-radius: var(--radius-lg);
-  padding: var(--gap-lg);
-  transition:
-    border-color var(--transition-normal),
-    transform var(--transition-normal);
+  border-radius: var(--radius-xl);
+  transition: var(--transition-normal);
+  overflow: hidden;
 }
 
-.testi-card:hover {
+.testimonial-card:hover {
+  transform: translateY(-4px);
   border-color: var(--main-color-6);
-  border-top-color: var(--accent-color);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
 }
 
-/* Stars */
-.testi-rating {
-  display: flex;
-  gap: 2px;
-  margin-bottom: var(--gap-sm);
+.testimonial-card--primary {
+  border-top: 3px solid var(--accent-primary);
 }
 
-.star {
-  color: var(--accent-warning);
+.testimonial-card--success {
+  border-top: 3px solid var(--accent-success);
+}
+
+.testimonial-card--warning {
+  border-top: 3px solid var(--accent-warning);
+}
+
+.testimonial-content {
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial-rating {
+  margin-bottom: var(--gap-md);
+}
+
+.rating-star {
   font-size: var(--font-sm);
+  color: var(--accent-warning);
+  margin-right: 2px;
 }
 
-/* Quote */
-.testi-quote {
+.testimonial-quote {
   margin: 0 0 var(--gap-lg);
 }
 
-.testi-quote p {
-  font-size: var(--font-sm);
-  line-height: 1.7;
-  color: var(--main-color-4);
+.testimonial-quote p {
+  font-size: var(--font-md);
+  line-height: 1.6;
+  color: var(--main-color-6);
   margin: 0;
   font-style: italic;
 }
 
-/* Author */
-.testi-author {
+.testimonial-author {
   display: flex;
   align-items: center;
   gap: var(--gap-md);
 }
 
 .author-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
   background: var(--main-color-8);
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--main-color-8);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-xs);
+  font-size: var(--font-sm);
   font-weight: 700;
-  color: var(--main-color-4);
+  color: var(--color-white);
   flex-shrink: 0;
-  letter-spacing: 0.02em;
 }
 
 .author-info {
   flex: 1;
-  min-width: 0;
 }
 
 .author-name {
-  display: block;
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   font-weight: 600;
-  color: var(--main-color-1);
-  font-style: normal;
+  color: var(--color-white);
   margin-bottom: 2px;
 }
 
-.author-meta {
-  font-size: var(--font-xs);
-  color: var(--main-color-4);
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.author-role {
+  font-size: var(--font-sm);
+  color: var(--main-color-6);
+  margin-bottom: 2px;
 }
 
 .author-company {
+  font-size: var(--font-sm);
   color: var(--main-color-5);
 }
 
-@media screen and (min-width: 1201px) {
-  .testi-stats {
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
+.testimonial-decoration {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--main-color-8) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+  }
+
+  .testimonial-author {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
   }
 }
 </style>

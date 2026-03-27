@@ -68,6 +68,6 @@
 
   /* Common Variables */
   --opacity-disabled: 0.6;
-  --letter-spacing-tight: 0.05em;
+  --letter-spacing-tight: 0.05px;
   --outline-offset: 2px;
 }

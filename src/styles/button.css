@@ -7,14 +7,13 @@ button {
   gap: var(--gap-xs);
   border: none;
   cursor: pointer;
-  font-size: var(--font-md);
   padding: var(--gap-md) var(--gap-lg);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   font-weight: 500;
   text-decoration: none;
   transition: var(--transition-normal);
   width: fit-content;
-  background: var(--accent-primary);
+  font-size: var(--font-md);
 }
 
 button:focus {
@@ -57,4 +56,16 @@ button:hover {
 .btn-error {
   background: var(--accent-error);
   color: var(--color-white);
+}
+
+/* Button Style Variants */
+.btn-ghost {
+  background: transparent;
+  color: var(--main-color-6);
+  border: 1px solid var(--main-color-3);
+}
+
+.btn-ghost:hover {
+  color: var(--color-white);
+  border-color: var(--main-color-5);
 }

@@ -39,7 +39,7 @@ const stats = [
           </p>
           <div class="hero-actions">
             <a href="#get-started" class="btn btn-primary hero-btn-primary">🚀 Deploy Free</a>
-            <a href="#docs" class="btn-ghost">📚 Read the docs →</a>
+            <a href="#docs" class="btn btn-ghost">📚 Read the docs →</a>
           </div>
 
           <!-- Stats row -->
@@ -96,7 +96,7 @@ const stats = [
   right: -20%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(127, 44, 134, 0.15) 0%, transparent 65%);
+  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 65%);
   pointer-events: none;
   border-radius: 50%;
 }
@@ -124,16 +124,16 @@ const stats = [
   font-size: var(--font-xs);
   font-weight: 500;
   color: var(--main-color-7);
-  letter-spacing: 0.04em;
-  background: rgba(255, 255, 255, 0.04);
+  letter-spacing: 0.04px;
+  background: var(--main-color-8);
 }
 
 /* Title */
 .hero-title {
-  font-size: clamp(28px, 7vw, 32px);
+  font-size: calc(var(--font-xl) * 1.6);
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.03px;
   margin: 0 0 var(--gap-md);
   color: var(--color-white);
 }
@@ -157,53 +157,18 @@ const stats = [
 /* Actions */
 .hero-actions {
   display: flex;
-  flex-direction: column;
   gap: var(--gap-sm);
   margin-bottom: var(--gap-xl);
 }
 
 .hero-btn-primary {
-  min-height: 48px;
-  font-size: var(--font-md);
-  font-weight: 600;
-  justify-content: center;
   background: var(--color-white);
   color: var(--main-color-1);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: var(--gap-xs);
-  transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
 }
 
 .hero-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: var(--gap-sm) var(--gap-md);
-  font-size: var(--font-sm);
-  font-weight: 500;
-  color: var(--main-color-6);
-  text-decoration: none;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--main-color-3);
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast);
-}
-
-.btn-ghost:hover {
-  color: var(--color-white);
-  border-color: var(--main-color-5);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Stats */
@@ -234,7 +199,7 @@ const stats = [
   font-size: var(--font-xs);
   color: var(--main-color-6);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.05px;
 }
 
 /* Code window */
@@ -247,7 +212,7 @@ const stats = [
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--main-color-3);
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-xl);
 }
 
 .code-titlebar {
@@ -271,13 +236,13 @@ const stats = [
 }
 
 .dot-red {
-  background: #ff5f56;
+  background: var(--accent-error);
 }
 .dot-yellow {
-  background: #ffbd2e;
+  background: var(--accent-warning);
 }
 .dot-green {
-  background: #27c93f;
+  background: var(--accent-success);
 }
 
 .code-filename {

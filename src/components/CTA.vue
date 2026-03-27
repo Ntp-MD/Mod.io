@@ -1,37 +1,69 @@
 <script setup>
 const benefits = ["50 GB bandwidth — no credit card needed", "Deploy globally in under 60 seconds", "Cancel or upgrade anytime"];
+
+const stats = [
+  { number: "50M+", label: "Developers" },
+  { number: "99.99%", label: "Uptime" },
+  { number: "150+", label: "Countries" },
+];
 </script>
 
 <template>
-  <section id="get-started" class="section cta-section section-light" aria-labelledby="cta-title">
+  <section id="get-started" class="section cta-section section-dark" aria-labelledby="cta-title">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="container">
-      <div class="cta-layout">
-        <!-- Left: copy -->
-        <div class="cta-copy">
-          <span class="badge badge-primary" aria-label="Section category">🚀 Get started</span>
-          <h2 class="cta-title" id="cta-title">Start distributing in minutes</h2>
-          <p class="cta-description">
-            Join 50M+ developers who rely on MOD.io for fast, reliable library delivery. Free tier is generous — no tricks.
-          </p>
-          <ul class="cta-benefits" aria-label="Benefits">
-            <li v-for="benefit in benefits" :key="benefit" class="benefit-row">
-              <span class="benefit-check" aria-hidden="true">✓</span>
-              <span class="benefit-text">{{ benefit }}</span>
-            </li>
-          </ul>
+      <div class="cta-header">
+        <span class="badge badge-primary" aria-label="Section category">🚀 Get Started</span>
+        <h2 class="cta-title" id="cta-title">Ready to scale?</h2>
+        <p class="cta-description">Join millions of developers deploying faster with MOD.io's global CDN.</p>
+      </div>
+
+      <!-- Stats Preview -->
+      <div class="cta-stats">
+        <div class="stats-row">
+          <div v-for="stat in stats" :key="stat.label" class="stat-item">
+            <div class="stat-number">{{ stat.number }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main CTA Content -->
+      <div class="cta-content">
+        <div class="cta-left">
+          <div class="benefits-card card">
+            <h3>Why choose MOD.io?</h3>
+            <ul class="benefits-list" aria-label="Key benefits">
+              <li v-for="benefit in benefits" :key="benefit" class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <span class="benefit-text">{{ benefit }}</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Right: actions -->
-        <div class="cta-actions">
-          <div class="action-group">
-            <a href="#signup" class="cta-btn cta-btn-primary" aria-label="Deploy free — create your MOD.io account"> ⚡ Deploy Free Now </a>
-            <a href="#demo" class="cta-btn cta-btn-ghost" aria-label="Watch a live demo of MOD.io"> 🎬 Watch demo </a>
+        <div class="cta-right">
+          <div class="action-card card">
+            <div class="action-header">
+              <h3>Start building today</h3>
+              <p>Free forever, no credit card required</p>
+            </div>
+
+            <div class="action-buttons">
+              <a href="#signup" class="btn cta-btn-primary" aria-label="Deploy free — create your MOD.io account">
+                <span class="btn-icon">⚡</span>
+                <span class="btn-text">Deploy Free Now</span>
+              </a>
+              <a href="#demo" class="btn cta-btn-secondary" aria-label="Watch a live demo of MOD.io">
+                <span class="btn-icon">🎬</span>
+                <span class="btn-text">Watch Demo</span>
+              </a>
+            </div>
+
+            <div class="action-footer">
+              <p>Already have an account? <a href="#login" class="sign-in-link">Sign in →</a></p>
+            </div>
           </div>
-          <p class="cta-sub">
-            Already have an account?
-            <a href="#login" class="cta-link">Sign in →</a>
-          </p>
         </div>
       </div>
     </div>
@@ -41,8 +73,8 @@ const benefits = ["50 GB bandwidth — no credit card needed", "Deploy globally 
 <style scoped>
 /* ── BASE: Mobile (320px+) ── */
 .cta-section {
-  background: var(--color-white);
-  color: var(--main-color-1);
+  background: var(--main-color-1);
+  color: var(--color-white);
   padding: var(--gap-section) 0;
   position: relative;
   overflow: hidden;
@@ -50,178 +82,232 @@ const benefits = ["50 GB bandwidth — no credit card needed", "Deploy globally 
 
 .cta-glow {
   position: absolute;
-  bottom: -20%;
-  left: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(127, 44, 134, 0.06) 0%, transparent 70%);
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 65%);
   pointer-events: none;
   border-radius: 50%;
 }
 
-.cta-layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xl);
+.cta-header {
+  text-align: center;
+  margin-bottom: var(--gap-section);
   position: relative;
-  z-index: 1;
-  padding: var(--gap-xl);
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid var(--main-color-8);
-  border-radius: var(--radius-xl);
-}
-
-/* Copy */
-.cta-copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
+  z-index: 2;
 }
 
 .cta-title {
-  font-size: clamp(24px, 6vw, 36px);
+  font-size: calc(var(--font-xl) * 1.8);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--main-color-1);
+  line-height: 1.1;
+  margin: var(--gap-md) 0;
+  background: linear-gradient(135deg, var(--color-white), var(--main-color-7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .cta-description {
   font-size: var(--font-md);
   line-height: 1.6;
-  color: var(--main-color-4);
-  margin: 0;
-  max-width: 48ch;
+  color: var(--main-color-6);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.cta-benefits {
+/* Stats Preview */
+.cta-stats {
+  margin: 0 0 var(--gap-section);
+  position: relative;
+  z-index: 2;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-xl);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: calc(var(--font-xl) * 1.5);
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1;
+  margin-bottom: var(--gap-xs);
+}
+
+.stat-label {
+  font-size: var(--font-sm);
+  color: var(--main-color-6);
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+}
+
+/* Main Content */
+.cta-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-xl);
+  position: relative;
+  z-index: 2;
+}
+
+/* Benefits Card */
+.benefits-card {
+  background: var(--main-color-8);
+  border: 1px solid var(--main-color-8);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+}
+
+.benefits-card h3 {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0 0 var(--gap-lg);
+}
+
+.benefits-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-sm);
+  gap: var(--gap-md);
 }
 
-.benefit-row {
+.benefit-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--gap-sm);
 }
 
-.benefit-check {
+.benefit-icon {
   color: var(--accent-success);
   font-weight: 700;
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .benefit-text {
-  font-size: var(--font-sm);
-  color: var(--main-color-4);
+  font-size: var(--font-md);
+  color: var(--main-color-6);
+  line-height: 1.5;
 }
 
-/* Actions */
-.cta-actions {
+/* Action Card */
+.action-card {
+  background: var(--main-color-8);
+  border: 1px solid var(--main-color-8);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.action-header {
+  margin-bottom: var(--gap-lg);
+}
+
+.action-header h3 {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0 0 var(--gap-sm);
+}
+
+.action-header p {
+  font-size: var(--font-md);
+  color: var(--main-color-6);
+  margin: 0;
+}
+
+.action-buttons {
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
-  justify-content: center;
-}
-
-.action-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
-}
-
-.cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding: var(--gap-sm) var(--gap-lg);
-  border-radius: var(--radius-md);
-  font-size: var(--font-md);
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast),
-    background var(--transition-fast);
-  gap: var(--gap-xs);
+  margin-bottom: var(--gap-lg);
 }
 
 .cta-btn-primary {
   background: var(--color-white);
   color: var(--main-color-1);
-  border: 2px solid var(--color-white);
+  width: 100%;
 }
 
 .cta-btn-primary:hover {
-  background: var(--main-color-8);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
-.cta-btn-ghost {
+.cta-btn-secondary {
   background: transparent;
-  color: var(--main-color-4);
+  color: var(--color-white);
   border: 1px solid var(--main-color-8);
+  width: 100%;
 }
 
-.cta-btn-ghost:hover {
+.cta-btn-secondary:hover {
+  background: var(--main-color-8);
   border-color: var(--main-color-6);
-  color: var(--main-color-1);
   transform: translateY(-1px);
 }
 
-.cta-sub {
-  font-size: var(--font-sm);
-  color: var(--main-color-4);
-  margin: 0;
-  text-align: center;
+.btn-icon {
+  font-size: var(--font-lg);
 }
 
-.cta-link {
-  color: var(--main-color-1);
+.action-footer {
+  font-size: var(--font-sm);
+  color: var(--main-color-6);
+}
+
+.sign-in-link {
+  color: var(--color-white);
   text-decoration: none;
   font-weight: 500;
   transition: color var(--transition-fast);
 }
 
-.cta-link:hover {
-  color: var(--accent-secondary);
+.sign-in-link:hover {
+  color: var(--accent-success);
 }
 
-/* ── TABLET (992px+) ── */
-@media screen and (max-width: 992px) {
-  .action-group {
-    flex-direction: column;
+/* ── TABLET (768px+) ── */
+@media screen and (min-width: 768px) {
+  .cta-content {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .stats-row {
+    gap: var(--gap-xl);
   }
 }
 
 /* ── DESKTOP (1200px+) ── */
 @media screen and (min-width: 1201px) {
-  .cta-layout {
+  .cta-title {
+    font-size: calc(var(--font-xl) * 2.2);
+  }
+
+  .action-buttons {
     flex-direction: row;
-    align-items: center;
-    gap: var(--gap-xl);
-    padding: var(--gap-section);
   }
 
-  .cta-copy {
+  .cta-btn-primary {
+    flex: 2;
+  }
+
+  .cta-btn-secondary {
     flex: 1;
-  }
-
-  .cta-actions {
-    flex: 0 0 auto;
-    min-width: 260px;
-  }
-
-  .cta-sub {
-    text-align: left;
   }
 }
 </style>

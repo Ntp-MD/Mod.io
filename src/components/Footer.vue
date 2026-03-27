@@ -44,13 +44,13 @@ const socialLinks = [
       <div class="footer-main">
         <!-- Brand column -->
         <div class="footer-brand">
-          <a href="/" class="brand-logo" aria-label="MOD.io home">
-            <span class="brand-mark" aria-hidden="true">M</span>
+          <a href="/" class="brand-logo flex-row-center gap-xs link-reset" aria-label="MOD.io home">
+            <span class="brand-mark flex-center" aria-hidden="true">M</span>
             <span class="brand-name">MOD<span class="brand-dot">.io</span></span>
           </a>
           <p class="brand-tagline">Intelligent CDN for developers. Fast, reliable library delivery at global scale.</p>
-          <div class="social-row" aria-label="Social media links">
-            <a v-for="link in socialLinks" :key="link.label" :href="link.href" class="social-btn" :aria-label="link.label">
+          <div class="social-row flex-row-center gap-xs" aria-label="Social media links">
+            <a v-for="link in socialLinks" :key="link.label" :href="link.href" class="social-btn flex-center" :aria-label="link.label">
               {{ link.icon }}
             </a>
           </div>
@@ -63,7 +63,7 @@ const socialLinks = [
               <h3 class="footer-col-heading">{{ group.heading }}</h3>
               <ul class="footer-col-links" role="list">
                 <li v-for="link in group.links" :key="link.label">
-                  <a :href="link.href" class="footer-link">{{ link.label }}</a>
+                  <a :href="link.href" class="footer-link link-reset">{{ link.label }}</a>
                 </li>
               </ul>
             </div>
@@ -74,9 +74,9 @@ const socialLinks = [
       <!-- Bottom bar -->
       <div class="footer-bottom">
         <p class="footer-copy">© {{ currentYear }} MOD.io. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="#privacy" class="footer-small-link">Privacy</a>
-          <a href="#terms" class="footer-small-link">Terms</a>
+        <div class="footer-bottom-links flex-row-center gap-md">
+          <a href="#privacy" class="footer-small-link link-reset">Privacy</a>
+          <a href="#terms" class="footer-small-link link-reset">Terms</a>
           <a href="#cookies" class="footer-small-link">Cookies</a>
         </div>
       </div>
@@ -110,17 +110,10 @@ const socialLinks = [
 }
 
 .brand-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--gap-xs);
-  text-decoration: none;
   width: fit-content;
 }
 
 .brand-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 36px;
   height: 36px;
   background: var(--main-color-3);
@@ -156,22 +149,13 @@ const socialLinks = [
   max-width: 36ch;
 }
 
-.social-row {
-  display: flex;
-  gap: var(--gap-xs);
-}
-
 .social-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 40px;
   height: 40px;
   background: var(--main-color-2);
   border: 1px solid var(--main-color-3);
   border-radius: var(--radius-sm);
   font-size: var(--font-md);
-  text-decoration: none;
   transition:
     background var(--transition-fast),
     border-color var(--transition-fast),
@@ -217,10 +201,7 @@ const socialLinks = [
 .footer-link {
   font-size: var(--font-sm);
   color: var(--main-color-5);
-  text-decoration: none;
   min-height: 28px;
-  display: inline-flex;
-  align-items: center;
   transition: color var(--transition-fast);
 }
 
@@ -243,15 +224,12 @@ const socialLinks = [
 }
 
 .footer-bottom-links {
-  display: flex;
-  gap: var(--gap-md);
   flex-wrap: wrap;
 }
 
 .footer-small-link {
   font-size: var(--font-xs);
   color: var(--main-color-5);
-  text-decoration: none;
   transition: color var(--transition-fast);
 }
 

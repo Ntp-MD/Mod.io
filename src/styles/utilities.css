@@ -1,0 +1,241 @@
+/* Shared Component Classes */
+
+/* Flexbox Utilities - ลดการซ้ำซ้อน */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Gap Utilities */
+.gap-xs {
+  gap: var(--gap-xs);
+}
+.gap-sm {
+  gap: var(--gap-sm);
+}
+.gap-md {
+  gap: var(--gap-md);
+}
+.gap-lg {
+  gap: var(--gap-lg);
+}
+.gap-xl {
+  gap: var(--gap-xl);
+}
+
+/* Common Link Utilities */
+.link-reset {
+  text-decoration: none;
+}
+
+/* Transition Utilities */
+.transition-normal {
+  transition: var(--transition-normal);
+}
+
+.transition-fast {
+  transition: var(--transition-fast);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--gap-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gap-md);
+  padding-right: var(--gap-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.section-title {
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02px;
+  margin: 0;
+  color: var(--color-white);
+}
+
+.section-description {
+  line-height: 1.6;
+  margin: 0;
+  color: var(--main-color-6);
+}
+
+/* Background Utilities */
+.bg-card {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.bg-card-dark {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.bg-hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bg-light {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Gradient Utilities */
+.bg-gradient-success {
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-success));
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, var(--accent-warning), var(--accent-error));
+}
+
+.bg-gradient-glow {
+  background: radial-gradient(circle, rgba(127, 44, 134, 0.15) 0%, transparent 65%);
+}
+
+/* Transform Utilities */
+.hover-lift {
+  transition: transform var(--transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-lift-subtle:hover {
+  transform: translateY(-1px);
+}
+
+/* Shadow Utilities */
+.shadow-glow {
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+.shadow-card {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Text Transform Utilities */
+.text-upper {
+  text-transform: uppercase;
+}
+
+/* Card Utility Class */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--main-color-8);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-lg);
+  transition:
+    border-color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.card:hover {
+  border-color: var(--main-color-6);
+  transform: translateY(-2px);
+}
+
+/* Badge Component */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: var(--gap-xs) var(--gap-md);
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  width: fit-content;
+}
+
+.badge-primary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--main-color-7);
+  border: 1px solid var(--main-color-3);
+}
+
+.badge-accent {
+  background: linear-gradient(135deg, var(--accent-warning), var(--accent-error));
+  color: var(--color-white);
+  letter-spacing: 0.05px;
+  text-transform: uppercase;
+}
+
+/* Section Variants */
+
+.section {
+  padding: var(--gap-section) 0;
+}
+
+.section-dark {
+  background: var(--main-color-1);
+  color: var(--color-white);
+}
+
+.section-light {
+  background: var(--color-white);
+
+  color: var(--main-color-1);
+}
+
+.section-light .section-title {
+  color: var(--main-color-1);
+}
+
+.section-light .section-description {
+  color: var(--main-color-4);
+}
+
+.section-light .badge-primary {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--main-color-1);
+  border: 1px solid var(--main-color-8);
+}
+
+/* Stat Component */
+
+.stat {
+  text-align: center;
+  padding: var(--gap-md);
+}
+
+.stat-number {
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: var(--gap-xs);
+  color: var(--color-white);
+}
+
+.stat-label {
+  color: var(--main-color-6);
+  font-weight: 500;
+  letter-spacing: 0.05px;
+}
+
+@media screen and (max-width: 992px) {
+  .section-header {
+    margin-bottom: var(--gap-xl);
+  }
+}

@@ -49,7 +49,7 @@ const features = [
       </header>
 
       <ul class="features-grid" grid="3,3,2,1,var(--gap-md)" role="list">
-        <li v-for="feature in features" :key="feature.title" class="feature-card" role="listitem">
+        <li v-for="feature in features" :key="feature.title" class="feature-card card" role="listitem">
           <article>
             <div class="feature-top">
               <span class="feature-icon" aria-hidden="true">{{ feature.icon }}</span>
@@ -69,17 +69,13 @@ const features = [
 .features-grid {
   list-style: none;
   margin: 0;
-  padding: 0;
 }
 
 .feature-card {
-  background: rgba(0, 0, 0, 0.03);
+  background: var(--main-color-8);
   border: 1px solid var(--main-color-8);
   border-radius: var(--radius-lg);
-  padding: var(--gap-lg);
-  transition:
-    border-color var(--transition-normal),
-    transform var(--transition-normal);
+  transition: var(--transition-normal);
   position: relative;
   overflow: hidden;
 }
@@ -88,9 +84,9 @@ const features = [
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(127, 44, 134, 0.04) 0%, transparent 60%);
+  background: linear-gradient(135deg, var(--accent-secondary) 0%, transparent 60%);
   opacity: 0;
-  transition: opacity var(--transition-normal);
+  transition: var(--transition-normal);
   pointer-events: none;
 }
 
@@ -116,11 +112,11 @@ const features = [
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: var(--main-color-8);
+  background: var(--main-color-1);
   border-radius: var(--radius-md);
   font-size: var(--font-xl);
   line-height: 1;
-  transition: transform var(--transition-fast);
+  transition: var(--transition-fast);
 }
 
 .feature-card:hover .feature-icon {
@@ -132,7 +128,7 @@ const features = [
   font-weight: 500;
   color: var(--main-color-4);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--letter-spacing-tight);
   padding: 3px 8px;
   background: var(--main-color-8);
   border-radius: var(--radius-full);

@@ -52,7 +52,7 @@ const plans = [
 </script>
 
 <template>
-  <section id="pricing" class="section section-dark" aria-labelledby="pricing-title">
+  <section id="pricing" class="section section-dark pricing-section" aria-labelledby="pricing-title">
     <div class="container">
       <header class="section-header">
         <span class="badge badge-primary" aria-label="Section category">💎 Pricing</span>
@@ -64,7 +64,7 @@ const plans = [
         <article
           v-for="plan in plans"
           :key="plan.name"
-          class="pricing-card"
+          class="pricing-card card"
           :class="{ 'pricing-card--highlighted': plan.highlighted }"
           :aria-label="`${plan.name} plan`"
         >
@@ -89,7 +89,7 @@ const plans = [
           </ul>
 
           <div class="pricing-action">
-            <a href="#get-started" class="pricing-btn" :class="plan.ctaVariant" :aria-label="`${plan.cta} - ${plan.name} plan`">
+            <a href="#get-started" class="btn pricing-btn" :class="plan.ctaVariant" :aria-label="`${plan.cta} - ${plan.name} plan`">
               {{ plan.cta }}
             </a>
           </div>
@@ -109,22 +109,16 @@ const plans = [
 
 /* Card base */
 .pricing-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--main-color-3);
-  border-radius: var(--radius-lg);
-  padding: var(--gap-lg);
   display: flex;
   flex-direction: column;
   gap: var(--gap-lg);
   position: relative;
-  transition:
-    border-color var(--transition-normal),
-    transform var(--transition-normal);
 }
 
-.pricing-card:hover {
-  border-color: var(--main-color-4);
-  transform: translateY(-2px);
+/* Override card styles for pricing */
+.pricing-card.card {
+  background: var(--main-color-8);
+  border: 1px solid var(--main-color-3);
 }
 
 /* Highlighted card */
@@ -133,7 +127,7 @@ const plans = [
   border-color: var(--main-color-5);
   box-shadow:
     0 0 0 1px var(--main-color-3),
-    0 24px 48px rgba(0, 0, 0, 0.4);
+    var(--shadow-xl);
 }
 
 .pricing-card--highlighted:hover {
@@ -155,7 +149,7 @@ const plans = [
   color: var(--color-white);
   font-size: var(--font-xs);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.06px;
   text-transform: uppercase;
   padding: 4px var(--gap-md);
   border-radius: 0 0 var(--radius-sm) var(--radius-sm);
@@ -168,11 +162,8 @@ const plans = [
 }
 
 .pricing-name {
-  font-size: var(--font-md);
-  font-weight: 600;
   color: var(--main-color-6);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.08px;
   margin: 0 0 var(--gap-sm);
 }
 
@@ -188,7 +179,7 @@ const plans = [
 }
 
 .price-amount {
-  font-size: clamp(36px, 8vw, 48px);
+  font-size: calc(var(--font-xl) * 2.4);
   font-weight: 700;
   color: var(--color-white);
   line-height: 1;
@@ -248,20 +239,8 @@ const plans = [
 }
 
 .pricing-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   min-height: 48px;
-  padding: var(--gap-sm) var(--gap-lg);
-  border-radius: var(--radius-md);
-  font-size: var(--font-sm);
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast),
-    background var(--transition-fast);
 }
 
 .btn-outline {
@@ -285,7 +264,7 @@ const plans = [
 .btn-white:hover {
   background: var(--main-color-8);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Footer */
@@ -293,7 +272,7 @@ const plans = [
   margin-top: var(--gap-xl);
   text-align: center;
   padding: var(--gap-lg);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--main-color-8);
   border: 1px solid var(--main-color-3);
   border-radius: var(--radius-lg);
 }

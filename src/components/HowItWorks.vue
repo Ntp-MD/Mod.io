@@ -131,7 +131,7 @@ const steps = [
 
 /* Step card */
 .step-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--main-color-8);
   border: 1px solid var(--main-color-3);
   border-radius: var(--radius-lg);
   padding: var(--gap-md) var(--gap-lg);
@@ -143,7 +143,7 @@ const steps = [
 
 .step-card:hover {
   border-color: var(--main-color-4);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--main-color-7);
 }
 
 .step-icon-row {

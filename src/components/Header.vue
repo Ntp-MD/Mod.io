@@ -21,8 +21,8 @@ const closeMenu = () => {
 
 <template>
   <header class="header-container" role="banner">
-    <a href="/" class="nav-logo" aria-label="MOD.io - Home">
-      <span class="logo-mark" aria-hidden="true">M</span>
+    <a href="/" class="nav-logo flex-row-center gap-xs link-reset" aria-label="MOD.io - Home">
+      <span class="logo-mark flex-center" aria-hidden="true">M</span>
       <span class="logo-name">MOD<span class="logo-dot">.io</span></span>
     </a>
 
@@ -31,7 +31,7 @@ const closeMenu = () => {
       <div class="nav-drawer">
         <div class="nav-drawer-header">
           <span class="nav-drawer-logo">MOD.io</span>
-          <button class="nav-close" @click="closeMenu" aria-label="Close navigation">✕</button>
+          <button class="nav-close flex-center" @click="closeMenu" aria-label="Close navigation">✕</button>
         </div>
         <ul class="nav-menu" role="list">
           <li v-for="link in navLinks" :key="link.label" class="nav-item">
@@ -42,10 +42,10 @@ const closeMenu = () => {
       </div>
     </nav>
 
-    <div class="header-actions">
+    <div class="header-actions flex-row-center gap-sm">
       <a href="#get-started" class="btn btn-primary header-cta" aria-label="Deploy Now - Get started with MOD.io">🚀 Deploy Now</a>
       <button
-        class="menu-toggle"
+        class="menu-toggle flex-center"
         @click="toggleMenu"
         :aria-expanded="isMenuOpen.toString()"
         aria-label="Toggle navigation menu"
@@ -68,7 +68,7 @@ const closeMenu = () => {
   align-items: center;
   justify-content: space-between;
   padding: var(--gap-sm) var(--gap-md);
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--color-white);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--main-color-8);
@@ -85,17 +85,10 @@ const closeMenu = () => {
 
 /* Logo */
 .nav-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-xs);
-  text-decoration: none;
   flex-shrink: 0;
 }
 
 .logo-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 36px;
   height: 36px;
   background: var(--main-color-1);
@@ -143,7 +136,7 @@ const closeMenu = () => {
 .nav-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--main-color-1);
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
@@ -186,9 +179,6 @@ const closeMenu = () => {
 }
 
 .nav-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
   background: var(--main-color-3);
@@ -242,22 +232,12 @@ const closeMenu = () => {
   min-height: 48px;
 }
 
-/* Header right actions */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-sm);
-}
-
 .header-cta {
   display: none;
 }
 
 /* Hamburger button */
 .menu-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
   background: none;
