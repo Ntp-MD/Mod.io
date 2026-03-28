@@ -27,6 +27,12 @@ export default defineNuxtConfig({
     }
   },
 
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth'
+    }
+  },
+
   components: {
     dirs: [
       {
