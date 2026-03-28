@@ -40,8 +40,8 @@ const steps = [
         <p class="section-description">From upload to global distribution in under 60 seconds</p>
       </header>
 
-      <ol class="steps-list" aria-label="Deployment steps">
-        <li v-for="(step, index) in steps" :key="step.number" class="step-item">
+      <div class="steps-list" aria-label="Deployment steps">
+        <div v-for="(step, index) in steps" :key="step.number" class="step-item">
           <!-- Vertical connector line (between steps) -->
           <div class="step-connector" aria-hidden="true" v-if="index < steps.length - 1"></div>
 
@@ -52,7 +52,7 @@ const steps = [
               </div>
             </div>
 
-            <article class="step-card">
+            <article class="step-card card">
               <div class="step-icon-row">
                 <span class="step-icon" aria-hidden="true">{{ step.icon }}</span>
                 <h3 class="step-title">{{ step.title }}</h3>
@@ -63,15 +63,14 @@ const steps = [
               </div>
             </article>
           </div>
-        </li>
-      </ol>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
 .steps-list {
-  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -131,10 +130,8 @@ const steps = [
 
 /* Step card */
 .step-card {
-  background: var(--main-color-8);
-  border: 1px solid var(--main-color-3);
+  background: var(--main-color-2);
   border-radius: var(--radius-lg);
-  padding: var(--gap-md) var(--gap-lg);
   flex: 1;
   transition:
     border-color var(--transition-normal),
@@ -142,8 +139,7 @@ const steps = [
 }
 
 .step-card:hover {
-  border-color: var(--main-color-4);
-  background: var(--main-color-7);
+  background: var(--main-color-2);
 }
 
 .step-icon-row {

@@ -34,5 +34,10 @@ export default defineConfig({
       overlay: true,
     },
   },
-  base: "/Mod.io/",
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+    sourcemap: false,
+    minify: "esbuild",
+  },
 });

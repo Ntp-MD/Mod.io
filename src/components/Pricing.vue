@@ -81,12 +81,12 @@ const plans = [
             <p class="pricing-desc">{{ plan.description }}</p>
           </div>
 
-          <ul class="pricing-features" aria-label="Plan features">
-            <li v-for="feature in plan.features" :key="feature" class="feature-row">
+          <div class="pricing-features" aria-label="Plan features">
+            <div v-for="feature in plan.features" :key="feature" class="feature-row">
               <span class="feature-check" aria-hidden="true">✓</span>
               <span class="feature-text">{{ feature }}</span>
-            </li>
-          </ul>
+            </div>
+          </div>
 
           <div class="pricing-action">
             <a href="#get-started" class="btn pricing-btn" :class="plan.ctaVariant" :aria-label="`${plan.cta} - ${plan.name} plan`">
@@ -113,16 +113,11 @@ const plans = [
   flex-direction: column;
   gap: var(--gap-lg);
   position: relative;
-}
-
-/* Override card styles for pricing */
-.pricing-card.card {
-  background: var(--main-color-8);
-  border: 1px solid var(--main-color-3);
+  background: var(--main-color-1);
 }
 
 /* Highlighted card */
-.pricing-card--highlighted {
+.pricing-card-highlighted {
   background: var(--main-color-1);
   border-color: var(--main-color-5);
   box-shadow:
@@ -167,8 +162,8 @@ const plans = [
   margin: 0 0 var(--gap-sm);
 }
 
-.pricing-card--highlighted .pricing-name {
-  color: var(--main-color-7);
+.pricing-card-highlighted .pricing-name {
+  color: var(--main-color-6);
 }
 
 .pricing-price {
@@ -200,7 +195,6 @@ const plans = [
 
 /* Features list */
 .pricing-features {
-  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -229,8 +223,8 @@ const plans = [
   line-height: 1.4;
 }
 
-.pricing-card--highlighted .feature-text {
-  color: var(--main-color-7);
+.pricing-card-highlighted .feature-text {
+  color: var(--main-color-6);
 }
 
 /* CTA */
@@ -246,7 +240,7 @@ const plans = [
 .btn-outline {
   background: transparent;
   border: 1px solid var(--main-color-4);
-  color: var(--main-color-7);
+  color: var(--main-color-6);
 }
 
 .btn-outline:hover {
@@ -284,7 +278,7 @@ const plans = [
 }
 
 .pricing-link {
-  color: var(--main-color-7);
+  color: var(--main-color-4);
   text-decoration: none;
   font-weight: 500;
   transition: color var(--transition-fast);
@@ -295,7 +289,7 @@ const plans = [
 }
 
 @media screen and (min-width: 1201px) {
-  .pricing-card--highlighted {
+  .pricing-card-highlighted {
     margin-top: calc(var(--gap-lg) * -1);
     margin-bottom: calc(var(--gap-lg) * -1);
   }

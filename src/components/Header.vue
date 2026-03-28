@@ -21,8 +21,8 @@ const closeMenu = () => {
 
 <template>
   <header class="header-container" role="banner">
-    <a href="/" class="nav-logo flex-row-center gap-xs link-reset" aria-label="MOD.io - Home">
-      <span class="logo-mark flex-center" aria-hidden="true">M</span>
+    <a href="/" class="nav-logo" aria-label="MOD.io - Home">
+      <span class="logo-mark hover-rotate" aria-hidden="true">M</span>
       <span class="logo-name">MOD<span class="logo-dot">.io</span></span>
     </a>
 
@@ -31,21 +31,23 @@ const closeMenu = () => {
       <div class="nav-drawer">
         <div class="nav-drawer-header">
           <span class="nav-drawer-logo">MOD.io</span>
-          <button class="nav-close flex-center" @click="closeMenu" aria-label="Close navigation">✕</button>
+          <button class="nav-close hover-scale" @click="closeMenu" aria-label="Close navigation">✕</button>
         </div>
-        <ul class="nav-menu" role="list">
-          <li v-for="link in navLinks" :key="link.label" class="nav-item">
+        <div class="nav-menu" role="list">
+          <div v-for="link in navLinks" :key="link.label" class="nav-item">
             <a :href="link.href" class="nav-link" @click="closeMenu">{{ link.label }}</a>
-          </li>
-        </ul>
-        <a href="#get-started" class="btn btn-primary nav-cta" @click="closeMenu">🚀 Deploy Free</a>
+          </div>
+        </div>
+        <a href="#get-started" class="btn btn-accent btn-primary nav-cta" data-hover="bounce" @click="closeMenu">🚀 Deploy Free</a>
       </div>
     </nav>
 
-    <div class="header-actions flex-row-center gap-sm">
-      <a href="#get-started" class="btn btn-primary header-cta" aria-label="Deploy Now - Get started with MOD.io">🚀 Deploy Now</a>
+    <div class="header-actions">
+      <a href="#get-started" class="btn btn-accent btn-primary header-cta" data-hover="bounce" aria-label="Deploy Now - Get started with MOD.io"
+        >🚀 Deploy Now</a
+      >
       <button
-        class="menu-toggle flex-center"
+        class="menu-toggle hover-scale"
         @click="toggleMenu"
         :aria-expanded="isMenuOpen.toString()"
         aria-label="Toggle navigation menu"
@@ -85,10 +87,18 @@ const closeMenu = () => {
 
 /* Logo */
 .nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 36px;
   height: 36px;
   background: var(--main-color-1);
@@ -97,14 +107,6 @@ const closeMenu = () => {
   font-size: var(--font-md);
   font-weight: 700;
   line-height: 1;
-  transition:
-    transform var(--transition-fast),
-    background var(--transition-fast);
-}
-
-.nav-logo:hover .logo-mark {
-  background: var(--main-color-3);
-  transform: scale(1.05);
 }
 
 .logo-name {
@@ -179,6 +181,9 @@ const closeMenu = () => {
 }
 
 .nav-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
   background: var(--main-color-3);
@@ -187,17 +192,9 @@ const closeMenu = () => {
   color: var(--color-white);
   font-size: var(--font-md);
   cursor: pointer;
-  transition: background var(--transition-fast);
-}
-
-.nav-close:hover {
-  background: var(--main-color-4);
 }
 
 .nav-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--gap-xs);
@@ -211,7 +208,7 @@ const closeMenu = () => {
   align-items: center;
   font-size: var(--font-md);
   font-weight: 500;
-  color: var(--main-color-7);
+  color: var(--main-color-6);
   text-decoration: none;
   border-radius: var(--radius-sm);
   transition:
@@ -219,17 +216,17 @@ const closeMenu = () => {
     color var(--transition-fast);
 }
 
-.nav-link:hover,
-.nav-link:focus-visible {
-  background: var(--main-color-3);
-  color: var(--color-white);
-}
-
 .nav-cta {
   margin-top: auto;
   width: 100%;
   justify-content: center;
   min-height: 48px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
 }
 
 .header-cta {
@@ -247,11 +244,6 @@ const closeMenu = () => {
   transition:
     background var(--transition-fast),
     border-color var(--transition-fast);
-}
-
-.menu-toggle:hover {
-  background: var(--main-color-9);
-  border-color: var(--main-color-7);
 }
 
 .menu-toggle:focus-visible {
@@ -355,9 +347,8 @@ const closeMenu = () => {
   }
 
   .nav-link {
-    color: var(--main-color-4);
+    color: var(--main-color-1);
     padding: var(--gap-xs) var(--gap-sm);
-    font-size: var(--font-sm);
     position: relative;
     min-height: 44px;
   }
@@ -372,15 +363,6 @@ const closeMenu = () => {
     background: var(--main-color-1);
     transform: scaleX(0);
     transition: transform var(--transition-fast);
-  }
-
-  .nav-link:hover {
-    background: var(--main-color-9);
-    color: var(--main-color-1);
-  }
-
-  .nav-link:hover::after {
-    transform: scaleX(1);
   }
 
   .menu-toggle {

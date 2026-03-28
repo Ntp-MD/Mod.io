@@ -3,12 +3,9 @@
   --main-color-1: #000000;
   --main-color-2: #171717;
   --main-color-3: #262626;
-  --main-color-4: #404040;
-  --main-color-5: #525252;
-  --main-color-6: #737373;
-  --main-color-7: #d4d4d4;
-  --main-color-8: #e5e5e5;
-  --main-color-9: #f5f5f5;
+  --main-color-4: #bbb;
+  --main-color-5: #ccc;
+  --main-color-6: #e5e5e5;
   --color-white: #ffffff;
   --accent-primary: #000000;
   --accent-secondary: #7f2c86;
@@ -49,25 +46,11 @@
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
-  --transition-sm: 150ms ease;
-  --transition-md: 250ms ease;
-  --transition-lg: 350ms ease;
 
   /* Z-index */
-  --z-dropdown: 100;
   --z-sticky: 200;
   --z-modal: 300;
-  --z-tooltip: 400;
-
-  /* Icon Sizes */
-  --icon-size-xs: 12px;
-  --icon-size-sm: 16px;
-  --icon-size-md: 20px;
-  --icon-size-lg: 24px;
-  --icon-size-xl: 32px;
 
   /* Common Variables */
-  --opacity-disabled: 0.6;
-  --letter-spacing-tight: 0.05px;
   --outline-offset: 2px;
 }

@@ -61,11 +61,11 @@ const socialLinks = [
           <div class="footer-nav-grid">
             <div v-for="group in navGroups" :key="group.heading" class="footer-col">
               <h3 class="footer-col-heading">{{ group.heading }}</h3>
-              <ul class="footer-col-links" role="list">
-                <li v-for="link in group.links" :key="link.label">
+              <div class="footer-col-links" role="list">
+                <div v-for="link in group.links" :key="link.label">
                   <a :href="link.href" class="footer-link link-reset">{{ link.label }}</a>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
         </nav>
@@ -183,14 +183,13 @@ const socialLinks = [
 .footer-col-heading {
   font-size: var(--font-xs);
   font-weight: 600;
-  color: var(--main-color-7);
+  color: var(--main-color-6);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0 0 var(--gap-md);
 }
 
 .footer-col-links {
-  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -234,7 +233,7 @@ const socialLinks = [
 }
 
 .footer-small-link:hover {
-  color: var(--main-color-7);
+  color: var(--main-color-6);
 }
 
 @media screen and (max-width: 992px) {

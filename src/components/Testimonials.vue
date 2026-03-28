@@ -7,7 +7,7 @@ const testimonials = [
     content:
       "MOD.io transformed our library distribution. Sub-20ms latency globally and analytics that actually surface actionable data. Night and day vs. our old CDN.",
     avatar: "SC",
-    accentIndex: 0,
+    accentClass: "accent-secondary",
   },
   {
     name: "Marcus Johnson",
@@ -16,7 +16,7 @@ const testimonials = [
     content:
       "Version management just works. Smart rollbacks, canary deployments — everything we used to script manually is now handled automatically.",
     avatar: "MJ",
-    accentIndex: 1,
+    accentClass: "accent-success",
   },
   {
     name: "Emily Rodriguez",
@@ -25,7 +25,7 @@ const testimonials = [
     content:
       "Self-healing infra means our on-call rotation is quieter. Our users in APAC, EU, and US all report identical performance. Reliability is genuinely unmatched.",
     avatar: "ER",
-    accentIndex: 2,
+    accentClass: "accent-warning",
   },
   {
     name: "David Kim",
@@ -34,7 +34,7 @@ const testimonials = [
     content:
       "The live analytics dashboard gave us visibility we never had. We identified a latency regression in a library update before users even noticed it.",
     avatar: "DK",
-    accentIndex: 0,
+    accentClass: "accent-secondary",
   },
   {
     name: "Lisa Thompson",
@@ -43,7 +43,7 @@ const testimonials = [
     content:
       "Production deployment in under 3 minutes. The DX is phenomenal — zero config, intuitive dashboard, and docs that developers actually enjoy reading.",
     avatar: "LT",
-    accentIndex: 1,
+    accentClass: "accent-success",
   },
   {
     name: "James Wilson",
@@ -52,75 +52,66 @@ const testimonials = [
     content:
       "Zero-trust security and TLS 1.3 out of the box satisfied our compliance team in one meeting. The audit logs are thorough and export cleanly to our SIEM.",
     avatar: "JW",
-    accentIndex: 2,
+    accentClass: "accent-warning",
   },
 ];
-
-const accentColors = ["var(--accent-secondary)", "var(--accent-success)", "var(--accent-warning)"];
 
 const stats = [
   { number: "50M+", label: "Developers", icon: "👥" },
   { number: "99.99%", label: "Satisfaction", icon: "⭐" },
   { number: "180+", label: "Countries", icon: "🌍" },
 ];
-
-const accentColorMap = {
-  0: "primary",
-  1: "success",
-  2: "warning",
-};
 </script>
 
 <template>
-  <section id="testimonials" class="section section-dark testimonials-section" aria-labelledby="testimonials-title">
+  <section id="testimonials" class="testimonials-modern" aria-labelledby="testimonials-title">
     <div class="container">
       <header class="section-header">
-        <span class="badge badge-primary" aria-label="Section category">💬 Testimonials</span>
-        <h2 class="section-title" id="testimonials-title">What developers say</h2>
-        <p class="section-description">Real feedback from teams using MOD.io every day</p>
+        <span class="badge badge-primary">💬 Testimonials</span>
+        <h2 class="section-title" id="testimonials-title">Loved by developers</h2>
+        <p class="section-description">See what teams are saying about MOD.io</p>
       </header>
 
-      <!-- Stats showcase -->
-      <div class="stats-showcase">
-        <div class="stats-grid">
-          <div v-for="stat in stats" :key="stat.label" class="stat-card card">
-            <div class="stat-icon">{{ stat.icon }}</div>
-            <div class="stat-content">
-              <div class="stat-number">{{ stat.number }}</div>
-              <div class="stat-label">{{ stat.label }}</div>
-            </div>
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div v-for="stat in stats" :key="stat.label" class="stat-pill" data-hover="scale">
+          <span class="stat-icon">{{ stat.icon }}</span>
+          <div class="stat-info">
+            <span class="stat-number">{{ stat.number }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
           </div>
         </div>
       </div>
 
-      <!-- Testimonials grid -->
-      <div class="testimonials-grid" grid="3,2,1,1,var(--gap-lg)">
+      <!-- Testimonials Masonry Grid -->
+      <div class="testimonials-masonry">
         <article
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.name"
-          class="testimonial-card card"
-          :class="`testimonial-card--${accentColors[testimonial.accentIndex]}`"
+          class="testimonial-card-modern"
+          :class="[testimonial.accentClass, { 'card-large': index === 0 || index === 3 }]"
+          data-hover="lift"
         >
-          <div class="testimonial-content">
-            <div class="testimonial-rating">
-              <span v-for="i in 5" :key="i" class="rating-star">⭐</span>
-            </div>
+          <div class="card-glow"></div>
 
-            <blockquote class="testimonial-quote">
-              <p>{{ testimonial.content }}</p>
-            </blockquote>
-
-            <div class="testimonial-author">
-              <div class="author-avatar">{{ testimonial.avatar }}</div>
-              <div class="author-info">
-                <div class="author-name">{{ testimonial.name }}</div>
-                <div class="author-role">{{ testimonial.role }}</div>
-                <div class="author-company">{{ testimonial.company }}</div>
+          <div class="testimonial-header">
+            <div class="author-row">
+              <div class="author-avatar-modern">{{ testimonial.avatar }}</div>
+              <div class="author-details">
+                <span class="author-name">{{ testimonial.name }}</span>
+                <span class="author-role">{{ testimonial.role }}</span>
               </div>
             </div>
+            <div class="company-badge">{{ testimonial.company }}</div>
           </div>
 
-          <div class="testimonial-decoration"></div>
+          <div class="testimonial-rating-modern">
+            <span v-for="i in 5" :key="i" class="star">★</span>
+          </div>
+
+          <blockquote class="testimonial-quote-modern">
+            <p>"{{ testimonial.content }}"</p>
+          </blockquote>
         </article>
       </div>
     </div>
@@ -128,43 +119,100 @@ const accentColorMap = {
 </template>
 
 <style scoped>
-/* Stats Showcase */
-.stats-showcase {
-  margin: 0 0 var(--gap-section);
+/* Testimonials Section - Modern Masonry */
+.testimonials-modern {
+  background: var(--main-color-1);
+  padding: var(--gap-section) 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-md);
-  max-width: 800px;
-  margin: 0 auto;
+.testimonials-modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(127, 44, 134, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 80%, rgba(0, 214, 79, 0.08) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-.stat-card {
+/* Section Header */
+.section-header-modern {
+  text-align: center;
+  margin-bottom: var(--gap-xl);
+  position: relative;
+  z-index: 1;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(234, 88, 12, 0.15);
+  border: 1px solid rgba(234, 88, 12, 0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--accent-warning);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--gap-md);
+}
+
+.section-title-modern {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0 0 var(--gap-sm);
+  letter-spacing: -0.02em;
+}
+
+.section-description-modern {
+  font-size: var(--font-lg);
+  color: var(--main-color-6);
+  margin: 0;
+}
+
+/* Stats Row */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-lg);
+  margin-bottom: var(--gap-xl);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-pill {
   display: flex;
   align-items: center;
   gap: var(--gap-sm);
-  background: var(--main-color-8);
-  border: 1px solid var(--main-color-8);
-  border-radius: var(--radius-lg);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
   backdrop-filter: blur(10px);
-  transition: var(--transition-normal);
+  transition: all 0.3s ease;
 }
 
-.stat-card:hover {
-  transform: translateY(-2px);
-  background: var(--main-color-7);
-  border-color: var(--main-color-6);
+.stat-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
 }
 
 .stat-icon {
   font-size: var(--font-xl);
-  opacity: 0.8;
+  line-height: 1;
 }
 
-.stat-content {
-  flex: 1;
+.stat-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .stat-number {
@@ -172,142 +220,204 @@ const accentColorMap = {
   font-weight: 700;
   color: var(--color-white);
   line-height: 1;
-  margin-bottom: 2px;
 }
 
 .stat-label {
   font-size: var(--font-xs);
-  color: var(--main-color-6);
+  color: var(--main-color-5);
   text-transform: uppercase;
-  letter-spacing: 0.05px;
+  letter-spacing: 0.05em;
 }
 
-/* Testimonials Grid */
-.testimonials-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Testimonials Masonry */
+.testimonials-masonry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-lg);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1023px) {
+  .testimonials-masonry {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-masonry {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Testimonial Card */
-.testimonial-card {
+.testimonial-card-modern {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-lg);
   position: relative;
-  background: var(--main-color-8);
-  border: 1px solid var(--main-color-8);
-  border-radius: var(--radius-xl);
-  transition: var(--transition-normal);
   overflow: hidden;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--main-color-6);
-  box-shadow: var(--shadow-xl);
-}
-
-.testimonial-card--primary {
-  border-top: 3px solid var(--accent-primary);
-}
-
-.testimonial-card--success {
-  border-top: 3px solid var(--accent-success);
-}
-
-.testimonial-card--warning {
-  border-top: 3px solid var(--accent-warning);
-}
-
-.testimonial-content {
-  position: relative;
-  z-index: 2;
-}
-
-.testimonial-rating {
-  margin-bottom: var(--gap-md);
-}
-
-.rating-star {
-  font-size: var(--font-sm);
-  color: var(--accent-warning);
-  margin-right: 2px;
-}
-
-.testimonial-quote {
-  margin: 0 0 var(--gap-lg);
-}
-
-.testimonial-quote p {
-  font-size: var(--font-md);
-  line-height: 1.6;
-  color: var(--main-color-6);
-  margin: 0;
-  font-style: italic;
-}
-
-.testimonial-author {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
   display: flex;
-  align-items: center;
-  gap: var(--gap-md);
+  flex-direction: column;
 }
 
-.author-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: var(--main-color-8);
-  border: 2px solid var(--main-color-8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-sm);
-  font-weight: 700;
-  color: var(--color-white);
-  flex-shrink: 0;
+.testimonial-card-modern:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.author-info {
-  flex: 1;
+.card-large {
+  grid-row: span 2;
 }
 
-.author-name {
-  font-size: var(--font-md);
-  font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: 2px;
-}
-
-.author-role {
-  font-size: var(--font-sm);
-  color: var(--main-color-6);
-  margin-bottom: 2px;
-}
-
-.author-company {
-  font-size: var(--font-sm);
-  color: var(--main-color-5);
-}
-
-.testimonial-decoration {
+.card-glow {
   position: absolute;
   top: -50%;
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, var(--main-color-8) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(127, 44, 134, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
   pointer-events: none;
 }
 
+.testimonial-card-modern:hover .card-glow {
+  opacity: 1;
+}
+
+/* Accent Variants */
+.testimonial-card-modern.accent-secondary {
+  border-color: rgba(127, 44, 134, 0.2);
+}
+
+.testimonial-card-modern.accent-secondary:hover {
+  border-color: rgba(127, 44, 134, 0.4);
+  box-shadow: 0 20px 40px rgba(127, 44, 134, 0.15);
+}
+
+.testimonial-card-modern.accent-success {
+  border-color: rgba(0, 214, 79, 0.2);
+}
+
+.testimonial-card-modern.accent-success:hover {
+  border-color: rgba(0, 214, 79, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 214, 79, 0.15);
+}
+
+.testimonial-card-modern.accent-warning {
+  border-color: rgba(234, 88, 12, 0.2);
+}
+
+.testimonial-card-modern.accent-warning:hover {
+  border-color: rgba(234, 88, 12, 0.4);
+  box-shadow: 0 20px 40px rgba(234, 88, 12, 0.15);
+}
+
+/* Testimonial Header */
+.testimonial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--gap-md);
+  gap: var(--gap-sm);
+}
+
+.author-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.author-avatar-modern {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--main-color-3) 0%, var(--main-color-4) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--color-white);
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-white);
+  line-height: 1.3;
+}
+
+.author-role {
+  font-size: var(--font-xs);
+  color: var(--main-color-5);
+}
+
+.company-badge {
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  color: var(--main-color-6);
+  white-space: nowrap;
+}
+
+/* Rating */
+.testimonial-rating-modern {
+  margin-bottom: var(--gap-sm);
+}
+
+.star {
+  color: var(--accent-warning);
+  font-size: var(--font-sm);
+  margin-right: 2px;
+}
+
+/* Quote */
+.testimonial-quote-modern {
+  margin: 0;
+  flex: 1;
+}
+
+.testimonial-quote-modern p {
+  font-size: var(--font-sm);
+  line-height: 1.7;
+  color: var(--main-color-6);
+  margin: 0;
+}
+
+.card-large .testimonial-quote-modern p {
+  font-size: var(--font-md);
+}
+
 /* Responsive */
-@media screen and (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: var(--gap-sm);
+@media (max-width: 640px) {
+  .stats-row {
+    flex-direction: column;
+    gap: var(--gap-md);
   }
 
-  .testimonial-author {
+  .card-large {
+    grid-row: span 1;
+  }
+  .testimonial-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-sm);
+  }
+
+  .company-badge {
+    align-self: flex-start;
   }
 }
 </style>

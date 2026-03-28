@@ -9,61 +9,67 @@ const stats = [
 </script>
 
 <template>
-  <section id="get-started" class="section cta-section section-dark" aria-labelledby="cta-title">
-    <div class="cta-glow" aria-hidden="true"></div>
+  <section id="get-started" class="cta-modern" aria-labelledby="cta-title">
+    <!-- Background effects -->
+    <div class="cta-bg" aria-hidden="true">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
     <div class="container">
-      <div class="cta-header">
-        <span class="badge badge-primary" aria-label="Section category">🚀 Get Started</span>
-        <h2 class="cta-title" id="cta-title">Ready to scale?</h2>
-        <p class="cta-description">Join millions of developers deploying faster with MOD.io's global CDN.</p>
-      </div>
+      <div class="cta-content-modern">
+        <!-- Left side - Main CTA -->
+        <div class="cta-main">
+          <span class="cta-tag">🚀 Get Started</span>
+          <h2 class="cta-title-modern" id="cta-title">Ready to deploy at scale?</h2>
+          <p class="cta-description-modern">
+            Join millions of developers shipping faster with MOD.io's intelligent global CDN. Free forever, no credit card required.
+          </p>
 
-      <!-- Stats Preview -->
-      <div class="cta-stats">
-        <div class="stats-row">
-          <div v-for="stat in stats" :key="stat.label" class="stat-item">
-            <div class="stat-number">{{ stat.number }}</div>
-            <div class="stat-label">{{ stat.label }}</div>
+          <div class="cta-buttons">
+            <a href="#signup" class="btn btn-primary-modern" data-hover="bounce">
+              <span>Deploy Free Now</span>
+              <span class="btn-arrow">→</span>
+            </a>
+            <a href="#demo" class="btn btn-secondary-modern" data-hover="lift">
+              <span>Watch Demo</span>
+            </a>
           </div>
-        </div>
-      </div>
 
-      <!-- Main CTA Content -->
-      <div class="cta-content">
-        <div class="cta-left">
-          <div class="benefits-card card">
-            <h3>Why choose MOD.io?</h3>
-            <ul class="benefits-list" aria-label="Key benefits">
-              <li v-for="benefit in benefits" :key="benefit" class="benefit-item">
-                <span class="benefit-icon">✓</span>
+          <p class="cta-note">Already have an account? <a href="#login" class="login-link">Sign in →</a></p>
+        </div>
+
+        <!-- Right side - Stats & Benefits -->
+        <div class="cta-side">
+          <div class="stats-card" data-hover="lift">
+            <div v-for="stat in stats" :key="stat.label" class="stat-block">
+              <span class="stat-value">{{ stat.number }}</span>
+              <span class="stat-name">{{ stat.label }}</span>
+            </div>
+          </div>
+
+          <div class="benefits-card-modern" data-hover="lift">
+            <h3 class="benefits-title">Why developers love us</h3>
+            <div class="benefits-list">
+              <div v-for="benefit in benefits" :key="benefit" class="benefit-item-modern">
+                <span class="benefit-check">✓</span>
                 <span class="benefit-text">{{ benefit }}</span>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="cta-right">
-          <div class="action-card card">
-            <div class="action-header">
-              <h3>Start building today</h3>
-              <p>Free forever, no credit card required</p>
-            </div>
-
-            <div class="action-buttons">
-              <a href="#signup" class="btn cta-btn-primary" aria-label="Deploy free — create your MOD.io account">
-                <span class="btn-icon">⚡</span>
-                <span class="btn-text">Deploy Free Now</span>
-              </a>
-              <a href="#demo" class="btn cta-btn-secondary" aria-label="Watch a live demo of MOD.io">
-                <span class="btn-icon">🎬</span>
-                <span class="btn-text">Watch Demo</span>
-              </a>
-            </div>
-
-            <div class="action-footer">
-              <p>Already have an account? <a href="#login" class="sign-in-link">Sign in →</a></p>
-            </div>
-          </div>
+      <!-- Trust logos -->
+      <div class="trust-section">
+        <p class="trust-text">Trusted by engineering teams at</p>
+        <div class="trust-logos">
+          <span class="trust-logo">Vercel</span>
+          <span class="trust-logo">Stripe</span>
+          <span class="trust-logo">Linear</span>
+          <span class="trust-logo">Notion</span>
+          <span class="trust-logo">Figma</span>
         </div>
       </div>
     </div>
@@ -71,243 +77,341 @@ const stats = [
 </template>
 
 <style scoped>
-/* ── BASE: Mobile (320px+) ── */
-.cta-section {
+/* CTA Section - Modern */
+.cta-modern {
   background: var(--main-color-1);
-  color: var(--color-white);
   padding: var(--gap-section) 0;
   position: relative;
   overflow: hidden;
 }
 
-.cta-glow {
+/* Background Effects */
+.cta-bg {
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 65%);
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
+}
+
+.gradient-orb {
+  position: absolute;
   border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
 }
 
-.cta-header {
-  text-align: center;
-  margin-bottom: var(--gap-section);
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--accent-secondary);
+  top: -200px;
+  right: -100px;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-success);
+  bottom: -150px;
+  left: -100px;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+/* Content Layout */
+.cta-content-modern {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-xl);
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  margin-bottom: var(--gap-xl);
 }
 
-.cta-title {
-  font-size: calc(var(--font-xl) * 1.8);
+@media (min-width: 1024px) {
+  .cta-content-modern {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+}
+
+/* Main CTA */
+.cta-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.cta-tag {
+  display: inline-block;
+  width: fit-content;
+  padding: 6px 14px;
+  background: rgba(127, 44, 134, 0.2);
+  border: 1px solid rgba(127, 44, 134, 0.4);
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cta-title-modern {
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
-  margin: var(--gap-md) 0;
-  background: linear-gradient(135deg, var(--color-white), var(--main-color-7));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-white);
+  margin: 0;
+  letter-spacing: -0.02em;
 }
 
-.cta-description {
-  font-size: var(--font-md);
-  line-height: 1.6;
+.cta-description-modern {
+  font-size: var(--font-lg);
+  line-height: 1.7;
   color: var(--main-color-6);
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
+  max-width: 500px;
 }
 
-/* Stats Preview */
-.cta-stats {
-  margin: 0 0 var(--gap-section);
+/* CTA Buttons */
+.cta-buttons {
+  display: flex;
+  gap: var(--gap-md);
+  margin-top: var(--gap-sm);
+  flex-wrap: wrap;
+}
+
+/* Button overrides - only specific styles not in button.css */
+.btn-primary-modern {
+  background: var(--color-white);
+  color: var(--main-color-1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary-modern:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.btn-secondary-modern {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary-modern:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* CTA Note */
+.cta-note {
+  font-size: var(--font-sm);
+  color: var(--main-color-6);
+  margin: var(--gap-sm) 0 0;
+}
+
+.login-link {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.login-link:hover {
+  color: var(--accent-success);
+}
+
+/* Side Content */
+.cta-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+/* Stats Card */
+.stats-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  padding: var(--gap-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+}
+
+.stats-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.stat-block {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.stat-name {
+  font-size: var(--font-xs);
+  color: var(--main-color-5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* Benefits Card */
+.benefits-card-modern {
+  padding: var(--gap-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+}
+
+.benefits-card-modern:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.benefits-title {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0 0 var(--gap-md);
+}
+
+.benefits-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.benefit-item-modern {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+}
+
+.benefit-check {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 214, 79, 0.15);
+  border-radius: 50%;
+  font-size: 10px;
+  color: var(--accent-success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefit-text {
+  font-size: var(--font-sm);
+  color: var(--main-color-6);
+  line-height: 1.5;
+}
+
+/* Trust Section */
+.trust-section {
+  text-align: center;
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  padding-top: var(--gap-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.stats-row {
+.trust-text {
+  font-size: var(--font-xs);
+  color: var(--main-color-5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 var(--gap-md);
+}
+
+.trust-logos {
   display: flex;
   justify-content: center;
   gap: var(--gap-xl);
   flex-wrap: wrap;
 }
 
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: calc(var(--font-xl) * 1.5);
-  font-weight: 800;
-  color: var(--color-white);
-  line-height: 1;
-  margin-bottom: var(--gap-xs);
-}
-
-.stat-label {
-  font-size: var(--font-sm);
-  color: var(--main-color-6);
-  text-transform: uppercase;
-  letter-spacing: 0.05px;
-}
-
-/* Main Content */
-.cta-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-xl);
-  position: relative;
-  z-index: 2;
-}
-
-/* Benefits Card */
-.benefits-card {
-  background: var(--main-color-8);
-  border: 1px solid var(--main-color-8);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(10px);
-}
-
-.benefits-card h3 {
-  font-size: var(--font-xl);
-  font-weight: 600;
-  color: var(--color-white);
-  margin: 0 0 var(--gap-lg);
-}
-
-.benefits-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
-}
-
-.benefit-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--gap-sm);
-}
-
-.benefit-icon {
-  color: var(--accent-success);
-  font-weight: 700;
-  font-size: var(--font-md);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.benefit-text {
-  font-size: var(--font-md);
-  color: var(--main-color-6);
-  line-height: 1.5;
-}
-
-/* Action Card */
-.action-card {
-  background: var(--main-color-8);
-  border: 1px solid var(--main-color-8);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(10px);
-  text-align: center;
-}
-
-.action-header {
-  margin-bottom: var(--gap-lg);
-}
-
-.action-header h3 {
-  font-size: var(--font-xl);
-  font-weight: 600;
-  color: var(--color-white);
-  margin: 0 0 var(--gap-sm);
-}
-
-.action-header p {
-  font-size: var(--font-md);
-  color: var(--main-color-6);
-  margin: 0;
-}
-
-.action-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
-  margin-bottom: var(--gap-lg);
-}
-
-.cta-btn-primary {
-  background: var(--color-white);
-  color: var(--main-color-1);
-  width: 100%;
-}
-
-.cta-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.cta-btn-secondary {
-  background: transparent;
-  color: var(--color-white);
-  border: 1px solid var(--main-color-8);
-  width: 100%;
-}
-
-.cta-btn-secondary:hover {
-  background: var(--main-color-8);
-  border-color: var(--main-color-6);
-  transform: translateY(-1px);
-}
-
-.btn-icon {
+.trust-logo {
   font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--main-color-4);
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
-.action-footer {
-  font-size: var(--font-sm);
-  color: var(--main-color-6);
-}
-
-.sign-in-link {
+.trust-logo:hover {
+  opacity: 1;
   color: var(--color-white);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color var(--transition-fast);
 }
 
-.sign-in-link:hover {
-  color: var(--accent-success);
-}
-
-/* ── TABLET (768px+) ── */
-@media screen and (min-width: 768px) {
-  .cta-content {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
+/* Mobile: Remove gradients, use solid colors */
+@media (max-width: 768px) {
+  .cta-modern {
+    background: var(--main-color-1) !important;
   }
 
-  .stats-row {
-    gap: var(--gap-xl);
+  .gradient-orb {
+    display: none;
+  }
+
+  .grid-overlay {
+    display: none;
   }
 }
 
-/* ── DESKTOP (1200px+) ── */
-@media screen and (min-width: 1201px) {
-  .cta-title {
-    font-size: calc(var(--font-xl) * 2.2);
+/* Responsive */
+@media (max-width: 640px) {
+  .cta-title-modern {
+    font-size: 2.2rem;
   }
 
-  .action-buttons {
-    flex-direction: row;
+  .cta-buttons {
+    flex-direction: column;
   }
 
-  .cta-btn-primary {
-    flex: 2;
+  .btn {
+    justify-content: center;
   }
 
-  .cta-btn-secondary {
-    flex: 1;
+  .stats-card {
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+  }
+
+  .stat-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
   }
 }
 </style>

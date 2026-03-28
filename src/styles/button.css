@@ -16,23 +16,15 @@ button {
   font-size: var(--font-md);
 }
 
-button:focus {
-  outline: 2px solid var(--main-color-1);
-  outline-offset: var(--outline-offset);
+/* Button Elements */
+.btn-icon {
+  font-size: var(--font-lg);
 }
 
-button:disabled {
-  opacity: var(--opacity-disabled);
-  cursor: not-allowed;
+.btn-arrow {
+  transition: transform 0.3s ease;
 }
 
-.btn:hover,
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Button Accent Color Variants */
 .btn-primary {
   background: var(--accent-primary);
   color: var(--color-white);
@@ -63,9 +55,4 @@ button:hover {
   background: transparent;
   color: var(--main-color-6);
   border: 1px solid var(--main-color-3);
-}
-
-.btn-ghost:hover {
-  color: var(--color-white);
-  border-color: var(--main-color-5);
 }
