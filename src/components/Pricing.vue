@@ -105,8 +105,6 @@ const plans = [
 </template>
 
 <style scoped>
-/* Grid-Mod handles layout via grid="3,2,1,1,var(--gap-md)" */
-
 /* Card base */
 .pricing-card {
   display: flex;
