@@ -87,22 +87,28 @@
 .section-light .badge-primary {
   background: rgba(0, 0, 0, 0.08);
   color: var(--main-color-1);
-  border: 1px solid var(--main-color-8);
+  border: 1px solid var(--main-color-7);
 }
 
-/* Mobile: Remove gradients, use solid colors */
-@media screen and (max-width: 768px) {
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+
+@media screen and (max-width: 992px) {
+  .section-header {
+    margin-bottom: var(--gap-xl);
+  }
+
   .section-dark {
     background: var(--main-color-1) !important;
   }
 
   .section-light {
     background: var(--color-white) !important;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .section-header {
-    margin-bottom: var(--gap-xl);
   }
 }

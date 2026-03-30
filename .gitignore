@@ -27,3 +27,6 @@ npm-debug.log*
 test-*.css
 test-scenarios/
 variable-dependencies.json
+
+# Development documentation
+codex-mod

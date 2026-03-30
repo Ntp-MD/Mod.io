@@ -1,40 +1,33 @@
 <script setup>
+import { FOOTER_LINKS, SOCIAL_LINKS } from "~/utils/constants.js";
+
+/**
+ * Current year for copyright
+ */
 const currentYear = new Date().getFullYear();
 
+/**
+ * Footer navigation groups configuration
+ */
 const navGroups = [
   {
     heading: "Product",
-    links: [
-      { label: "Features", href: "#features" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "Documentation", href: "#docs" },
-      { label: "API Reference", href: "#api" },
-    ],
+    links: FOOTER_LINKS.product,
   },
   {
     heading: "Company",
-    links: [
-      { label: "About", href: "#about" },
-      { label: "Blog", href: "#blog" },
-      { label: "Careers", href: "#careers" },
-      { label: "Contact", href: "#contact" },
-    ],
+    links: FOOTER_LINKS.company,
   },
   {
     heading: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "#privacy" },
-      { label: "Terms of Service", href: "#terms" },
-      { label: "Cookie Policy", href: "#cookies" },
-    ],
+    links: FOOTER_LINKS.legal,
   },
 ];
 
-const socialLinks = [
-  { label: "GitHub", href: "#github", icon: "🐙" },
-  { label: "Twitter / X", href: "#twitter", icon: "🐦" },
-  { label: "Discord", href: "#discord", icon: "🎯" },
-];
+/**
+ * Social media links configuration
+ */
+const socialLinks = SOCIAL_LINKS;
 </script>
 
 <template>
@@ -133,7 +126,7 @@ const socialLinks = [
   font-size: var(--font-lg);
   font-weight: 700;
   color: var(--color-white);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.2px;
 }
 
 .brand-dot {
@@ -185,7 +178,7 @@ const socialLinks = [
   font-weight: 600;
   color: var(--main-color-6);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.8px;
   margin: 0 0 var(--gap-md);
 }
 

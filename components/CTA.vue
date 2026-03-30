@@ -9,7 +9,7 @@ const stats = [
 </script>
 
 <template>
-  <section id="get-started" class="cta-modern" aria-labelledby="cta-title">
+  <section id="get-started" class="cta-section" aria-labelledby="cta-title">
     <!-- Background effects -->
     <div class="cta-bg" aria-hidden="true">
       <div class="gradient-orb orb-1"></div>
@@ -18,21 +18,21 @@ const stats = [
     </div>
 
     <div class="container">
-      <div class="cta-content-modern">
+      <div class="cta-content-section">
         <!-- Left side - Main CTA -->
         <div class="cta-main">
           <span class="cta-tag">🚀 Get Started</span>
-          <h2 class="cta-title-modern" id="cta-title">Ready to deploy at scale?</h2>
-          <p class="cta-description-modern">
+          <h2 class="cta-title-section" id="cta-title">Ready to deploy at scale?</h2>
+          <p class="cta-description-section">
             Join millions of developers shipping faster with MOD.io's intelligent global CDN. Free forever, no credit card required.
           </p>
 
           <div class="cta-buttons">
-            <a href="#signup" class="btn btn-primary-modern" data-hover="bounce">
+            <a href="#signup" class="btn btn-white hover-lift">
               <span>Deploy Free Now</span>
               <span class="btn-arrow">→</span>
             </a>
-            <a href="#demo" class="btn btn-secondary-modern" data-hover="lift">
+            <a href="#demo" class="btn btn-white hover-lift">
               <span>Watch Demo</span>
             </a>
           </div>
@@ -42,17 +42,17 @@ const stats = [
 
         <!-- Right side - Stats & Benefits -->
         <div class="cta-side">
-          <div class="stats-card" data-hover="lift">
+          <div class="stats-card hover-lift">
             <div v-for="stat in stats" :key="stat.label" class="stat-block">
               <span class="stat-value">{{ stat.number }}</span>
               <span class="stat-name">{{ stat.label }}</span>
             </div>
           </div>
 
-          <div class="benefits-card-modern" data-hover="lift">
+          <div class="benefits-card-section hover-lift">
             <h3 class="benefits-title">Why developers love us</h3>
             <div class="benefits-list">
-              <div v-for="benefit in benefits" :key="benefit" class="benefit-item-modern">
+              <div v-for="benefit in benefits" :key="benefit" class="benefit-item-section">
                 <span class="benefit-check">✓</span>
                 <span class="benefit-text">{{ benefit }}</span>
               </div>
@@ -78,7 +78,7 @@ const stats = [
 
 <style scoped>
 /* CTA Section - Modern */
-.cta-modern {
+.cta-section {
   background: var(--main-color-1);
   padding: var(--gap-section) 0;
   position: relative;
@@ -93,40 +93,8 @@ const stats = [
   pointer-events: none;
 }
 
-.gradient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.4;
-}
-
-.orb-1 {
-  width: 500px;
-  height: 500px;
-  background: var(--accent-secondary);
-  top: -200px;
-  right: -100px;
-}
-
-.orb-2 {
-  width: 400px;
-  height: 400px;
-  background: var(--accent-success);
-  bottom: -150px;
-  left: -100px;
-}
-
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
-}
-
 /* Content Layout */
-.cta-content-modern {
+.cta-content-section {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--gap-xl);
@@ -136,7 +104,7 @@ const stats = [
 }
 
 @media (min-width: 1024px) {
-  .cta-content-modern {
+  .cta-content-section {
     grid-template-columns: 1.2fr 1fr;
     gap: 80px;
     align-items: start;
@@ -159,21 +127,21 @@ const stats = [
   border-radius: var(--radius-full);
   font-size: var(--font-xs);
   font-weight: 600;
-  color: var(--accent-secondary);
+  color: var(--accent-success);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 1px;
 }
 
-.cta-title-modern {
+.cta-title-section {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
   color: var(--color-white);
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.2px;
 }
 
-.cta-description-modern {
+.cta-description-section {
   font-size: var(--font-lg);
   line-height: 1.7;
   color: var(--main-color-6);
@@ -181,40 +149,12 @@ const stats = [
   max-width: 500px;
 }
 
-/* CTA Buttons */
+/* CTA Buttons Layout */
 .cta-buttons {
   display: flex;
   gap: var(--gap-md);
   margin-top: var(--gap-sm);
   flex-wrap: wrap;
-}
-
-/* Button overrides - only specific styles not in button.css */
-.btn-primary-modern {
-  background: var(--color-white);
-  color: var(--main-color-1);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-}
-
-.btn-primary-modern:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
-}
-
-.btn-primary-modern:hover .btn-arrow {
-  transform: translateX(4px);
-}
-
-.btn-secondary-modern {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-white);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-}
-
-.btn-secondary-modern:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* CTA Note */
@@ -225,14 +165,14 @@ const stats = [
 }
 
 .login-link {
-  color: var(--accent-secondary);
+  color: var(--accent-success);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .login-link:hover {
-  color: var(--accent-success);
+  color: var(--accent-secondary);
 }
 
 /* Side Content */
@@ -276,12 +216,12 @@ const stats = [
   font-size: var(--font-xs);
   color: var(--main-color-5);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.5px;
   margin-top: 4px;
 }
 
 /* Benefits Card */
-.benefits-card-modern {
+.benefits-card-section {
   padding: var(--gap-lg);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -290,7 +230,7 @@ const stats = [
   transition: all 0.4s ease;
 }
 
-.benefits-card-modern:hover {
+.benefits-card-section:hover {
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
@@ -310,7 +250,7 @@ const stats = [
   gap: var(--gap-sm);
 }
 
-.benefit-item-modern {
+.benefit-item-section {
   display: flex;
   align-items: flex-start;
   gap: var(--gap-sm);
@@ -349,7 +289,7 @@ const stats = [
   font-size: var(--font-xs);
   color: var(--main-color-5);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 1px;
   margin: 0 0 var(--gap-md);
 }
 
@@ -375,7 +315,7 @@ const stats = [
 
 /* Mobile: Remove gradients, use solid colors */
 @media (max-width: 768px) {
-  .cta-modern {
+  .cta-section {
     background: var(--main-color-1) !important;
   }
 
@@ -390,8 +330,8 @@ const stats = [
 
 /* Responsive */
 @media (max-width: 640px) {
-  .cta-title-modern {
-    font-size: 2.2rem;
+  .cta-title-section {
+    font-size: 35.2px;
   }
 
   .cta-buttons {

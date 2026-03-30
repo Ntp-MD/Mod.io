@@ -113,35 +113,7 @@
   animation: shake 0.5s;
 }
 
-/* Button Hover Effects using data attributes - Clean Code Principles */
-.btn[data-hover="bounce"]:hover {
-  transform: scale(1.15);
-  transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.btn[data-hover="lift"]:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn[data-hover="scale"]:hover {
-  transform: scale(1.1);
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn[data-hover="rotate"]:hover {
-  transform: rotate(5deg) scale(1.05);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn[data-hover="glow"]:hover {
-  box-shadow: 0 0 30px rgba(0, 214, 79, 0.4);
-  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* Keyframes */
 @keyframes gridEntrance {
   from {
     opacity: 0;

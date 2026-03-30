@@ -1,52 +1,78 @@
+import { BREAKPOINTS } from "../../utils/constants.js";
+
+/**
+ * GridMod - Dynamic CSS Grid Layout Helper
+ * Automatically generates responsive grid styles based on data attributes
+ */
 class GridMod {
   constructor() {
-    this.BREAKPOINTS = {
-      LARGE: 1200,
-      MEDIUM: 992,
-      SMALL: 480,
-    };
-
+    this.BREAKPOINTS = BREAKPOINTS;
     this.init();
   }
 
+  /**
+   * Initialize GridMod functionality
+   */
   init() {
     this.processGridElements();
     // Re-process on DOM changes
     this.observeChanges();
   }
 
+  /**
+   * Process all elements with grid attribute
+   */
   processGridElements() {
-    const gridElements = document.querySelectorAll("[grid]");
+    try {
+      const gridElements = document.querySelectorAll("[grid]");
 
-    gridElements.forEach((element) => {
-      const gridAttr = element.getAttribute("grid");
-      if (gridAttr) {
-        this.generateGridCSS(element, gridAttr);
+      if (gridElements.length === 0) {
+        console.debug("GridMod: No grid elements found");
+        return;
       }
-    });
+
+      gridElements.forEach((element) => {
+        const gridAttr = element.getAttribute("grid");
+        if (gridAttr) {
+          this.generateGridCSS(element, gridAttr);
+        }
+      });
+    } catch (error) {
+      console.error("GridMod: Error processing grid elements:", error);
+    }
   }
 
+  /**
+   * Parse grid attribute string into configuration object
+   * @param {string} gridAttr - Grid attribute string (e.g., "4,3,2,1,var(--gap-sm)")
+   * @returns {Object} Parsed grid configuration
+   */
   parseGridAttribute(gridAttr) {
-    // Validate gridAttr
+    // Validate input
     if (!gridAttr || typeof gridAttr !== "string") {
-      console.warn("GridMod: Invalid grid attribute");
+      console.warn("GridMod: Invalid grid attribute provided");
       return { columns: [1, 1, 1, 1], gap: "var(--gap-md)" };
     }
 
-    // Parse array-like string: "4,3,2,1,var(--gap-sm)"
-    const parts = gridAttr.split(",").map((part) => part.trim());
+    try {
+      // Parse array-like string: "4,3,2,1,var(--gap-sm)"
+      const parts = gridAttr.split(",").map((part) => part.trim());
 
-    const columns = parts.slice(0, 4).map((col) => {
-      // Remove quotes if present and convert to number
-      const cleanCol = col.replace(/[']/g, "");
-      const numValue = parseInt(cleanCol);
-      return isNaN(numValue) ? 1 : numValue; // Default to 1 if invalid
-    });
+      const columns = parts.slice(0, 4).map((col) => {
+        // Remove quotes if present and convert to number
+        const cleanCol = col.replace(/[']/g, "");
+        const numValue = parseInt(cleanCol);
+        return isNaN(numValue) ? 1 : numValue; // Default to 1 if invalid
+      });
 
-    return {
-      columns: columns,
-      gap: parts[4] || "var(--gap-md)",
-    };
+      return {
+        columns: columns,
+        gap: parts[4] || "var(--gap-md)",
+      };
+    } catch (error) {
+      console.error("GridMod: Error parsing grid attribute:", error);
+      return { columns: [1, 1, 1, 1], gap: "var(--gap-md)" };
+    }
   }
 
   generateGridCSS(element, gridAttr) {

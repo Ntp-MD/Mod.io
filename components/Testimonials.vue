@@ -64,7 +64,7 @@ const stats = [
 </script>
 
 <template>
-  <section id="testimonials" class="testimonials-modern" aria-labelledby="testimonials-title">
+  <section id="testimonials" class="testimonials-section" aria-labelledby="testimonials-title">
     <div class="container">
       <header class="section-header">
         <span class="badge badge-primary">💬 Testimonials</span>
@@ -74,7 +74,7 @@ const stats = [
 
       <!-- Stats Row -->
       <div class="stats-row">
-        <div v-for="stat in stats" :key="stat.label" class="stat-pill" data-hover="scale">
+        <div v-for="stat in stats" :key="stat.label" class="stat-pill hover-scale">
           <span class="stat-icon">{{ stat.icon }}</span>
           <div class="stat-info">
             <span class="stat-number">{{ stat.number }}</span>
@@ -88,15 +88,14 @@ const stats = [
         <article
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.name"
-          class="testimonial-card-modern"
+          class="testimonial-card hover-lift"
           :class="[testimonial.accentClass, { 'card-large': index === 0 || index === 3 }]"
-          data-hover="lift"
         >
           <div class="card-glow"></div>
 
           <div class="testimonial-header">
             <div class="author-row">
-              <div class="author-avatar-modern">{{ testimonial.avatar }}</div>
+              <div class="author-avatar">{{ testimonial.avatar }}</div>
               <div class="author-details">
                 <span class="author-name">{{ testimonial.name }}</span>
                 <span class="author-role">{{ testimonial.role }}</span>
@@ -105,11 +104,11 @@ const stats = [
             <div class="company-badge">{{ testimonial.company }}</div>
           </div>
 
-          <div class="testimonial-rating-modern">
+          <div class="testimonial-rating">
             <span v-for="i in 5" :key="i" class="star">★</span>
           </div>
 
-          <blockquote class="testimonial-quote-modern">
+          <blockquote class="testimonial-quote">
             <p>"{{ testimonial.content }}"</p>
           </blockquote>
         </article>
@@ -120,14 +119,14 @@ const stats = [
 
 <style scoped>
 /* Testimonials Section - Modern Masonry */
-.testimonials-modern {
+.testimonials-section {
   background: var(--main-color-1);
   padding: var(--gap-section) 0;
   position: relative;
   overflow: hidden;
 }
 
-.testimonials-modern::before {
+.testimonials-section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -140,13 +139,7 @@ const stats = [
   pointer-events: none;
 }
 
-/* Section Header */
-.section-header-modern {
-  text-align: center;
-  margin-bottom: var(--gap-xl);
-  position: relative;
-  z-index: 1;
-}
+/* Section Header - Using global utilities */
 
 .section-tag {
   display: inline-block;
@@ -158,22 +151,8 @@ const stats = [
   font-weight: 600;
   color: var(--accent-warning);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 1px;
   margin-bottom: var(--gap-md);
-}
-
-.section-title-modern {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: var(--color-white);
-  margin: 0 0 var(--gap-sm);
-  letter-spacing: -0.02em;
-}
-
-.section-description-modern {
-  font-size: var(--font-lg);
-  color: var(--main-color-6);
-  margin: 0;
 }
 
 /* Stats Row */
@@ -226,7 +205,7 @@ const stats = [
   font-size: var(--font-xs);
   color: var(--main-color-5);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.5px;
 }
 
 /* Testimonials Masonry */
@@ -251,7 +230,7 @@ const stats = [
 }
 
 /* Testimonial Card */
-.testimonial-card-modern {
+.testimonial-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-lg);
@@ -264,7 +243,7 @@ const stats = [
   flex-direction: column;
 }
 
-.testimonial-card-modern:hover {
+.testimonial-card-section:hover {
   transform: translateY(-8px);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -286,34 +265,34 @@ const stats = [
   pointer-events: none;
 }
 
-.testimonial-card-modern:hover .card-glow {
+.testimonial-card:hover .card-glow {
   opacity: 1;
 }
 
 /* Accent Variants */
-.testimonial-card-modern.accent-secondary {
+.testimonial-card.accent-secondary {
   border-color: rgba(127, 44, 134, 0.2);
 }
 
-.testimonial-card-modern.accent-secondary:hover {
+.testimonial-card.accent-secondary:hover {
   border-color: rgba(127, 44, 134, 0.4);
   box-shadow: 0 20px 40px rgba(127, 44, 134, 0.15);
 }
 
-.testimonial-card-modern.accent-success {
+.testimonial-card.accent-success {
   border-color: rgba(0, 214, 79, 0.2);
 }
 
-.testimonial-card-modern.accent-success:hover {
+.testimonial-card.accent-success:hover {
   border-color: rgba(0, 214, 79, 0.4);
   box-shadow: 0 20px 40px rgba(0, 214, 79, 0.15);
 }
 
-.testimonial-card-modern.accent-warning {
+.testimonial-card.accent-warning {
   border-color: rgba(234, 88, 12, 0.2);
 }
 
-.testimonial-card-modern.accent-warning:hover {
+.testimonial-card.accent-warning:hover {
   border-color: rgba(234, 88, 12, 0.4);
   box-shadow: 0 20px 40px rgba(234, 88, 12, 0.15);
 }
@@ -333,7 +312,7 @@ const stats = [
   gap: var(--gap-sm);
 }
 
-.author-avatar-modern {
+.author-avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -375,7 +354,7 @@ const stats = [
 }
 
 /* Rating */
-.testimonial-rating-modern {
+.testimonial-rating {
   margin-bottom: var(--gap-sm);
 }
 
@@ -386,19 +365,19 @@ const stats = [
 }
 
 /* Quote */
-.testimonial-quote-modern {
+.testimonial-quote {
   margin: 0;
   flex: 1;
 }
 
-.testimonial-quote-modern p {
+.testimonial-quote p {
   font-size: var(--font-sm);
   line-height: 1.7;
   color: var(--main-color-6);
   margin: 0;
 }
 
-.card-large .testimonial-quote-modern p {
+.card-large .testimonial-quote p {
   font-size: var(--font-md);
 }
 

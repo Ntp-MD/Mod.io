@@ -34,7 +34,7 @@ const mediumFeatures = [
 </script>
 
 <template>
-  <section id="features" class="features-modern" aria-labelledby="features-title">
+  <section id="features" class="features-section" aria-labelledby="features-title">
     <div class="container">
       <header class="section-header">
         <span class="badge badge-primary">🚀 Features</span>
@@ -44,7 +44,7 @@ const mediumFeatures = [
 
       <div class="features-bento" role="list">
         <!-- Large feature card -->
-        <article class="feature-card feature-large" role="listitem" data-hover="lift">
+        <article class="feature-card feature-large hover-lift" role="listitem">
           <div class="feature-glow"></div>
           <div class="feature-content">
             <div class="feature-header">
@@ -70,13 +70,7 @@ const mediumFeatures = [
         </article>
 
         <!-- Medium feature cards -->
-        <article
-          v-for="(feature, index) in mediumFeatures"
-          :key="feature.title"
-          class="feature-card feature-medium"
-          role="listitem"
-          data-hover="lift"
-        >
+        <article v-for="(feature, index) in mediumFeatures" :key="feature.title" class="feature-card feature-medium hover-lift">
           <div class="feature-icon-wrap" :style="{ background: feature.gradient }">
             <span class="feature-icon">{{ feature.icon }}</span>
           </div>
@@ -95,14 +89,14 @@ const mediumFeatures = [
 
 <style scoped>
 /* Features Section - Modern Bento Grid */
-.features-modern {
+.features-section {
   background: var(--main-color-1);
   padding: var(--gap-section) 0;
   position: relative;
   overflow: hidden;
 }
 
-.features-modern::before {
+.features-section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -115,13 +109,7 @@ const mediumFeatures = [
   pointer-events: none;
 }
 
-/* Section Header */
-.section-header-modern {
-  text-align: center;
-  margin-bottom: var(--gap-xl);
-  position: relative;
-  z-index: 1;
-}
+/* Section Header - Using global utilities */
 
 .section-tag {
   display: inline-block;
@@ -133,25 +121,8 @@ const mediumFeatures = [
   font-weight: 600;
   color: var(--accent-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 1px;
   margin-bottom: var(--gap-md);
-}
-
-.section-title-modern {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: var(--color-white);
-  margin: 0 0 var(--gap-sm);
-  letter-spacing: -0.02em;
-}
-
-.section-description-modern {
-  font-size: var(--font-lg);
-  color: var(--main-color-6);
-  margin: 0;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Bento Grid Layout */
@@ -238,7 +209,7 @@ const mediumFeatures = [
 }
 
 .feature-icon-large {
-  font-size: 3rem;
+  font-size: 48px;
   line-height: 1;
 }
 
@@ -398,10 +369,6 @@ const mediumFeatures = [
 }
 
 @media (max-width: 640px) {
-  .section-title-modern {
-    font-size: 1.8rem;
-  }
-
   .feature-card {
     padding: var(--gap-md);
   }

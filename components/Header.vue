@@ -1,21 +1,43 @@
 <script setup>
 import { ref } from "vue";
+import { SCROLL_CONFIG } from "~/utils/constants.js";
+import { useSmoothScroll } from "~/composables/useSmoothScroll.js";
 
 const isMenuOpen = ref(false);
+const { scrollToElement } = useSmoothScroll();
 
+/**
+ * Navigation links configuration
+ */
 const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Documentation", href: "#docs" },
-  { label: "GitHub", href: "#github" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Pricing", href: "#pricing" },
 ];
 
+/**
+ * Toggle mobile menu state
+ */
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
+/**
+ * Close mobile menu
+ */
 const closeMenu = () => {
   isMenuOpen.value = false;
+};
+
+/**
+ * Handle navigation click with smooth scroll
+ * @param {Event} event - Click event
+ * @param {string} href - Target href
+ */
+const handleNavClick = (event, href) => {
+  closeMenu();
+  scrollToElement(event, href, SCROLL_CONFIG);
 };
 </script>
 
@@ -35,15 +57,21 @@ const closeMenu = () => {
         </div>
         <div class="nav-menu" role="list">
           <div v-for="link in navLinks" :key="link.label" class="nav-item">
-            <a :href="link.href" class="nav-link" @click="closeMenu">{{ link.label }}</a>
+            <a :href="link.href" class="nav-link" @click="handleNavClick($event, link.href)">{{ link.label }}</a>
           </div>
         </div>
-        <a href="#get-started" class="btn btn-accent btn-primary nav-cta" data-hover="bounce" @click="closeMenu">🚀 Deploy Free</a>
+        <a href="#get-started" class="btn btn-accent btn-primary nav-cta hover-bounce" @click="handleNavClick($event, '#get-started')"
+          >🚀 Deploy Free</a
+        >
       </div>
     </nav>
 
     <div class="header-actions">
-      <a href="#get-started" class="btn btn-accent btn-primary header-cta" data-hover="bounce" aria-label="Deploy Now - Get started with MOD.io"
+      <a
+        href="#get-started"
+        class="btn btn-accent btn-primary header-cta hover-bounce"
+        aria-label="Deploy Now - Get started with MOD.io"
+        @click="handleNavClick($event, '#get-started')"
         >🚀 Deploy Now</a
       >
       <button
@@ -73,7 +101,7 @@ const closeMenu = () => {
   background: var(--color-white);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--main-color-8);
+  border-bottom: 1px solid var(--main-color-7);
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
@@ -113,7 +141,7 @@ const closeMenu = () => {
   font-size: var(--font-md);
   font-weight: 700;
   color: var(--main-color-1);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.2px;
 }
 
 .logo-dot {
@@ -238,7 +266,7 @@ const closeMenu = () => {
   width: 44px;
   height: 44px;
   background: none;
-  border: 1px solid var(--main-color-8);
+  border: 1px solid var(--main-color-7);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition:
@@ -290,10 +318,6 @@ const closeMenu = () => {
 }
 
 @media screen and (min-width: 993px) {
-  .header-container {
-    padding: var(--gap-sm) var(--gap-lg);
-  }
-
   .logo-mark {
     width: 40px;
     height: 40px;
@@ -304,10 +328,11 @@ const closeMenu = () => {
   }
 }
 
-/* ── DESKTOP (1200px+) ── */
-@media screen and (min-width: 1201px) {
+/* ── DESKTOP (1024px+) ── */
+@media screen and (min-width: 1024px) {
   .header-container {
-    padding: var(--gap-md) var(--gap-xl);
+    display: grid;
+    grid-template-columns: 20% auto 20%;
   }
 
   .logo-mark {

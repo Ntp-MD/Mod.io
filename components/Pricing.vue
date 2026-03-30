@@ -7,7 +7,7 @@ const plans = [
     features: ["50 GB bandwidth / month", "Up to 10 libraries", "Global CDN delivery", "Basic analytics", "HTTPS included"],
     highlighted: false,
     cta: "🚀 Deploy Free",
-    ctaVariant: "btn-outline",
+    ctaVariant: "btn-ghost",
   },
   {
     name: "Pro",
@@ -46,13 +46,21 @@ const plans = [
     ],
     highlighted: false,
     cta: "🎯 Contact Sales",
-    ctaVariant: "btn-outline",
+    ctaVariant: "btn-ghost",
   },
 ];
 </script>
 
 <template>
   <section id="pricing" class="section section-dark pricing-section" aria-labelledby="pricing-title">
+    <!-- Animated background -->
+    <div class="pricing-bg" aria-hidden="true">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="grid-pattern"></div>
+    </div>
+
     <div class="container">
       <header class="section-header">
         <span class="badge badge-primary" aria-label="Section category">💎 Pricing</span>
@@ -60,7 +68,7 @@ const plans = [
         <p class="section-description">Start free. Scale when you need to. No surprises.</p>
       </header>
 
-      <div class="pricing-grid" grid="3,2,2,1,var(--gap-md)">
+      <div class="pricing-grid">
         <article
           v-for="plan in plans"
           :key="plan.name"
@@ -105,7 +113,15 @@ const plans = [
 </template>
 
 <style scoped>
-/* Grid-Mod handles layout via grid="3,2,1,1,var(--gap-md)" */
+.pricing-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-grid {
+  display: grid;
+  gap: var(--gap-md);
+}
 
 /* Card base */
 .pricing-card {
@@ -113,20 +129,29 @@ const plans = [
   flex-direction: column;
   gap: var(--gap-lg);
   position: relative;
-  background: var(--main-color-1);
-}
-
-/* Highlighted card */
-.pricing-card-highlighted {
-  background: var(--main-color-1);
-  border-color: var(--main-color-5);
+  border: unset;
+  background: rgba(105, 103, 103, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 0 0 1px var(--main-color-3),
-    var(--shadow-xl);
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transition: var(--transition-normal);
 }
 
-.pricing-card--highlighted:hover {
-  border-color: var(--main-color-6);
+.pricing-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  backdrop-filter: blur(0);
+  background: var(--main-color-2);
+  border: 1px solid var(--main-color-4);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 2px var(--main-color-4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .pricing-popular {
@@ -234,31 +259,6 @@ const plans = [
 
 .pricing-btn {
   width: 100%;
-  min-height: 48px;
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--main-color-4);
-  color: var(--main-color-6);
-}
-
-.btn-outline:hover {
-  border-color: var(--main-color-6);
-  color: var(--color-white);
-  transform: translateY(-1px);
-}
-
-.btn-white {
-  background: var(--color-white);
-  border: 1px solid var(--color-white);
-  color: var(--main-color-1);
-}
-
-.btn-white:hover {
-  background: var(--main-color-8);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
 }
 
 /* Footer */
@@ -266,7 +266,7 @@ const plans = [
   margin-top: var(--gap-xl);
   text-align: center;
   padding: var(--gap-lg);
-  background: var(--main-color-8);
+  background: var(--main-color-2);
   border: 1px solid var(--main-color-3);
   border-radius: var(--radius-lg);
 }
@@ -288,10 +288,31 @@ const plans = [
   color: var(--color-white);
 }
 
+@media screen and (min-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-lg);
+  }
+}
+
 @media screen and (min-width: 1201px) {
   .pricing-card-highlighted {
     margin-top: calc(var(--gap-lg) * -1);
     margin-bottom: calc(var(--gap-lg) * -1);
   }
+}
+
+/* Orb Background - Matching Hero Component */
+.pricing-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 </style>

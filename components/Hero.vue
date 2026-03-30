@@ -22,7 +22,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 </script>
 
 <template>
-  <section class="hero-modern" aria-labelledby="hero-title">
+  <section class="hero-section" aria-labelledby="hero-title">
     <!-- Animated background -->
     <div class="hero-bg" aria-hidden="true">
       <div class="gradient-orb orb-1"></div>
@@ -54,11 +54,11 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
           <!-- CTA Group -->
           <div class="cta-group">
-            <a href="#get-started" class="btn btn-primary hero-btn" data-hover="bounce">
+            <a href="#get-started" class="btn btn-white hover-bounce">
               <span class="btn-icon">🚀</span>
               <span>Start Free</span>
             </a>
-            <a href="#docs" class="btn btn-secondary hero-btn" data-hover="lift">
+            <a href="#docs" class="btn btn-ghost hover-lift">
               <span>View Documentation</span>
               <span class="btn-arrow">→</span>
             </a>
@@ -66,7 +66,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
           <!-- Stats -->
           <div class="stats-bar">
-            <div v-for="stat in stats" :key="stat.label" class="stat-item" data-hover="scale">
+            <div v-for="stat in stats" :key="stat.label" class="stat-item hover-scale">
               <span class="stat-number">{{ stat.number }}</span>
               <span class="stat-label">{{ stat.label }}</span>
             </div>
@@ -83,7 +83,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
         <!-- Visual - Code Preview -->
         <div class="hero-visual">
-          <div class="code-card" data-hover="perspective">
+          <div class="code-card hover-perspective">
             <!-- Window header -->
             <div class="code-header">
               <div class="window-controls">
@@ -118,12 +118,12 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
           <!-- Floating metrics -->
           <div class="floating-metrics">
-            <div class="metric-pill" data-hover="scale">
+            <div class="metric-pill hover-scale">
               <span class="metric-icon">⚡</span>
               <span class="metric-value">12ms</span>
               <span class="metric-label">Latency</span>
             </div>
-            <div class="metric-pill highlight" data-hover="scale">
+            <div class="metric-pill highlight hover-scale">
               <span class="metric-icon">🌐</span>
               <span class="metric-value">SG-EDGE</span>
               <span class="metric-label">Nearest Node</span>
@@ -137,7 +137,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
 <style scoped>
 /* Hero Section - Modern Design */
-.hero-modern {
+.hero-section {
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -153,64 +153,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   inset: 0;
   z-index: 0;
   overflow: hidden;
-}
-
-.gradient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.5;
-  animation: float 20s ease-in-out infinite;
-}
-
-.orb-1 {
-  width: 600px;
-  height: 600px;
-  background: var(--accent-secondary);
-  top: -200px;
-  right: -100px;
-  animation-delay: 0s;
-}
-
-.orb-2 {
-  width: 400px;
-  height: 400px;
-  background: var(--accent-success);
-  bottom: -100px;
-  left: -100px;
-  animation-delay: -7s;
-}
-
-.orb-3 {
-  width: 300px;
-  height: 300px;
-  background: var(--accent-warning);
-  top: 50%;
-  left: 30%;
-  animation-delay: -14s;
-  opacity: 0.3;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -30px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-.grid-pattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
 }
 
 /* Layout */
@@ -267,7 +209,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   display: block;
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.2px;
   color: var(--color-white);
 }
 
@@ -292,34 +234,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   display: flex;
   gap: var(--gap-md);
   flex-wrap: wrap;
-}
-
-/* Button overrides - only specific styles not in button.css */
-.btn-primary.hero-btn {
-  background: var(--color-white);
-  color: var(--main-color-1);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-}
-
-.btn-primary.hero-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
-}
-
-.btn-secondary.hero-btn {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-white);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-}
-
-.btn-secondary.hero-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-.btn-secondary.hero-btn:hover .btn-arrow {
-  transform: translateX(4px);
 }
 
 /* Stats Bar */
@@ -347,7 +261,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   font-size: var(--font-xs);
   color: var(--main-color-5);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 1px;
 }
 
 /* Partners */
@@ -362,7 +276,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   font-size: var(--font-xs);
   color: var(--main-color-5);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 1px;
 }
 
 .partners-logos {
@@ -573,27 +487,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   color: var(--main-color-6);
 }
 
-/* Mobile: Remove gradients, use solid colors */
-@media (max-width: 768px) {
-  .hero-modern {
-    background: var(--main-color-1) !important;
-  }
-
-  .gradient-orb {
-    display: none;
-  }
-
-  .grid-pattern {
-    display: none;
-  }
-
-  .gradient-text {
-    background: none;
-    -webkit-text-fill-color: var(--color-white);
-    color: var(--color-white);
-  }
-}
-
 /* Responsive */
 @media (max-width: 1200px) {
   .hero-layout {
@@ -621,6 +514,23 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
   .floating-metrics {
     display: none;
+  }
+}
+
+/* Mobile: Remove gradients, use solid colors */
+@media (max-width: 768px) {
+  .hero-section {
+    background: var(--main-color-1) !important;
+  }
+
+  .gradient-orb {
+    display: none;
+  }
+
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: var(--color-white);
+    color: var(--color-white);
   }
 }
 

@@ -16,13 +16,6 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
-      ],
-      script: [
-        {
-          src: '/js/grid-mod.js',
-          type: 'module',
-          defer: true
-        }
       ]
     }
   },
