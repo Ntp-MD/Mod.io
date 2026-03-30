@@ -16,6 +16,9 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
+      ],
+      script: [
+        { src: 'https://code.jquery.com/jquery-3.7.1.min.js', async: true }
       ]
     }
   },

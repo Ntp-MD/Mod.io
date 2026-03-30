@@ -15,6 +15,7 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 
 export const CTA: typeof import("../components/CTA.vue")['default']
+export const FeatureShowcase: typeof import("../components/FeatureShowcase.vue")['default']
 export const Features: typeof import("../components/Features.vue")['default']
 export const Footer: typeof import("../components/Footer.vue")['default']
 export const Header: typeof import("../components/Header.vue")['default']
@@ -46,6 +47,7 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const LazyCTA: LazyComponent<typeof import("../components/CTA.vue")['default']>
+export const LazyFeatureShowcase: LazyComponent<typeof import("../components/FeatureShowcase.vue")['default']>
 export const LazyFeatures: LazyComponent<typeof import("../components/Features.vue")['default']>
 export const LazyFooter: LazyComponent<typeof import("../components/Footer.vue")['default']>
 export const LazyHeader: LazyComponent<typeof import("../components/Header.vue")['default']>
