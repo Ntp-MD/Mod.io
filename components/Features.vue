@@ -43,7 +43,7 @@ const mediumFeatures = [
       </header>
 
       <div class="features-bento" role="list">
-        <article class="feature-card feature-large hover-lift" role="listitem">
+        <article class="card feature-card feature-large hover-lift" role="listitem">
           <div class="feature-glow"></div>
           <div class="feature-content">
             <div class="feature-header">
@@ -68,7 +68,7 @@ const mediumFeatures = [
           </div>
         </article>
 
-        <article v-for="(feature, index) in mediumFeatures" :key="feature.title" class="feature-card feature-medium hover-lift">
+        <article v-for="(feature, index) in mediumFeatures" :key="feature.title" class="card feature-card feature-medium hover-lift">
           <div class="feature-icon-wrap" :class="'feature-icon-wrap--' + (index + 1)">
             <span class="feature-icon">{{ feature.icon }}</span>
           </div>
@@ -148,9 +148,7 @@ const mediumFeatures = [
 
 .feature-card {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-lg);
-  padding: var(--gap-lg);
+  border-color: rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -168,7 +166,7 @@ const mediumFeatures = [
   flex-direction: column;
   background: linear-gradient(135deg, rgba(127, 44, 134, 0.15) 0%, rgba(0, 214, 79, 0.05) 100%);
   border-color: rgba(127, 44, 134, 0.3);
-  min-height: 320px;
+  min-height: calc(var(--size-xl) * 6);
 }
 
 .feature-large .feature-content {
@@ -253,8 +251,8 @@ const mediumFeatures = [
 }
 
 .feature-icon-wrap {
-  width: 56px;
-  height: 56px;
+  width: var(--size-xl);
+  height: var(--size-xl);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -305,8 +303,8 @@ const mediumFeatures = [
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 36px;
-  height: 36px;
+  width: var(--size-md);
+  height: var(--size-md);
   display: flex;
   align-items: center;
   justify-content: center;

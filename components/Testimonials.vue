@@ -74,7 +74,7 @@ const stats = [
 
       <!-- Stats Row -->
       <div class="stats-row">
-        <div v-for="stat in stats" :key="stat.label" class="stat-pill hover-scale">
+        <div v-for="stat in stats" :key="stat.label" class="stat-pill hover-lift">
           <span class="stat-icon">{{ stat.icon }}</span>
           <div class="stat-info">
             <span class="stat-number">{{ stat.number }}</span>
@@ -88,7 +88,7 @@ const stats = [
         <article
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.name"
-          class="testimonial-card hover-lift"
+          class="card testimonial-card hover-lift"
           :class="[testimonial.accentClass, { 'card-large': index === 0 || index === 3 }]"
         >
           <div class="card-glow"></div>
@@ -232,9 +232,7 @@ const stats = [
 /* Testimonial Card */
 .testimonial-card {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-lg);
-  padding: var(--gap-lg);
+  border-color: rgba(255, 255, 255, 0.06);
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);

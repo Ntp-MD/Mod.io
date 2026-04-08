@@ -1,24 +1,40 @@
 <script setup>
-import { FOOTER_LINKS, SOCIAL_LINKS } from "~/utils/constants.js";
-
 const currentYear = new Date().getFullYear();
 
 const navGroups = [
   {
     heading: "Product",
-    links: FOOTER_LINKS.product,
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "Documentation", href: "#docs" },
+      { label: "API", href: "#api" },
+    ],
   },
   {
     heading: "Company",
-    links: FOOTER_LINKS.company,
+    links: [
+      { label: "About", href: "#about" },
+      { label: "Blog", href: "#blog" },
+      { label: "Careers", href: "#careers" },
+      { label: "Contact", href: "#contact" },
+    ],
   },
   {
     heading: "Legal",
-    links: FOOTER_LINKS.legal,
+    links: [
+      { label: "Privacy", href: "#privacy" },
+      { label: "Terms", href: "#terms" },
+      { label: "Cookies", href: "#cookies" },
+    ],
   },
 ];
 
-const socialLinks = SOCIAL_LINKS;
+const socialLinks = [
+  { label: "GitHub", href: "#github", icon: "⚡" },
+  { label: "Twitter", href: "#twitter", icon: "🐦" },
+  { label: "LinkedIn", href: "#linkedin", icon: "💼" },
+];
 </script>
 
 <template>
@@ -92,8 +108,8 @@ const socialLinks = SOCIAL_LINKS;
 }
 
 .brand-mark {
-  width: 36px;
-  height: 36px;
+  width: var(--size-md);
+  height: var(--size-md);
   background: var(--main-color-3);
   border-radius: var(--radius-sm);
   color: var(--color-white);
@@ -128,8 +144,8 @@ const socialLinks = SOCIAL_LINKS;
 }
 
 .social-btn {
-  width: 40px;
-  height: 40px;
+  width: var(--size-lg);
+  height: var(--size-lg);
   background: var(--main-color-2);
   border: 1px solid var(--main-color-3);
   border-radius: var(--radius-sm);
@@ -154,7 +170,7 @@ const socialLinks = SOCIAL_LINKS;
 }
 
 .footer-col {
-  flex: 1 1 120px;
+  flex: 1 1 calc(var(--size-xl) * 2);
 }
 
 .footer-col-heading {
@@ -177,7 +193,7 @@ const socialLinks = SOCIAL_LINKS;
 .footer-link {
   font-size: var(--font-sm);
   color: var(--main-color-5);
-  min-height: 28px;
+  min-height: var(--size-sm);
   transition: color var(--transition-fast);
 }
 
@@ -226,7 +242,7 @@ const socialLinks = SOCIAL_LINKS;
   }
 
   .footer-brand {
-    flex: 0 0 260px;
+    flex: 0 0 calc(var(--size-xl) * 7);
   }
 
   .footer-nav {

@@ -138,7 +138,7 @@ const stats = [
   line-height: 1.7;
   color: var(--main-color-6);
   margin: 0;
-  max-width: 500px;
+  max-width: calc(var(--size-xl) * 9);
 }
 
 .cta-buttons {
@@ -244,8 +244,8 @@ const stats = [
 }
 
 .benefit-check {
-  width: 20px;
-  height: 20px;
+  width: var(--size-xs);
+  height: var(--size-xs);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -320,10 +320,6 @@ const stats = [
 
   .cta-buttons {
     flex-direction: column;
-  }
-
-  .btn {
-    justify-content: center;
   }
 
   .stats-card {

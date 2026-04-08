@@ -48,7 +48,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
           </p>
 
           <div class="cta-group">
-            <a href="#get-started" class="btn btn-white hover-bounce">
+            <a href="#get-started" class="btn btn-white hover-lift">
               <span class="btn-icon">🚀</span>
               <span>Start Free</span>
             </a>
@@ -59,7 +59,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
           </div>
 
           <div class="stats-bar">
-            <div v-for="stat in stats" :key="stat.label" class="stat-item hover-scale">
+            <div v-for="stat in stats" :key="stat.label" class="stat-item hover-lift">
               <span class="stat-number">{{ stat.number }}</span>
               <span class="stat-label">{{ stat.label }}</span>
             </div>
@@ -105,12 +105,12 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
           </div>
 
           <div class="floating-metrics">
-            <div class="metric-pill hover-scale">
+            <div class="metric-pill hover-lift">
               <span class="metric-icon">⚡</span>
               <span class="metric-value">12ms</span>
               <span class="metric-label">Latency</span>
             </div>
-            <div class="metric-pill highlight hover-scale">
+            <div class="metric-pill highlight hover-lift">
               <span class="metric-icon">🌐</span>
               <span class="metric-value">SG-EDGE</span>
               <span class="metric-label">Nearest Node</span>
@@ -511,10 +511,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   .cta-group {
     flex-direction: column;
     width: 100%;
-  }
-
-  .btn {
-    justify-content: center;
   }
 
   .stats-bar {

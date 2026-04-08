@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import { SCROLL_CONFIG } from "~/utils/constants.js";
 import { useSmoothScroll } from "~/composables/useSmoothScroll.js";
 
 const isMenuOpen = ref(false);
@@ -23,7 +22,7 @@ const closeMenu = () => {
 
 const handleNavClick = (event, href) => {
   closeMenu();
-  scrollToElement(event, href, SCROLL_CONFIG);
+  scrollToElement(event, href, { behavior: "smooth", block: "start" });
 };
 </script>
 
@@ -39,14 +38,14 @@ const handleNavClick = (event, href) => {
       <div class="nav-drawer">
         <div class="nav-drawer-header">
           <span class="nav-drawer-logo">MOD.io</span>
-          <button class="nav-close hover-scale" @click="closeMenu" aria-label="Close navigation">✕</button>
+          <button class="btn nav-close hover-lift" @click="closeMenu" aria-label="Close navigation">✕</button>
         </div>
         <div class="nav-menu" role="list">
           <div v-for="link in navLinks" :key="link.label" class="nav-item">
             <a :href="link.href" class="nav-link" @click="handleNavClick($event, link.href)">{{ link.label }}</a>
           </div>
         </div>
-        <a href="#get-started" class="btn btn-accent btn-primary nav-cta hover-bounce" @click="handleNavClick($event, '#get-started')"
+        <a href="#get-started" class="btn btn-accent btn-primary nav-cta hover-lift" @click="handleNavClick($event, '#get-started')"
           >🚀 Deploy Free</a
         >
       </div>
@@ -55,13 +54,13 @@ const handleNavClick = (event, href) => {
     <div class="header-actions">
       <a
         href="#get-started"
-        class="btn btn-accent btn-primary header-cta hover-bounce"
+        class="btn btn-accent btn-primary header-cta hover-lift"
         aria-label="Deploy Now - Get started with MOD.io"
         @click="handleNavClick($event, '#get-started')"
         >🚀 Deploy Now</a
       >
       <button
-        class="menu-toggle hover-scale"
+        class="btn menu-toggle hover-lift"
         @click="toggleMenu"
         :aria-expanded="isMenuOpen.toString()"
         aria-label="Toggle navigation menu"
@@ -90,7 +89,7 @@ const handleNavClick = (event, href) => {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  min-height: 60px;
+  min-height: var(--size-lg);
   transition: box-shadow var(--transition-normal);
 }
 
@@ -111,8 +110,8 @@ const handleNavClick = (event, href) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: var(--size-md);
+  height: var(--size-md);
   background: var(--main-color-1);
   border-radius: var(--radius-sm);
   color: var(--color-white);
@@ -192,17 +191,11 @@ const handleNavClick = (event, href) => {
 }
 
 .nav-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
   background: var(--main-color-3);
-  border: none;
-  border-radius: var(--radius-sm);
   color: var(--color-white);
   font-size: var(--font-md);
-  cursor: pointer;
 }
 
 .nav-menu {
@@ -230,7 +223,6 @@ const handleNavClick = (event, href) => {
 .nav-cta {
   margin-top: auto;
   width: 100%;
-  justify-content: center;
   min-height: 48px;
 }
 
@@ -249,8 +241,6 @@ const handleNavClick = (event, href) => {
   height: 44px;
   background: none;
   border: 1px solid var(--main-color-7);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
   transition:
     background var(--transition-fast),
     border-color var(--transition-fast);
