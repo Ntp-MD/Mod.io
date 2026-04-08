@@ -23,7 +23,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
 <template>
   <section class="hero-section" aria-labelledby="hero-title">
-    <!-- Animated background -->
     <div class="hero-bg" aria-hidden="true">
       <div class="gradient-orb orb-1"></div>
       <div class="gradient-orb orb-2"></div>
@@ -33,26 +32,21 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 
     <div class="container">
       <div class="hero-layout">
-        <!-- Content -->
         <div class="hero-content">
-          <!-- Trust badge -->
           <div class="trust-badge">
             <span class="badge-glow">⚡ Trusted by developers worldwide</span>
           </div>
 
-          <!-- Main headline -->
           <h1 class="hero-title" id="hero-title">
             <span class="title-line">Global CDN</span>
             <span class="title-line gradient-text">for Modern Apps</span>
           </h1>
 
-          <!-- Description -->
           <p class="hero-description">
             Deploy your libraries and assets to 150+ edge locations worldwide. Sub-20ms latency, intelligent caching, and real-time analytics built
             for scale.
           </p>
 
-          <!-- CTA Group -->
           <div class="cta-group">
             <a href="#get-started" class="btn btn-white hover-bounce">
               <span class="btn-icon">🚀</span>
@@ -64,7 +58,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
             </a>
           </div>
 
-          <!-- Stats -->
           <div class="stats-bar">
             <div v-for="stat in stats" :key="stat.label" class="stat-item hover-scale">
               <span class="stat-number">{{ stat.number }}</span>
@@ -72,7 +65,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
             </div>
           </div>
 
-          <!-- Partner logos -->
           <div class="partners">
             <span class="partners-label">Used by teams at</span>
             <div class="partners-logos">
@@ -81,10 +73,8 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
           </div>
         </div>
 
-        <!-- Visual - Code Preview -->
         <div class="hero-visual">
           <div class="code-card hover-perspective">
-            <!-- Window header -->
             <div class="code-header">
               <div class="window-controls">
                 <span class="control close"></span>
@@ -98,12 +88,10 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
               </span>
             </div>
 
-            <!-- Code content -->
             <div class="code-content">
               <pre class="code-block"><code>{{ codeExample }}</code></pre>
             </div>
 
-            <!-- Terminal footer -->
             <div class="code-footer">
               <div class="terminal-line">
                 <span class="prompt">$</span>
@@ -116,7 +104,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
             </div>
           </div>
 
-          <!-- Floating metrics -->
           <div class="floating-metrics">
             <div class="metric-pill hover-scale">
               <span class="metric-icon">⚡</span>
@@ -136,7 +123,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 </template>
 
 <style scoped>
-/* Hero Section - Modern Design */
 .hero-section {
   position: relative;
   min-height: 100vh;
@@ -147,7 +133,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   padding: var(--gap-section) 0 var(--gap-section);
 }
 
-/* Animated Background */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -155,7 +140,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   overflow: hidden;
 }
 
-/* Layout */
 .hero-layout {
   position: relative;
   z-index: 1;
@@ -167,18 +151,16 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
 @media (min-width: 1024px) {
   .hero-layout {
     grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
+    gap: var(--gap-xl);
   }
 }
 
-/* Content */
 .hero-content {
   display: flex;
   flex-direction: column;
   gap: var(--gap-lg);
 }
 
-/* Trust Badge */
 .trust-badge {
   display: inline-flex;
 }
@@ -197,7 +179,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   backdrop-filter: blur(10px);
 }
 
-/* Title */
 .hero-title {
   display: flex;
   flex-direction: column;
@@ -220,7 +201,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   background-clip: text;
 }
 
-/* Description */
 .hero-description {
   font-size: var(--font-lg);
   line-height: 1.7;
@@ -229,14 +209,12 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   margin: 0;
 }
 
-/* CTA Group */
 .cta-group {
   display: flex;
   gap: var(--gap-md);
   flex-wrap: wrap;
 }
 
-/* Stats Bar */
 .stats-bar {
   display: flex;
   gap: var(--gap-xl);
@@ -264,7 +242,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   letter-spacing: 1px;
 }
 
-/* Partners */
 .partners {
   display: flex;
   flex-direction: column;
@@ -297,7 +274,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   opacity: 1;
 }
 
-/* Hero Visual - Code Card */
 .hero-visual {
   position: relative;
   perspective: 1000px;
@@ -444,7 +420,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   color: var(--accent-success);
 }
 
-/* Floating Metrics */
 .floating-metrics {
   position: absolute;
   bottom: -20px;
@@ -487,7 +462,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   color: var(--main-color-6);
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
   .hero-layout {
     display: flex;
@@ -517,7 +491,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   }
 }
 
-/* Mobile: Remove gradients, use solid colors */
 @media (max-width: 768px) {
   .hero-section {
     background: var(--main-color-1) !important;
@@ -554,7 +527,6 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
     align-items: center;
   }
 
-  /* Mobile: Fix code card overflow */
   .hero-visual {
     width: 100%;
     max-width: 100%;

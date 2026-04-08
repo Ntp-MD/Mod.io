@@ -53,13 +53,6 @@
   border: 1px solid var(--main-color-3);
 }
 
-.badge-accent {
-  background: linear-gradient(135deg, var(--accent-warning), var(--accent-error));
-  color: var(--color-white);
-  letter-spacing: 0.05px;
-  text-transform: uppercase;
-}
-
 /* Section Variants */
 
 .section {
@@ -69,25 +62,6 @@
 .section-dark {
   background: var(--main-color-1);
   color: var(--color-white);
-}
-
-.section-light {
-  background: var(--color-white);
-  color: var(--main-color-1);
-}
-
-.section-light .section-title {
-  color: var(--main-color-1);
-}
-
-.section-light .section-description {
-  color: var(--main-color-4);
-}
-
-.section-light .badge-primary {
-  background: rgba(0, 0, 0, 0.08);
-  color: var(--main-color-1);
-  border: 1px solid var(--main-color-7);
 }
 
 .grid-pattern {
@@ -106,9 +80,5 @@
 
   .section-dark {
     background: var(--main-color-1) !important;
-  }
-
-  .section-light {
-    background: var(--color-white) !important;
   }
 }

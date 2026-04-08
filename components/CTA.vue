@@ -10,7 +10,6 @@ const stats = [
 
 <template>
   <section id="get-started" class="cta-section" aria-labelledby="cta-title">
-    <!-- Background effects -->
     <div class="cta-bg" aria-hidden="true">
       <div class="gradient-orb orb-1"></div>
       <div class="gradient-orb orb-2"></div>
@@ -19,7 +18,6 @@ const stats = [
 
     <div class="container">
       <div class="cta-content-section">
-        <!-- Left side - Main CTA -->
         <div class="cta-main">
           <span class="cta-tag">🚀 Get Started</span>
           <h2 class="cta-title-section" id="cta-title">Ready to deploy at scale?</h2>
@@ -40,7 +38,6 @@ const stats = [
           <p class="cta-note">Already have an account? <a href="#login" class="login-link">Sign in →</a></p>
         </div>
 
-        <!-- Right side - Stats & Benefits -->
         <div class="cta-side">
           <div class="stats-card hover-lift">
             <div v-for="stat in stats" :key="stat.label" class="stat-block">
@@ -61,7 +58,6 @@ const stats = [
         </div>
       </div>
 
-      <!-- Trust logos -->
       <div class="trust-section">
         <p class="trust-text">Trusted by engineering teams at</p>
         <div class="trust-logos">
@@ -77,7 +73,6 @@ const stats = [
 </template>
 
 <style scoped>
-/* CTA Section - Modern */
 .cta-section {
   background: var(--main-color-1);
   padding: var(--gap-section) 0;
@@ -85,7 +80,6 @@ const stats = [
   overflow: hidden;
 }
 
-/* Background Effects */
 .cta-bg {
   position: absolute;
   inset: 0;
@@ -93,7 +87,6 @@ const stats = [
   pointer-events: none;
 }
 
-/* Content Layout */
 .cta-content-section {
   display: grid;
   grid-template-columns: 1fr;
@@ -106,12 +99,11 @@ const stats = [
 @media (min-width: 1024px) {
   .cta-content-section {
     grid-template-columns: 1.2fr 1fr;
-    gap: 80px;
+    gap: var(--gap-xl);
     align-items: start;
   }
 }
 
-/* Main CTA */
 .cta-main {
   display: flex;
   flex-direction: column;
@@ -149,7 +141,6 @@ const stats = [
   max-width: 500px;
 }
 
-/* CTA Buttons Layout */
 .cta-buttons {
   display: flex;
   gap: var(--gap-md);
@@ -157,7 +148,6 @@ const stats = [
   flex-wrap: wrap;
 }
 
-/* CTA Note */
 .cta-note {
   font-size: var(--font-sm);
   color: var(--main-color-6);
@@ -175,14 +165,12 @@ const stats = [
   color: var(--accent-secondary);
 }
 
-/* Side Content */
 .cta-side {
   display: flex;
   flex-direction: column;
   gap: var(--gap-lg);
 }
 
-/* Stats Card */
 .stats-card {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -220,7 +208,6 @@ const stats = [
   margin-top: 4px;
 }
 
-/* Benefits Card */
 .benefits-card-section {
   padding: var(--gap-lg);
   background: rgba(255, 255, 255, 0.03);
@@ -264,7 +251,7 @@ const stats = [
   justify-content: center;
   background: rgba(0, 214, 79, 0.15);
   border-radius: 50%;
-  font-size: 10px;
+  font-size: var(--font-xs);
   color: var(--accent-success);
   flex-shrink: 0;
   margin-top: 2px;
@@ -276,7 +263,6 @@ const stats = [
   line-height: 1.5;
 }
 
-/* Trust Section */
 .trust-section {
   text-align: center;
   position: relative;
@@ -313,7 +299,6 @@ const stats = [
   color: var(--color-white);
 }
 
-/* Mobile: Remove gradients, use solid colors */
 @media (max-width: 768px) {
   .cta-section {
     background: var(--main-color-1) !important;
@@ -328,7 +313,6 @@ const stats = [
   }
 }
 
-/* Responsive */
 @media (max-width: 640px) {
   .cta-title-section {
     font-size: 35.2px;

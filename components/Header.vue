@@ -6,9 +6,6 @@ import { useSmoothScroll } from "~/composables/useSmoothScroll.js";
 const isMenuOpen = ref(false);
 const { scrollToElement } = useSmoothScroll();
 
-/**
- * Navigation links configuration
- */
 const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
@@ -16,25 +13,14 @@ const navLinks = [
   { label: "Pricing", href: "#pricing" },
 ];
 
-/**
- * Toggle mobile menu state
- */
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
-/**
- * Close mobile menu
- */
 const closeMenu = () => {
   isMenuOpen.value = false;
 };
 
-/**
- * Handle navigation click with smooth scroll
- * @param {Event} event - Click event
- * @param {string} href - Target href
- */
 const handleNavClick = (event, href) => {
   closeMenu();
   scrollToElement(event, href, SCROLL_CONFIG);
@@ -92,7 +78,6 @@ const handleNavClick = (event, href) => {
 </template>
 
 <style scoped>
-/* ── BASE: Mobile (320px+) ── */
 .header-container {
   display: flex;
   align-items: center;
@@ -113,7 +98,6 @@ const handleNavClick = (event, href) => {
   box-shadow: var(--shadow-sm);
 }
 
-/* Logo */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -149,7 +133,6 @@ const handleNavClick = (event, href) => {
   font-weight: 400;
 }
 
-/* Mobile nav drawer — base hidden state */
 .nav {
   position: fixed;
   inset: 0;
@@ -261,7 +244,6 @@ const handleNavClick = (event, href) => {
   display: none;
 }
 
-/* Hamburger button */
 .menu-toggle {
   width: 44px;
   height: 44px;
@@ -310,7 +292,6 @@ const handleNavClick = (event, href) => {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ── TABLET (992px+) ── */
 @media screen and (max-width: 992px) {
   .header-cta {
     display: none;
@@ -328,7 +309,6 @@ const handleNavClick = (event, href) => {
   }
 }
 
-/* ── DESKTOP (1024px+) ── */
 @media screen and (min-width: 1024px) {
   .header-container {
     display: grid;
@@ -340,7 +320,6 @@ const handleNavClick = (event, href) => {
     height: 44px;
   }
 
-  /* Show inline desktop nav, hide hamburger */
   .nav {
     position: static;
     pointer-events: auto;

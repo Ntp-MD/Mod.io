@@ -345,10 +345,10 @@ const stats = [
 }
 
 .company-badge {
-  padding: 3px 10px;
+  padding: var(--gap-xs) var(--gap-sm);
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-full);
-  font-size: 11px;
+  font-size: var(--font-xs);
   color: var(--main-color-6);
   white-space: nowrap;
 }

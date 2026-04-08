@@ -30,26 +30,6 @@ button {
   color: var(--color-white);
 }
 
-.btn-secondary {
-  background: var(--accent-secondary);
-  color: var(--color-white);
-}
-
-.btn-success {
-  background: var(--accent-success);
-  color: var(--color-white);
-}
-
-.btn-warning {
-  background: var(--accent-warning);
-  color: var(--color-white);
-}
-
-.btn-error {
-  background: var(--accent-error);
-  color: var(--color-white);
-}
-
 .btn-white {
   background: var(--color-white);
   color: var(--main-color-1);

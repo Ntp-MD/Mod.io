@@ -1,14 +1,8 @@
 <script setup>
 import { FOOTER_LINKS, SOCIAL_LINKS } from "~/utils/constants.js";
 
-/**
- * Current year for copyright
- */
 const currentYear = new Date().getFullYear();
 
-/**
- * Footer navigation groups configuration
- */
 const navGroups = [
   {
     heading: "Product",
@@ -24,18 +18,13 @@ const navGroups = [
   },
 ];
 
-/**
- * Social media links configuration
- */
 const socialLinks = SOCIAL_LINKS;
 </script>
 
 <template>
   <footer class="section footer" role="contentinfo">
     <div class="container">
-      <!-- Main footer grid -->
       <div class="footer-main">
-        <!-- Brand column -->
         <div class="footer-brand">
           <a href="/" class="brand-logo flex-row-center gap-xs link-reset" aria-label="MOD.io home">
             <span class="brand-mark flex-center" aria-hidden="true">M</span>
@@ -49,7 +38,6 @@ const socialLinks = SOCIAL_LINKS;
           </div>
         </div>
 
-        <!-- Nav columns -->
         <nav class="footer-nav" aria-label="Footer navigation">
           <div class="footer-nav-grid">
             <div v-for="group in navGroups" :key="group.heading" class="footer-col">
@@ -64,7 +52,6 @@ const socialLinks = SOCIAL_LINKS;
         </nav>
       </div>
 
-      <!-- Bottom bar -->
       <div class="footer-bottom">
         <p class="footer-copy">© {{ currentYear }} MOD.io. All rights reserved.</p>
         <div class="footer-bottom-links flex-row-center gap-md">
@@ -78,7 +65,6 @@ const socialLinks = SOCIAL_LINKS;
 </template>
 
 <style scoped>
-/* ── BASE: Mobile (320px+) ── */
 .footer {
   background: var(--main-color-1);
   color: var(--color-white);
@@ -95,7 +81,6 @@ const socialLinks = SOCIAL_LINKS;
   margin-bottom: var(--gap-md);
 }
 
-/* Brand */
 .footer-brand {
   display: flex;
   flex-direction: column;
@@ -161,7 +146,6 @@ const socialLinks = SOCIAL_LINKS;
   transform: translateY(-2px);
 }
 
-/* Nav columns */
 .footer-nav-grid {
   display: flex;
   flex-direction: row;
@@ -201,7 +185,6 @@ const socialLinks = SOCIAL_LINKS;
   color: var(--color-white);
 }
 
-/* Bottom bar */
 .footer-bottom {
   display: flex;
   flex-direction: column;

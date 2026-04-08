@@ -43,7 +43,6 @@ const mediumFeatures = [
       </header>
 
       <div class="features-bento" role="list">
-        <!-- Large feature card -->
         <article class="feature-card feature-large hover-lift" role="listitem">
           <div class="feature-glow"></div>
           <div class="feature-content">
@@ -69,9 +68,8 @@ const mediumFeatures = [
           </div>
         </article>
 
-        <!-- Medium feature cards -->
         <article v-for="(feature, index) in mediumFeatures" :key="feature.title" class="feature-card feature-medium hover-lift">
-          <div class="feature-icon-wrap" :style="{ background: feature.gradient }">
+          <div class="feature-icon-wrap" :class="'feature-icon-wrap--' + (index + 1)">
             <span class="feature-icon">{{ feature.icon }}</span>
           </div>
           <div class="feature-content">
@@ -88,7 +86,6 @@ const mediumFeatures = [
 </template>
 
 <style scoped>
-/* Features Section - Modern Bento Grid */
 .features-section {
   background: var(--main-color-1);
   padding: var(--gap-section) 0;
@@ -109,8 +106,6 @@ const mediumFeatures = [
   pointer-events: none;
 }
 
-/* Section Header - Using global utilities */
-
 .section-tag {
   display: inline-block;
   padding: 6px 14px;
@@ -125,7 +120,6 @@ const mediumFeatures = [
   margin-bottom: var(--gap-md);
 }
 
-/* Bento Grid Layout */
 .features-bento {
   display: grid;
   gap: var(--gap-lg);
@@ -152,7 +146,6 @@ const mediumFeatures = [
   }
 }
 
-/* Feature Cards */
 .feature-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -170,7 +163,6 @@ const mediumFeatures = [
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Large Feature Card */
 .feature-large {
   display: flex;
   flex-direction: column;
@@ -209,7 +201,7 @@ const mediumFeatures = [
 }
 
 .feature-icon-large {
-  font-size: 48px;
+  font-size: clamp(36px, 5vw, 48px);
   line-height: 1;
 }
 
@@ -254,7 +246,6 @@ const mediumFeatures = [
   margin-top: 4px;
 }
 
-/* Medium Feature Cards */
 .feature-medium {
   display: flex;
   flex-direction: column;
@@ -269,6 +260,22 @@ const mediumFeatures = [
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.feature-icon-wrap--1 {
+  background: linear-gradient(135deg, #7f2c86 0%, #4a1c4e 100%);
+}
+.feature-icon-wrap--2 {
+  background: linear-gradient(135deg, #00d64f 0%, #009e3a 100%);
+}
+.feature-icon-wrap--3 {
+  background: linear-gradient(135deg, #ea580c 0%, #b34509 100%);
+}
+.feature-icon-wrap--4 {
+  background: linear-gradient(135deg, #7f2c86 0%, #ea580c 100%);
+}
+.feature-icon-wrap--5 {
+  background: linear-gradient(135deg, #00d64f 0%, #7f2c86 100%);
 }
 
 .feature-icon {
@@ -316,7 +323,6 @@ const mediumFeatures = [
   transform: translateX(4px);
 }
 
-/* Common Title */
 .feature-title {
   font-size: var(--font-xl);
   font-weight: 700;
@@ -325,7 +331,6 @@ const mediumFeatures = [
   line-height: 1.3;
 }
 
-/* Mobile: Remove gradients, use solid colors */
 @media (max-width: 768px) {
   .feature-arrow {
     bottom: unset;
@@ -352,7 +357,6 @@ const mediumFeatures = [
   }
 }
 
-/* Responsive */
 @media (max-width: 767px) {
   .features-bento {
     grid-template-columns: 1fr;

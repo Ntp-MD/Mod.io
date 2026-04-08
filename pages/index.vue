@@ -8,7 +8,6 @@
     <Header />
     <main>
       <Hero />
-      <FeatureShowcase />
       <Features />
       <HowItWorks />
       <Testimonials />
