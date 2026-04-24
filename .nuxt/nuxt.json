@@ -1,9 +1,9 @@
 {
-  "_hash": "nxNJZXF2ImF-Tw3ckueuGZJ6P09NZN5RFyiH6NEmT5w",
+  "_hash": "ve1CMF2YYmcrtrtQESIMiEzA2G5e4GdkBznQ3fgmMEA",
   "project": {
     "rootDir": "C:/Users/ITOP/Desktop/MOD@ITOPPLUS/Mod-Space/Mod.io"
   },
   "versions": {
-    "nuxt": "3.21.2"
+    "nuxt": "4.4.2"
   }
 }

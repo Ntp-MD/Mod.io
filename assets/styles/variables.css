@@ -19,6 +19,12 @@
   --font-3xl: clamp(36px, 5vw, 48px);
   --font-4xl: clamp(48px, 6vw, 64px);
 
+  --accent-primary: #000000;
+  --accent-secondary: #7f2c86;
+  --accent-success: #00d64f;
+  --accent-warning: #ea580c;
+  --accent-error: #dc2626;
+
   /* Gap Scale */
   --gap-xs: 5px;
   --gap-sm: 10px;
