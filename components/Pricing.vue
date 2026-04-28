@@ -55,8 +55,6 @@ const plans = [
   <section id="pricing" class="section section-dark pricing-section" aria-labelledby="pricing-title">
     <!-- Animated background -->
     <div class="pricing-bg" aria-hidden="true">
-      <div class="gradient-orb orb-1"></div>
-      <div class="gradient-orb orb-2"></div>
       <div class="gradient-orb orb-3"></div>
       <div class="grid-pattern"></div>
     </div>

@@ -1,5 +1,6 @@
 <script setup>
-const codeExample = `<script src="https://cdn.mod.io/v2/latest.min.js"><\/script>
+const codeExample = import.meta.env.DEV
+  ? `<script src="https://cdn.mod.io/v2/latest.min.js"><\/script>
 
 MOD.init({
   project: 'your-project-id',
@@ -10,7 +11,9 @@ MOD.init({
 // Verify delivery
 MOD.on('ready', ({ latency, node }) => {
   console.log(\`⚡ \${latency}ms · \${node}\`);
-});`;
+});`
+  : `// Production integration code would go here
+// MOD.io SDK integration disabled in production`;
 
 const stats = [
   { number: "100M+", label: "Requests / day" },
@@ -511,6 +514,7 @@ const partners = ["Google", "Microsoft", "Amazon", "Meta", "Netflix"];
   .cta-group {
     flex-direction: column;
     width: 100%;
+    align-items: center;
   }
 
   .stats-bar {

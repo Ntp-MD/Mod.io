@@ -10,12 +10,6 @@ const stats = [
 
 <template>
   <section id="get-started" class="cta-section" aria-labelledby="cta-title">
-    <div class="cta-bg" aria-hidden="true">
-      <div class="gradient-orb orb-1"></div>
-      <div class="gradient-orb orb-2"></div>
-      <div class="grid-overlay"></div>
-    </div>
-
     <div class="container">
       <div class="cta-content-section">
         <div class="cta-main">
@@ -78,13 +72,6 @@ const stats = [
   padding: var(--gap-section) 0;
   position: relative;
   overflow: hidden;
-}
-
-.cta-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
 }
 
 .cta-content-section {

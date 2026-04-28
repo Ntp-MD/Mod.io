@@ -41,7 +41,7 @@ const handleNavClick = (event, href) => {
           <button class="btn nav-close hover-lift" @click="closeMenu" aria-label="Close navigation">✕</button>
         </div>
         <div class="nav-menu" role="list">
-          <div v-for="link in navLinks" :key="link.label" class="nav-item">
+          <div v-for="link in navLinks" :key="link.label" class="nav-item" role="listitem">
             <a :href="link.href" class="nav-link" @click="handleNavClick($event, link.href)">{{ link.label }}</a>
           </div>
         </div>

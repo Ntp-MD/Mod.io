@@ -59,7 +59,7 @@ const socialLinks = [
             <div v-for="group in navGroups" :key="group.heading" class="footer-col">
               <h3 class="footer-col-heading">{{ group.heading }}</h3>
               <div class="footer-col-links" role="list">
-                <div v-for="link in group.links" :key="link.label">
+                <div v-for="link in group.links" :key="link.label" role="listitem">
                   <a :href="link.href" class="footer-link link-reset">{{ link.label }}</a>
                 </div>
               </div>

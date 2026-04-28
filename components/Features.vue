@@ -68,7 +68,7 @@ const mediumFeatures = [
           </div>
         </article>
 
-        <article v-for="(feature, index) in mediumFeatures" :key="feature.title" class="card feature-card feature-medium hover-lift">
+        <article v-for="(feature, index) in mediumFeatures" :key="feature.title" class="card feature-card feature-medium hover-lift" role="listitem">
           <div class="feature-icon-wrap" :class="'feature-icon-wrap--' + (index + 1)">
             <span class="feature-icon">{{ feature.icon }}</span>
           </div>
