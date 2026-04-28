@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: false }, // Disable in production for better performance
   
+  // Enable sourcemaps for development
+  sourcemap: {
+    server: true,
+    client: true
+  },
+  
   css: [
     '@/assets/styles/main.css'
   ],
@@ -33,6 +39,12 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       exclude: ['@nuxt/devtools']
+    },
+    // Enable sourcemaps for debugging
+    server: {
+      fs: {
+        strict: true
+      }
     }
   },
 
